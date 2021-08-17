@@ -1,20 +1,15 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonTabButton, IonButton, IonIcon, IonLabel, IonItem, IonSelect, IonSelectOption, IonText, IonImg } from '@ionic/react';
 import './Home.css';
 
-const Tab1: React.FC = () => {
+const Home: React.FC = () => {
   return (
     <IonPage>
 
       <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Home</IonTitle>
-          </IonToolbar>
-        </IonHeader>
 
-        <IonText>
+        <h1 className="ion-text-center">
           Custom Workouts
-        </IonText>
+        </h1>
 
         <IonItem>
           <IonLabel>Select workout</IonLabel>
@@ -24,12 +19,14 @@ const Tab1: React.FC = () => {
           </IonSelect>
         </IonItem>
 
-        <IonButton color="primary">
-          <IonLabel>Start workout</IonLabel>
-        </IonButton>
+        <div className="ion-text-center">
+          <IonButton color="primary" className="ion-text-center">
+            <IonLabel>Start workout</IonLabel>
+          </IonButton>
+        </div>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab1;
+export default Home;
