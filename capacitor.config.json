@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Workout Creator",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
