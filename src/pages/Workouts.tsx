@@ -2,10 +2,13 @@ import { IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonIt
 import { pizza, star } from 'ionicons/icons';
 import { useState } from 'react';
 import ExploreContainer from '../components/ExploreContainer';
+import { WorkoutsSave } from '../services/WorkoutsSave';
 import './Workouts.css';
 
 const Workouts: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+
+  WorkoutsSave.Instance.loadWorkouts();
 
   return (
     <IonPage>
