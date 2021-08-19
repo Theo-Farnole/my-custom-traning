@@ -57,7 +57,7 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
 
         return (
             <IonPage>
-                <IonContent>
+                <IonContent fullscreen>
                     <h1 className="ion-text-center">
                         editing workout {workout.name}
                     </h1>
@@ -113,6 +113,10 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
                             </div>
                             <IonReorder slot="start" />
                         </IonItem>
+
+                        <IonButton expand="block">
+                            Add a set
+                        </IonButton>
 
                     </IonReorderGroup>
                 </IonContent>
