@@ -1,34 +1,18 @@
 import { IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonModal, IonPage, IonRadio, IonReorder, IonReorderGroup, IonTitle, IonToggle, IonToolbar, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
-import { pizza, star } from 'ionicons/icons';
 import { useState } from 'react';
-import ExploreContainer from '../components/ExploreContainer';
-import { Utils } from '../services/Utilities';
-import { WorkoutsSave } from '../services/WorkoutsSave';
+import { Workout, WorkoutsSave } from '../services/WorkoutsSave';
 import './Workouts.css';
 
 
 const Workouts: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [workouts_list, setWorkouts] = useState<JSX.Element[]>([])
+  const [workouts, setWorkouts] = useState(WorkoutsSave.Instance.workouts);
 
-  WorkoutsSave.Instance.loadWorkouts().then(() => {
+  const workouts_components: JSX.Element[] = buildWorkoutsComponent(workouts);
 
-    var workouts_list_tmp: JSX.Element[] = [];
-
-    WorkoutsSave.Instance.workouts.forEach(element => {
-      workouts_list_tmp.push(
-        <IonItem key={element.name}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
-          <IonLabel>{element.name}</IonLabel>
-          <IonLabel className="ion-text-center">{element.duration}</IonLabel>
-          <IonLabel class="ion-text-right">
-            <IonButton color="secondary">edit</IonButton>
-            <IonButton color="danger">delete</IonButton>
-          </IonLabel>
-        </IonItem>
-      );
-    });
-
-    setWorkouts(workouts_list_tmp);
+  WorkoutsSave.Instance.attachOnWorkoutsModified(event => {    
+    setWorkouts(WorkoutsSave.Instance.workouts);
+    console.log("update workouts");
   });
 
 
@@ -47,7 +31,7 @@ const Workouts: React.FC = () => {
             <IonLabel class="ion-text-right"><b>Actions</b></IonLabel>
           </IonListHeader>
 
-          {workouts_list}
+          {workouts_components}
 
           <IonButton expand="block" onClick={() => setShowModal(true)}>Create a new workout</IonButton>
 
@@ -78,3 +62,23 @@ const Workouts: React.FC = () => {
 };
 
 export default Workouts;
+
+function buildWorkoutsComponent(workouts: Workout[]) {
+  const output: JSX.Element[] = [];
+
+  workouts.forEach(element => {
+
+    console.log("Generate " + element.name);
+
+    output.push(<IonItem key={element.name}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
+      <IonLabel>{element.name}</IonLabel>
+      <IonLabel className="ion-text-center">{element.duration}</IonLabel>
+      <IonLabel class="ion-text-right">
+        <IonButton color="secondary">edit</IonButton>
+        <IonButton color="danger">delete</IonButton>
+      </IonLabel>
+    </IonItem>);
+  });
+  
+  return output;
+}

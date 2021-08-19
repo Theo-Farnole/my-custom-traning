@@ -1,9 +1,12 @@
 import { Filesystem, Directory, Encoding, ReadFileResult } from '@capacitor/filesystem';
+import { EventDispatcher, Handler } from '../utilities/EventEmitter';
 
 const filename = "workouts.json";
 const directory = Directory.Data;
 const encoding = Encoding.UTF8;
 const completePath = directory + "/" + filename;
+
+interface WorkoutsModifiedEvent { }
 
 export class WorkoutsSave {
 
@@ -11,6 +14,17 @@ export class WorkoutsSave {
     private static instance: WorkoutsSave;
 
     private _areWorkoutsLoaded: boolean = false;
+
+    private workoutsModifiedDispatcher = new EventDispatcher<WorkoutsModifiedEvent>();
+
+    public attachOnWorkoutsModified(handler: Handler<WorkoutsModifiedEvent>) {
+        this.workoutsModifiedDispatcher.register(handler);
+    }
+
+    private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {
+        console.log("fire");
+        this.workoutsModifiedDispatcher.fire(event);
+    }
 
     public get areWorkoutsLoaded(): boolean {
         return this._areWorkoutsLoaded;
@@ -32,12 +46,14 @@ export class WorkoutsSave {
                 console.log("Successfully loaded " + this.workouts.length + " workouts.");
 
                 this._areWorkoutsLoaded = true;
+                this.fireWorkoutsModifiedEvent({});
             }).catch((error) => {
                 if (error == "Error: File does not exist.") {
                     console.log("Cannot find workouts file. Creating default file...");
                     this.createDefaultConfiguration();
 
                     this._areWorkoutsLoaded = true;
+                    this.fireWorkoutsModifiedEvent({});
                 }
                 else {
                     console.log("Failed to load workouts. The following error is " + error + ". For more details, file is located at " + completePath + ".");
