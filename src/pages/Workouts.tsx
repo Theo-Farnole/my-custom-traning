@@ -3,16 +3,10 @@ import { useState } from 'react';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import { Workout } from "../services/Workout";
 import './Workouts.css';
+import { useConstructor } from '../services/CustomHooks';
 
 
-// source: https://dev.to/bytebodger/constructors-in-functional-components-with-hooks-280m
-// this is a custom hook that mimic the constructor for a functional component
-const useConstructor = (callBack = () => { }) => {
-  const [hasBeenCalled, setHasBeenCalled] = useState(false);
-  if (hasBeenCalled) return;
-  callBack();
-  setHasBeenCalled(true);
-}
+
 
 const Workouts: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
@@ -83,7 +77,7 @@ function buildWorkoutsComponent(workouts: Workout[]) {
       <IonLabel>{element.name}</IonLabel>
       <IonLabel className="ion-text-center">{element.duration}</IonLabel>
       <IonLabel class="ion-text-right">
-        <IonButton routerLink="/edit-workout" color="secondary">edit</IonButton>
+        <IonButton routerLink={"/edit-workout/" + workouts.indexOf(element)} color="secondary">edit</IonButton>
         <IonButton color="danger">delete</IonButton>
       </IonLabel>
     </IonItem>);
