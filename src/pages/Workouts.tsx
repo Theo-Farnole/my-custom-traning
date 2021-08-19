@@ -8,21 +8,29 @@ import './Workouts.css';
 
 const Workouts: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
+  const [workouts_list, setWorkouts] = useState<JSX.Element[]>([])
 
-  var workouts_list: JSX.Element[] = [];
+  WorkoutsSave.Instance.loadWorkouts().then(() => {
 
-  WorkoutsSave.Instance.workouts.forEach(element => {
-    console.log("Generate element: " + element);
+    var workouts_list_tmp: JSX.Element[] = [];
 
-    workouts_list.push(<IonItem>
-      <IonLabel>{element.name}</IonLabel>
-      <IonLabel className="ion-text-center">{element.duration}</IonLabel>
-      <IonLabel class="ion-text-right">
-        <IonButton color="secondary">edit</IonButton>
-        <IonButton color="danger">delete</IonButton>
-      </IonLabel>
-    </IonItem>);
-  })
+    WorkoutsSave.Instance.workouts.forEach(element => {
+      console.log("Generate element: " + element.name);
+
+      workouts_list_tmp.push(<IonItem>
+        <IonLabel>{element.name}</IonLabel>
+        <IonLabel className="ion-text-center">{element.duration}</IonLabel>
+        <IonLabel class="ion-text-right">
+          <IonButton color="secondary">edit</IonButton>
+          <IonButton color="danger">delete</IonButton>
+        </IonLabel>
+      </IonItem>
+      );
+    });
+
+    setWorkouts(workouts_list_tmp);
+  });
+
 
   return (
     <IonPage>

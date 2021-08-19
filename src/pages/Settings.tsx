@@ -1,6 +1,7 @@
-import { IonAvatar, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonButton, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
 import { pin, heart, closeCircle } from 'ionicons/icons';
 import ExploreContainer from '../components/ExploreContainer';
+import { WorkoutsSave } from '../services/WorkoutsSave';
 import './Settings.css';
 
 const Settings: React.FC = () => {
@@ -23,6 +24,11 @@ const Settings: React.FC = () => {
           <IonItem>
             <IonLabel>Sound alert when timer over</IonLabel>
             <IonToggle checked value="sound" />
+          </IonItem>
+
+          <IonItem>
+            <IonLabel>Reset save?</IonLabel>
+            <IonButton color="danger" onClick={WorkoutsSave.Instance.resetSave}>Reset save</IonButton>
           </IonItem>
         </IonList>
       </IonContent>

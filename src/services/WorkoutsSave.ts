@@ -1,4 +1,4 @@
-import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
+import { Filesystem, Directory, Encoding, ReadFileResult } from '@capacitor/filesystem';
 
 const filename = "workouts.json";
 const directory = Directory.Data;
@@ -7,7 +7,7 @@ const completePath = directory + "/" + filename;
 
 export class WorkoutsSave {
 
-    public workouts: Workout[] = [Workout.getPullWorkout()];
+    public workouts: Workout[] = [];
     private static instance: WorkoutsSave;
 
     private _areWorkoutsLoaded: boolean = false;
@@ -43,8 +43,6 @@ export class WorkoutsSave {
                     console.log("Failed to load workouts. The following error is " + error + ". For more details, file is located at " + completePath + ".");
                 }
             });
-
-
     }
 
     saveCurrentWorkouts() {
@@ -67,13 +65,25 @@ export class WorkoutsSave {
 
         console.log("Default file created.")
     }
+
+    resetSave() {
+        Filesystem.deleteFile({
+            path: filename,
+            directory: directory
+        }).then(() => {
+            console.log("File " + filename + " succesfuly deleted.")
+        })
+            .catch((err) => {
+                console.log("Deleting " + filename + " failed: " + err);
+            });
+    }
 }
 
 export class Workout {
     sets: Set[];
     secondsBetweenSets: number;
     name: string;
-    duration: string = "NOT IMPLEMENTED";
+    duration: string = "DURATION NOT IMPLEMENTED";
 
     constructor(name: string, sets: Set[], secondsBetweenSets: number) {
         this.sets = sets;
