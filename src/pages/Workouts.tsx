@@ -2,35 +2,16 @@ import { IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonIt
 import { pizza, star } from 'ionicons/icons';
 import { useState } from 'react';
 import ExploreContainer from '../components/ExploreContainer';
-import { Utils } from '../services/Utilities';
+import WorkoutsList from '../components/WorkoutsList';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './Workouts.css';
 
 
 const Workouts: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [workouts_list, setWorkouts] = useState<JSX.Element[]>([])
+  
 
-  WorkoutsSave.Instance.loadWorkouts().then(() => {
-
-    var workouts_list_tmp: JSX.Element[] = [];
-
-    WorkoutsSave.Instance.workouts.forEach(element => {
-      workouts_list_tmp.push(
-        <IonItem key={element.name}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
-          <IonLabel>{element.name}</IonLabel>
-          <IonLabel className="ion-text-center">{element.duration}</IonLabel>
-          <IonLabel class="ion-text-right">
-            <IonButton color="secondary">edit</IonButton>
-            <IonButton color="danger">delete</IonButton>
-          </IonLabel>
-        </IonItem>
-      );
-    });
-
-    setWorkouts(workouts_list_tmp);
-  });
-
+  
 
   return (
     <IonPage>
@@ -47,14 +28,14 @@ const Workouts: React.FC = () => {
             <IonLabel class="ion-text-right"><b>Actions</b></IonLabel>
           </IonListHeader>
 
-          {workouts_list}
+          <WorkoutsList></WorkoutsList>
 
           <IonButton expand="block" onClick={() => setShowModal(true)}>Create a new workout</IonButton>
 
           <IonModal isOpen={showModal} cssClass='workout-name'>
 
             <IonList>
-              <IonListHeader>
+              <IonListHeader>                
                 <h2 className="ion-text-center">Let's give a name to your new workout!</h2>
               </IonListHeader>
 
