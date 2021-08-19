@@ -21,8 +21,7 @@ export class WorkoutsSave {
         this.workoutsModifiedDispatcher.register(handler);
     }
 
-    private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {
-        console.log("fire");
+    private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {        
         this.workoutsModifiedDispatcher.fire(event);
     }
 

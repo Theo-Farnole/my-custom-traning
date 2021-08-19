@@ -4,15 +4,26 @@ import { Workout, WorkoutsSave } from '../services/WorkoutsSave';
 import './Workouts.css';
 
 
+// source: https://dev.to/bytebodger/constructors-in-functional-components-with-hooks-280m
+// this is a custom hook that mimic the constructor for a functional component
+const useConstructor = (callBack = () => { }) => {
+  const [hasBeenCalled, setHasBeenCalled] = useState(false);
+  if (hasBeenCalled) return;
+  callBack();
+  setHasBeenCalled(true);
+}
+
 const Workouts: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
   const [workouts, setWorkouts] = useState(WorkoutsSave.Instance.workouts);
 
   const workouts_components: JSX.Element[] = buildWorkoutsComponent(workouts);
 
-  WorkoutsSave.Instance.attachOnWorkoutsModified(event => {    
-    setWorkouts(WorkoutsSave.Instance.workouts);
-    console.log("update workouts");
+  // constructor equivalent
+  useConstructor(() => {
+    WorkoutsSave.Instance.attachOnWorkoutsModified(event => {
+      setWorkouts(WorkoutsSave.Instance.workouts);
+    });
   });
 
 
@@ -67,9 +78,6 @@ function buildWorkoutsComponent(workouts: Workout[]) {
   const output: JSX.Element[] = [];
 
   workouts.forEach(element => {
-
-    console.log("Generate " + element.name);
-
     output.push(<IonItem key={element.name}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
       <IonLabel>{element.name}</IonLabel>
       <IonLabel className="ion-text-center">{element.duration}</IonLabel>
@@ -79,6 +87,6 @@ function buildWorkoutsComponent(workouts: Workout[]) {
       </IonLabel>
     </IonItem>);
   });
-  
+
   return output;
 }
