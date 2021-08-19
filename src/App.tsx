@@ -34,6 +34,7 @@ import './theme/variables.css';
 import Home from './pages/Home';
 import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
+import EditWorkout from './pages/EditWorkout';
 
 const App: React.FC = () => (
   <IonApp>
@@ -49,6 +50,7 @@ const App: React.FC = () => (
           <Route path="/settings">
             <Settings />
           </Route>
+          <Route path="/edit-workout/:id" component={EditWorkout} />
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
