@@ -2,6 +2,7 @@ import { IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonIt
 import { pizza, star } from 'ionicons/icons';
 import { useState } from 'react';
 import ExploreContainer from '../components/ExploreContainer';
+import { Utils } from '../services/Utilities';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './Workouts.css';
 
@@ -15,16 +16,15 @@ const Workouts: React.FC = () => {
     var workouts_list_tmp: JSX.Element[] = [];
 
     WorkoutsSave.Instance.workouts.forEach(element => {
-      console.log("Generate element: " + element.name);
-
-      workouts_list_tmp.push(<IonItem>
-        <IonLabel>{element.name}</IonLabel>
-        <IonLabel className="ion-text-center">{element.duration}</IonLabel>
-        <IonLabel class="ion-text-right">
-          <IonButton color="secondary">edit</IonButton>
-          <IonButton color="danger">delete</IonButton>
-        </IonLabel>
-      </IonItem>
+      workouts_list_tmp.push(
+        <IonItem key={element.name}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
+          <IonLabel>{element.name}</IonLabel>
+          <IonLabel className="ion-text-center">{element.duration}</IonLabel>
+          <IonLabel class="ion-text-right">
+            <IonButton color="secondary">edit</IonButton>
+            <IonButton color="danger">delete</IonButton>
+          </IonLabel>
+        </IonItem>
       );
     });
 
