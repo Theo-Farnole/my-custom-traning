@@ -1,6 +1,7 @@
 import { IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonModal, IonPage, IonRadio, IonReorder, IonReorderGroup, IonTitle, IonToggle, IonToolbar, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
 import { useState } from 'react';
-import { Workout, WorkoutsSave } from '../services/WorkoutsSave';
+import { WorkoutsSave } from '../services/WorkoutsSave';
+import { Workout } from "../services/Workout";
 import './Workouts.css';
 
 
@@ -82,7 +83,7 @@ function buildWorkoutsComponent(workouts: Workout[]) {
       <IonLabel>{element.name}</IonLabel>
       <IonLabel className="ion-text-center">{element.duration}</IonLabel>
       <IonLabel class="ion-text-right">
-        <IonButton color="secondary">edit</IonButton>
+        <IonButton routerLink="/edit-workout" color="secondary">edit</IonButton>
         <IonButton color="danger">delete</IonButton>
       </IonLabel>
     </IonItem>);

@@ -1,5 +1,7 @@
 import { Filesystem, Directory, Encoding, ReadFileResult } from '@capacitor/filesystem';
 import { EventDispatcher, Handler } from '../utilities/EventEmitter';
+import { Workout } from './Workout';
+import { WorkoutExamples } from './WorkoutExamples';
 
 const filename = "workouts.json";
 const directory = Directory.Data;
@@ -21,7 +23,7 @@ export class WorkoutsSave {
         this.workoutsModifiedDispatcher.register(handler);
     }
 
-    private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {        
+    private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {
         this.workoutsModifiedDispatcher.fire(event);
     }
 
@@ -70,12 +72,7 @@ export class WorkoutsSave {
     }
 
     createDefaultConfiguration() {
-
-        var defaultWorkouts = [
-            Workout.getPullWorkout()
-        ];
-
-        this.workouts = defaultWorkouts;
+        this.workouts = WorkoutExamples.getAllExamples();
         this.saveCurrentWorkouts();
 
         console.log("Default file created.")
@@ -87,46 +84,10 @@ export class WorkoutsSave {
             directory: directory
         }).then(() => {
             console.log("File " + filename + " succesfuly deleted.")
+            this.fireWorkoutsModifiedEvent({});
         })
             .catch((err) => {
                 console.log("Deleting " + filename + " failed: " + err);
             });
-    }
-}
-
-export class Workout {
-    sets: Set[];
-    secondsBetweenSets: number;
-    name: string;
-    duration: string = "DURATION NOT IMPLEMENTED";
-
-    constructor(name: string, sets: Set[], secondsBetweenSets: number) {
-        this.sets = sets;
-        this.secondsBetweenSets = secondsBetweenSets;
-        this.name = name;
-    }
-
-    static getPullWorkout() {
-        var sets = [
-            new Set("traction pronation", "Max-1", 4),
-            new Set("tirage horizontal", "8", 4),
-            new Set("tirage focus biceps", "8", 3),
-            new Set("relevés de jambes", "12", 4),
-            new Set("superset tirage", "max", 3)
-        ];
-
-        return new Workout("Pull workout", sets, 90);
-    }
-}
-
-export class Set {
-    repetitionsPerSet: string;
-    setCount: number;
-    exercise: string;
-
-    constructor(exercise: string, repetitionsPerSet: string, setCount: number) {
-        this.repetitionsPerSet = repetitionsPerSet;
-        this.setCount = setCount;
-        this.exercise = exercise;
     }
 }

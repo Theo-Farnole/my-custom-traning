@@ -10,9 +10,6 @@ import {
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 import { ellipse, square, triangle, settings, settingsOutline, home, create } from 'ionicons/icons';
-import Home from './pages/Home';
-import Workouts from './pages/Workouts';
-import Settings from './pages/Settings';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -32,6 +29,11 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
+/* My imports*/
+import Home from './pages/Home';
+import Workouts from './pages/Workouts';
+import Settings from './pages/Settings';
 
 const App: React.FC = () => (
   <IonApp>
