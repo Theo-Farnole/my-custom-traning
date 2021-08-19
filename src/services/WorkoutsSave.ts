@@ -7,18 +7,21 @@ const completePath = directory + "/" + filename;
 
 export class WorkoutsSave {
 
-    public workouts: Workout[] = [];
+    public workouts: Workout[] = [Workout.getPullWorkout()];
     private static instance: WorkoutsSave;
+
+    private _areWorkoutsLoaded: boolean = false;
+
+    public get areWorkoutsLoaded(): boolean {
+        return this._areWorkoutsLoaded;
+    }
 
     public static get Instance(): WorkoutsSave {
         return this.instance || (this.instance = new this());
     }
 
     loadWorkouts() {
-
-
-
-        Filesystem.readFile(
+        return Filesystem.readFile(
             {
                 path: filename,
                 directory: directory,
@@ -27,15 +30,21 @@ export class WorkoutsSave {
                 this.workouts = JSON.parse(raw_json.data);
 
                 console.log("Successfully loaded " + this.workouts.length + " workouts.");
+
+                this._areWorkoutsLoaded = true;
             }).catch((error) => {
                 if (error == "Error: File does not exist.") {
                     console.log("Cannot find workouts file. Creating default file...");
                     this.createDefaultConfiguration();
+
+                    this._areWorkoutsLoaded = true;
                 }
                 else {
                     console.log("Failed to load workouts. The following error is " + error + ". For more details, file is located at " + completePath + ".");
                 }
             });
+
+
     }
 
     saveCurrentWorkouts() {
@@ -63,10 +72,13 @@ export class WorkoutsSave {
 export class Workout {
     sets: Set[];
     secondsBetweenSets: number;
+    name: string;
+    duration: string = "NOT IMPLEMENTED";
 
-    constructor(sets: Set[], secondsBetweenSets: number) {
+    constructor(name: string, sets: Set[], secondsBetweenSets: number) {
         this.sets = sets;
         this.secondsBetweenSets = secondsBetweenSets;
+        this.name = name;
     }
 
     static getPullWorkout() {
@@ -78,7 +90,7 @@ export class Workout {
             new Set("superset tirage", "max", 3)
         ];
 
-        return new Workout(sets, 90);
+        return new Workout("Pull workout", sets, 90);
     }
 }
 

@@ -1,14 +1,28 @@
-import { IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonModal, IonPage, IonRadio, IonReorder, IonReorderGroup, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
+import { IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonModal, IonPage, IonRadio, IonReorder, IonReorderGroup, IonTitle, IonToggle, IonToolbar, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
 import { pizza, star } from 'ionicons/icons';
 import { useState } from 'react';
 import ExploreContainer from '../components/ExploreContainer';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './Workouts.css';
 
+
 const Workouts: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
 
-  WorkoutsSave.Instance.loadWorkouts();
+  var workouts_list: JSX.Element[] = [];
+
+  WorkoutsSave.Instance.workouts.forEach(element => {
+    console.log("Generate element: " + element);
+
+    workouts_list.push(<IonItem>
+      <IonLabel>{element.name}</IonLabel>
+      <IonLabel className="ion-text-center">{element.duration}</IonLabel>
+      <IonLabel class="ion-text-right">
+        <IonButton color="secondary">edit</IonButton>
+        <IonButton color="danger">delete</IonButton>
+      </IonLabel>
+    </IonItem>);
+  })
 
   return (
     <IonPage>
@@ -25,23 +39,7 @@ const Workouts: React.FC = () => {
             <IonLabel class="ion-text-right"><b>Actions</b></IonLabel>
           </IonListHeader>
 
-          <IonItem>
-            <IonLabel>Morning Workout</IonLabel>
-            <IonLabel className="ion-text-center">10m30s</IonLabel>
-            <IonLabel class="ion-text-right">
-              <IonButton color="secondary">edit</IonButton>
-              <IonButton color="danger">delete</IonButton>
-            </IonLabel>
-          </IonItem>
-
-          <IonItem>
-            <IonLabel>Fast Workout</IonLabel>
-            <IonLabel className="ion-text-center">5m00s</IonLabel>
-            <IonLabel class="ion-text-right">
-              <IonButton color="secondary">edit</IonButton>
-              <IonButton color="danger">delete</IonButton>
-            </IonLabel>
-          </IonItem>
+          {workouts_list}
 
           <IonButton expand="block" onClick={() => setShowModal(true)}>Create a new workout</IonButton>
 
