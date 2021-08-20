@@ -42,7 +42,24 @@ export class WorkoutsSave {
                 directory: directory,
                 encoding: encoding
             }).then((raw_json) => {
-                this.workouts = JSON.parse(raw_json.data);
+                var json = JSON.parse(raw_json.data);
+                this.workouts = []
+
+                try {
+
+                    // for (var i = 0; i < json.)
+                    json.forEach((workoutData: Workout) => {
+
+                        const emptyWorkout = new Workout("", [], 0);
+                        const fullfilledWorkout = Object.assign(emptyWorkout, workoutData);
+
+                        this.workouts.push(fullfilledWorkout);
+                    });
+                }
+                catch (err) {
+                    console.error("Error while parsing: " + err);
+                }
+
 
                 console.log("Successfully loaded " + this.workouts.length + " workouts.");
 
@@ -69,6 +86,8 @@ export class WorkoutsSave {
             encoding: encoding,
             data: JSON.stringify(this.workouts)
         });
+
+        this.fireWorkoutsModifiedEvent({});
     }
 
     createDefaultConfiguration() {

@@ -6,7 +6,7 @@ export class WorkoutExamples {
     static getAllExamples() {
         return [
             this.getPushWorkout(),
-            this.getPushWorkout(),
+            this.getPullWorkout(),
             this.getLegsDayWorkout()
         ];
     }

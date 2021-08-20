@@ -8,6 +8,8 @@ import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
 import Workouts from './Workouts';
 import { ItemReorderEventDetail } from '@ionic/core';
+import { WorkoutExamples } from '../services/WorkoutExamples';
+import { refresh } from 'ionicons/icons';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -25,11 +27,19 @@ function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
     event.detail.complete();
 }
 
+function addSetClicked(w: Workout) {
+    if (w == undefined) throw "Add set to an undefined workout";
+    if (w == null) throw "Add set to a null workout"
+
+    w.addEmptySet();    
+    WorkoutsSave.Instance.saveCurrentWorkouts();
+}
+
 
 const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
 
     const [workout, setWorkout] = useState<Workout>();
-    const id: number = parseInt(match.params.id);
+    const id: number = parseInt(match.params.id);    
 
     // constructor equivalent
     useConstructor(() => {
@@ -55,7 +65,7 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
 
     workout?.sets.forEach((set) => {
         workout_component.push(
-            <IonItem className="set-input">
+            <IonItem key={set.uid} className="set-input">
                 <div className="exercice-input ion-input">
                     <IonInput value={set.exercise}></IonInput>
                 </div>
@@ -92,7 +102,7 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
 
                         {workout_component}
 
-                        <IonButton expand="block">
+                        <IonButton onClick={() => addSetClicked(workout)} expand="block">
                             Add a set
                         </IonButton>
 
