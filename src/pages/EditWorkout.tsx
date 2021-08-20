@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonLoading, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
+import { IonButton, IonContent, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
 import { exception } from 'console';
 import { useReducer, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
@@ -11,6 +11,7 @@ import { ItemReorderEventDetail } from '@ionic/core';
 import { WorkoutExamples } from '../services/WorkoutExamples';
 import { refresh } from 'ionicons/icons';
 import { forceUpdate } from 'ionicons/dist/types/stencil-public-runtime';
+import { Set } from '../services/Set';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -34,7 +35,11 @@ function addSetClicked(w: Workout) {
 
     w.addEmptySet();
     WorkoutsSave.Instance.saveCurrentWorkouts();
-    // THERE SHOULD RELOAD
+}
+
+function onDeleteSetClick(w: Workout, s: Set) {
+    w.removeSet(s);
+    WorkoutsSave.Instance.saveCurrentWorkouts();
 }
 
 const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
@@ -68,6 +73,8 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
     workout?.sets.forEach((set) => {
         workout_component.push(
             <IonItem key={set.uid} className="set-input">
+                <IonButton onClick={() => { onDeleteSetClick(workout, set); forceUpdate(); }} color="danger">delete</IonButton>
+
                 <div className="exercice-input ion-input">
                     <IonInput value={set.exercise}></IonInput>
                 </div>
@@ -79,7 +86,8 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
                 <div className="set-count-input ion-input">
                     <IonInput type="number" value={set.setCount}></IonInput>
                 </div>
-                <IonReorder slot="start" />
+
+                <IonReorder slot="end" />
             </IonItem>
         );
     });

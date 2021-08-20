@@ -16,4 +16,17 @@ export class Workout {
     addEmptySet() {
         this.sets.push(Set.Empty)
     }
+
+    removeSet(set: Set) {
+        const index = this.sets.indexOf(set);
+
+        if (index > -1) {
+            this.sets.splice(index, 1);
+
+            console.log("Set \"" + set + "\" at index " + index + "deleted in workout " + this.name + ".");
+        }
+        else {
+            console.error("Cannot delete set in workout " + this.name + ": the set you are trying to delete doesn't exist.")
+        }
+    }
 }

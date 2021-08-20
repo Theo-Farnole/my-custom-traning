@@ -100,8 +100,8 @@ export class WorkoutsSave {
             path: filename,
             directory: directory
         }).then(() => {
-            console.log("File " + filename + " succesfuly deleted.")
-            this.fireWorkoutsModifiedEvent({});
+            console.log("File " + filename + " succesfuly deleted.")            
+            this.createDefaultConfiguration();
         })
             .catch((err) => {
                 console.log("Deleting " + filename + " failed: " + err);
