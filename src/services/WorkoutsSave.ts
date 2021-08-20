@@ -46,8 +46,6 @@ export class WorkoutsSave {
                 this.workouts = []
 
                 try {
-
-                    // for (var i = 0; i < json.)
                     json.forEach((workoutData: Workout) => {
 
                         const emptyWorkout = new Workout("", [], 0);

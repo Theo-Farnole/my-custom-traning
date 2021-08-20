@@ -1,6 +1,6 @@
-import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
+import { IonButton, IonContent, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonLoading, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
 import { exception } from 'console';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
 import { useConstructor } from '../services/CustomHooks';
 import { Workout } from '../services/Workout';
@@ -10,6 +10,7 @@ import Workouts from './Workouts';
 import { ItemReorderEventDetail } from '@ionic/core';
 import { WorkoutExamples } from '../services/WorkoutExamples';
 import { refresh } from 'ionicons/icons';
+import { forceUpdate } from 'ionicons/dist/types/stencil-public-runtime';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -31,15 +32,16 @@ function addSetClicked(w: Workout) {
     if (w == undefined) throw "Add set to an undefined workout";
     if (w == null) throw "Add set to a null workout"
 
-    w.addEmptySet();    
+    w.addEmptySet();
     WorkoutsSave.Instance.saveCurrentWorkouts();
+    // THERE SHOULD RELOAD
 }
-
 
 const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
 
     const [workout, setWorkout] = useState<Workout>();
-    const id: number = parseInt(match.params.id);    
+    const [ignored, forceUpdate] = useReducer(x => x + 1, 0); // Official FAQ ( https://reactjs.org/docs/hooks-faq.html#is-there-something-like-forceupdate ) now recommends this way if you really need to do it:
+    const id: number = parseInt(match.params.id);
 
     // constructor equivalent
     useConstructor(() => {
@@ -102,7 +104,7 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
 
                         {workout_component}
 
-                        <IonButton onClick={() => addSetClicked(workout)} expand="block">
+                        <IonButton onClick={() => { addSetClicked(workout); forceUpdate(); }} expand="block">
                             Add a set
                         </IonButton>
 
