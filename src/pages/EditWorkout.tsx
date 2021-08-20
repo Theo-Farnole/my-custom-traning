@@ -51,6 +51,27 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
         }
     }
 
+    var workout_component: JSX.Element[] = [];
+
+    workout?.sets.forEach((set) => {
+        workout_component.push(
+            <IonItem className="set-input">
+                <div className="exercice-input ion-input">
+                    <IonInput value={set.exercise}></IonInput>
+                </div>
+
+                <div className="rep-input ion-input">
+                    <IonInput value={set.repetitionsPerSet}></IonInput>
+                </div>
+
+                <div className="set-count-input ion-input">
+                    <IonInput type="number" value={set.setCount}></IonInput>
+                </div>
+                <IonReorder slot="start" />
+            </IonItem>
+        );
+    });
+
     try {
         if (workout == undefined)
             throw "Workout in array is undefined.";
@@ -69,50 +90,7 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
                             <IonLabel className="set-header"><b>Set count</b></IonLabel>
                         </IonListHeader>
 
-                        <IonItem className="set-input">
-                            <div className="exercice-input ion-input">
-                                <IonInput placeholder="push up"></IonInput>
-                            </div>
-
-                            <div className="rep-input ion-input">
-                                <IonInput placeholder="10"></IonInput>
-                            </div>
-
-                            <div className="set-count-input ion-input">
-                                <IonInput type="number" placeholder="3"></IonInput>
-                            </div>
-                            <IonReorder slot="start" />
-                        </IonItem>
-
-                        <IonItem className="set-input">
-                            <div className="exercice-input ion-input">
-                                <IonInput placeholder="pull up"></IonInput>
-                            </div>
-
-                            <div className="rep-input ion-input">
-                                <IonInput placeholder="3"></IonInput>
-                            </div>
-
-                            <div className="set-count-input ion-input">
-                                <IonInput type="number" placeholder="3"></IonInput>
-                            </div>
-                            <IonReorder slot="start" />
-                        </IonItem>
-
-                        <IonItem className="set-input">
-                            <div className="exercice-input ion-input">
-                                <IonInput placeholder="😀"></IonInput>
-                            </div>
-
-                            <div className="rep-input ion-input">
-                                <IonInput placeholder="Max-1"></IonInput>
-                            </div>
-
-                            <div className="set-count-input ion-input">
-                                <IonInput type="number" placeholder="3"> </IonInput>
-                            </div>
-                            <IonReorder slot="start" />
-                        </IonItem>
+                        {workout_component}
 
                         <IonButton expand="block">
                             Add a set
