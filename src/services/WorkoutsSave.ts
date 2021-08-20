@@ -85,6 +85,8 @@ export class WorkoutsSave {
             data: JSON.stringify(this.workouts)
         });
 
+        console.log("Workouts saved");
+
         this.fireWorkoutsModifiedEvent({});
     }
 
