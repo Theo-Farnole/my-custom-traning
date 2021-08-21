@@ -107,12 +107,12 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
                         </IonListHeader>
 
                         {workout_component}
-
-                        <IonButton onClick={() => { addSetClicked(workout); forceUpdate(); }} expand="block">
-                            Add a set
-                        </IonButton>
-
                     </IonReorderGroup>
+
+                    <IonButton onClick={() => { addSetClicked(workout); forceUpdate(); }} expand="block">
+                        Add a set
+                    </IonButton>
+
                 </IonContent>
             </IonPage >
 
