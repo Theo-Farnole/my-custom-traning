@@ -57,7 +57,11 @@ class Timer extends React.Component<TimerProps> {
     }
 
     componentWillUnmount() {
-        clearInterval(this.timerInterval);
+        if (this.timerInterval != -1)
+        {
+            clearInterval(this.timerInterval);
+            this.timerInterval = -1;
+        }
     }
 
     calculateTimeFraction() {
