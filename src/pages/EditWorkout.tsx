@@ -72,15 +72,15 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
                 <IonButton onClick={() => { onDeleteSetClick(workout, set); forceUpdate(); }} color="danger">delete</IonButton>
 
                 <div className="exercice-input ion-input">
-                    <IonInput onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
+                    <IonInput placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
                 </div>
 
                 <div className="rep-input ion-input">
-                    <IonInput onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
+                    <IonInput placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
                 </div>
 
                 <div className="set-count-input ion-input">
-                    <IonInput type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
+                    <IonInput placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
                 </div>
 
                 <IonReorder slot="end" />
