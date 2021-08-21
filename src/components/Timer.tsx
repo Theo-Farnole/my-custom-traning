@@ -22,6 +22,7 @@ class Timer extends React.Component<TimerProps> {
     timePassed: number;
     timeLeft: number;
     duration: number;
+    timerInterval: number;
 
     constructor(props: TimerProps) {
         super(props);
@@ -29,41 +30,42 @@ class Timer extends React.Component<TimerProps> {
         this.timePassed = 0;
         this.timeLeft = props.duration;
         this.duration = props.duration;
+        this.timerInterval = -1;
 
         this.state =
         {
             timeLeft: props.duration,
             circleDashArray: FULL_DASH_ARRAY.toString()
         }
-
     }
 
     componentDidMount() {
-        let timerInterval = setInterval(() => {
-            // The amount of time passed increments by one
+        this.timerInterval = window.setInterval(() => {
             this.timePassed++;
             this.timeLeft = this.duration - this.timePassed;
 
-            // The time left label is updated
-            this.setState({ timeLeft: this.timeLeft });
-            this.setCircleDasharray();
+            this.setState(
+                {
+                    timeLeft: this.timeLeft,
+                    circleDasharray: this.calculateCircleDashArray()
+                });
 
             if (this.timeLeft <= 0) {
-                clearInterval(timerInterval);
+                clearInterval(this.timerInterval);
             }
         }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerInterval);
     }
 
     calculateTimeFraction() {
         return this.timeLeft / this.duration;
     }
 
-    setCircleDasharray() {
-
-
-        const circleDasharray = (this.calculateTimeFraction() * FULL_DASH_ARRAY).toFixed(0) + " " + FULL_DASH_ARRAY;
-
-        this.setState({ circleDasharray: circleDasharray });
+    calculateCircleDashArray(): string {
+        return (this.calculateTimeFraction() * FULL_DASH_ARRAY).toFixed(0) + " " + FULL_DASH_ARRAY;
     }
 
     render() {
