@@ -12,6 +12,10 @@ export class Workout {
         this.name = name;
     }
 
+    static get Empty() {
+        return new Workout("", [], 0);
+    }
+
     addEmptySet() {
         this.sets.push(Set.Empty)
     }
