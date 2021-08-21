@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonFooter, IonPage, IonToolbar } from "@ionic/react"
+import { IonButton, IonCol, IonContent, IonFooter, IonGrid, IonPage, IonRow, IonToolbar } from "@ionic/react"
 import Timer from "../../components/Timer";
 import "./Rest.css"
 
@@ -12,10 +12,10 @@ const Rest: React.FC = () => {
             </IonContent>
 
             <IonFooter>
-                <IonButton expand="block" color="light">Pause</IonButton>
-                <IonButton expand="block" color="danger">Skip</IonButton>
+                <IonButton expand="block" size="large" color="light">Pause</IonButton>
+                <IonButton expand="block" size="large" color="danger">Skip</IonButton>
             </IonFooter>
-        </IonPage>
+        </IonPage >
     )
 };
 

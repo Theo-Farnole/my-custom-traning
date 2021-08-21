@@ -1,6 +1,6 @@
 /* Sets the containers height and width */
 
-.base-timer {
+.timer {
     position: relative;
     height: 300px;
     width: 300px;
