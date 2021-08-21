@@ -13,14 +13,7 @@
     stroke: none;
 }
 
-/* The SVG path that displays the timer's progress */
-
-.base-timer__path-elapsed {
-    stroke-width: 7px;
-    stroke: grey;
-}
-
-.base-timer__label {
+.time-label {
     position: absolute;
     /* Size should match the parent container */
     width: 300px;
@@ -32,14 +25,13 @@
     align-items: center;
     justify-content: center;
     /* Sort of an arbitrary number; adjust to your liking */
-    font-size: 48px;
+    font-size: 72px;
+    color: var(--ion-color-primary);
 }
 
-.base-timer__path-remaining {
+.remaining {
     /* Just as thick as the original ring */
-    stroke-width: 7px;
-    /* Rounds the line endings to create a seamless circle */
-    stroke-linecap: round;
+    stroke-width: 6px;
     /* Makes sure the animation starts at the top of the circle */
     transform: rotate(90deg);
     transform-origin: center;
@@ -47,9 +39,17 @@
     transition: 1s linear all;
     /* Allows the ring to change color when the color value updates */
     stroke: var(--ion-color-primary);
+    fill: none;
+}
+
+.background {
+    stroke: var(--ion-color-primary-contrast);
+    stroke-width: 5px;
+    fill: none;
 }
 
 .base-timer__svg {
     /* Flips the svg and makes the animation to move left-to-right */
     transform: scaleX(-1);
+    border: 15px;
 }

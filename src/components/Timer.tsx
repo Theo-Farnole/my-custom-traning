@@ -1,3 +1,4 @@
+import { timelineEnd } from "console";
 import { extensionPuzzleSharp, flaskOutline } from "ionicons/icons";
 import React from "react";
 import { useState } from "react";
@@ -16,73 +17,85 @@ class Timer extends React.Component<TimerProps> {
 
     state = {
         timeLeft: 0,
-        circleDashArray: FULL_DASH_ARRAY.toString()
+        dash: FULL_DASH_ARRAY.toString()
     };
 
     timePassed: number;
-    timeLeft: number;
     duration: number;
-    timerInterval: number;
+    timerIntervalID: number;
 
     constructor(props: TimerProps) {
         super(props);
 
         this.timePassed = 0;
-        this.timeLeft = props.duration;
         this.duration = props.duration;
-        this.timerInterval = -1;
+        this.timerIntervalID = -1;
 
         this.state =
         {
             timeLeft: props.duration,
-            circleDashArray: FULL_DASH_ARRAY.toString()
+            dash: FULL_DASH_ARRAY.toString()
         }
     }
 
     componentDidMount() {
-        this.timerInterval = window.setInterval(() => {
+        this.timerIntervalID = window.setInterval(() => {
             this.timePassed++;
-            this.timeLeft = this.duration - this.timePassed;
+            this.updateVisual();
 
-            this.setState(
-                {
-                    timeLeft: this.timeLeft,
-                    circleDasharray: this.calculateCircleDashArray()
-                });
-
-            if (this.timeLeft <= 0) {
-                clearInterval(this.timerInterval);
+            if (this.state.timeLeft <= 0) {
+                clearInterval(this.timerIntervalID);
             }
         }, 1000);
     }
 
+    updateVisual() {
+        // batching can leads to problem: dash use TimeLeft
+        this.setState(
+            {
+                timeLeft: this.duration - this.timePassed
+            });
+
+        this.setState(
+            {
+                dash: this.calculateCircleDashArray()
+            });
+
+        console.log(this.state.dash);
+
+    }
+
     componentWillUnmount() {
-        if (this.timerInterval != -1)
-        {
-            clearInterval(this.timerInterval);
-            this.timerInterval = -1;
+        if (this.timerIntervalID != -1) {
+            clearInterval(this.timerIntervalID);
+            this.timerIntervalID = -1;
         }
     }
 
     calculateTimeFraction() {
-        return this.timeLeft / this.duration;
+        const rawTimeFraction = this.state.timeLeft / this.duration;
+        return rawTimeFraction - (1 / this.duration) * (1 - rawTimeFraction);
     }
 
-    calculateCircleDashArray(): string {
-        return (this.calculateTimeFraction() * FULL_DASH_ARRAY).toFixed(0) + " " + FULL_DASH_ARRAY;
+    calculateCircleDashArray() {
+        var firstDigit = this.calculateTimeFraction() * FULL_DASH_ARRAY;
+
+        if (firstDigit < 0) {
+            firstDigit = 0;
+        }
+
+        return (firstDigit).toFixed(0) + " " + FULL_DASH_ARRAY.toString()
     }
 
     render() {
         return (
             <div className="base-timer">
                 <svg className="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <g className="base-timer__circle">
-                        <circle className="base-timer__path-elapsed" cx="50" cy="50" r="45" />
-                    </g>
+                    <circle className="background" r="45" cx="50" cy="50"></circle>
+
                     <path
-                        id="base-timer-path-remaining"
-                        strokeDasharray={this.state.circleDashArray}
-                        className="base-timer__path-remaining"
+                        strokeDasharray={this.state.dash}
+                        className="remaining"
                         d="
                             M 50, 50
                             m -45, 0
@@ -91,7 +104,7 @@ class Timer extends React.Component<TimerProps> {
                             "
                     ></path>
                 </svg>
-                <span id="base-timer-label" className="base-timer__label">
+                <span className="time-label">
                     {this.state.timeLeft}
                 </span>
             </div>

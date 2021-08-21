@@ -6,7 +6,7 @@ const Rest: React.FC = () => {
     return (
         <IonPage>
             <IonContent>
-                <Timer duration={20}></Timer>
+                <Timer duration={10}></Timer>
             </IonContent>
         </IonPage>
     )
