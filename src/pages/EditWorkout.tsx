@@ -18,15 +18,11 @@ interface EditWorkoutProps extends RouteComponentProps<{
     id: string;
 }> { }
 
-function doReorder(event: CustomEvent<ItemReorderEventDetail>) {
-    // The `from` and `to` properties contain the index of the item
-    // when the drag started and ended, respectively
-    console.log('Dragged from index', event.detail.from, 'to', event.detail.to);
-
-    // Finish the reorder and position the item in the DOM based on
-    // where the gesture ended. This method can also be called directly
-    // by the reorder group
+function doReorder(event: CustomEvent<ItemReorderEventDetail>, workout: Workout) {
     event.detail.complete();
+
+    workout.moveSet(event.detail.from - 1, event.detail.to - 1);
+    WorkoutsSave.Instance.saveCurrentWorkouts();
 }
 
 function addSetClicked(w: Workout) {
@@ -103,7 +99,7 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
                         editing workout {workout.name}
                     </h1>
 
-                    <IonReorderGroup disabled={false} onIonItemReorder={doReorder}>
+                    <IonReorderGroup disabled={false} onIonItemReorder={(e) => doReorder(e, workout)}>
                         <IonListHeader className="set-list-header">
                             <IonLabel className="exercice-header"><b>Exercice</b></IonLabel>
                             <IonLabel className="rep-header"><b>Rep count</b></IonLabel>

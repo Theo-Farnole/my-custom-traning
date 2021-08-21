@@ -1,6 +1,5 @@
 import { Set } from "./Set";
 
-
 export class Workout {
     sets: Set[] = [];
     secondsBetweenSets: number = 0;
@@ -28,5 +27,11 @@ export class Workout {
         else {
             console.error("Cannot delete set in workout " + this.name + ": the set you are trying to delete doesn't exist.")
         }
+    }
+
+    moveSet(fromIndex: number, toIndex: number) {
+
+        console.log("Move " + this.sets[fromIndex].exercise + " to " + toIndex + ".");
+        this.sets = this.sets.move(fromIndex, toIndex);
     }
 }

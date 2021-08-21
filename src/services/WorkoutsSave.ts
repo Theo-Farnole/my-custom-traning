@@ -2,6 +2,7 @@ import { Filesystem, Directory, Encoding, ReadFileResult } from '@capacitor/file
 import { EventDispatcher, Handler } from '../utilities/EventEmitter';
 import { Workout } from './Workout';
 import { WorkoutExamples } from './WorkoutExamples';
+import { Set } from './Set';
 
 const filename = "workouts.json";
 const directory = Directory.Data;
@@ -50,6 +51,12 @@ export class WorkoutsSave {
 
                         const emptyWorkout = new Workout("", [], 0);
                         const fullfilledWorkout = Object.assign(emptyWorkout, workoutData);
+
+                        emptyWorkout.sets = Array<Set>();
+
+                        for (var i = 0; i < workoutData.sets.length; i++) {
+                            emptyWorkout.sets.push(Object.assign(new Set("", "", 0), workoutData.sets[i]));
+                        }
 
                         this.workouts.push(fullfilledWorkout);
                     });
@@ -102,7 +109,7 @@ export class WorkoutsSave {
             path: filename,
             directory: directory
         }).then(() => {
-            console.log("File " + filename + " succesfuly deleted.")            
+            console.log("File " + filename + " succesfuly deleted.")
             this.createDefaultConfiguration();
         })
             .catch((err) => {

@@ -4,6 +4,7 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { WorkoutsSave } from './services/WorkoutsSave';
+import './utilities/array.extensions'
 
 ReactDOM.render(
   <React.StrictMode>
