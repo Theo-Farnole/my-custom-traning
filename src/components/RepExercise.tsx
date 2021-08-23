@@ -31,8 +31,6 @@ class RepExercise extends React.Component<RepExerciceProps> {
                             <div className="repLabel">Rep</div>
                         </div>
                     </div>
-                    {/* <p id="rep-count">{this.props.repCount ?? 10}</p>
-                <p>{this.props.currentSet ?? 1}/{this.props.totalSet ?? 3}</p> */}
 
                 </IonContent>
 

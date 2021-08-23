@@ -40,9 +40,7 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
                 throw "Workout in array is undefined.";
             else {
                 return (
-                    <IonPage>
-                            <RepExercise exerciceName="Push up" currentSet={1} totalSet={3} repCount={10}/>                        
-                    </IonPage >
+                    <RepExercise exerciceName="Push up" currentSet={1} totalSet={3} repCount={10} />
 
                 );
             }

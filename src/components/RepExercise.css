@@ -6,7 +6,7 @@
     grid-template-rows: 0.4fr 1.6fr 0.6fr 1.4fr;
     gap: 5px 0px;
     grid-template-areas: ". . . . ." ". repLabel repCount . ." ". setLabel setCount . ." ". . . . .";
-    gap: 5vh 5vw;
+    gap: 10px 10px;
 }
 
 .content {
@@ -17,6 +17,7 @@
 
 .setLabel, .repLabel {
     font-weight: bold;
+    text-align: right !important;
 }
 
 .setLabel, .repLabel, .setCount {
