@@ -5,7 +5,7 @@ import "./Rest.css"
 
 interface RestProps {
     duration: number;
-    onClick: () => void;
+    onSkip: () => void;
     onTimerOver: () => void;
 }
 
@@ -17,7 +17,7 @@ class Rest extends React.Component<RestProps> {
 
     render() {
         return (
-            <div>
+            <IonPage>
                 <IonContent className="ion-text-center">
                     <h1 className="ion-text-center">Rest</h1>
                     <Timer onTimerOver={this.props.onTimerOver} duration={this.props.duration}></Timer>
@@ -27,7 +27,7 @@ class Rest extends React.Component<RestProps> {
                     <IonButton expand="block" size="large" color="light">Pause</IonButton>
                     <IonButton onClick={this.props.onTimerOver} expand="block" size="large" color="danger">Skip</IonButton>
                 </IonFooter>
-            </div>
+            </IonPage>
         )
     }
 }

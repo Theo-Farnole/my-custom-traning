@@ -7,7 +7,8 @@ interface RepExerciceProps {
     exerciceName: string,
     currentSet: number,
     totalSet: number,
-    repCount: number
+    repCount: string,
+    onDone: () => void
 }
 
 class RepExercise extends React.Component<RepExerciceProps> {
@@ -35,7 +36,7 @@ class RepExercise extends React.Component<RepExerciceProps> {
                 </IonContent>
 
                 <IonFooter>
-                    <IonButton expand="block">Mark as done</IonButton>
+                    <IonButton onClick={this.props.onDone} expand="block">Mark as done</IonButton>
                 </IonFooter>
             </IonPage>
         )

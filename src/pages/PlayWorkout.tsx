@@ -2,6 +2,7 @@ import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import RepExercise from "../components/RepExercise";
+import Rest from "../components/Rest";
 import { Workout } from "../services/Workout";
 import { WorkoutsSave } from "../services/WorkoutsSave";
 
@@ -13,8 +14,10 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
     id: number;
     state = {
-        workout: Workout.Empty // not sure if it a good idea
+        workout: Workout.Empty, // not sure if it a good idea
+        showComponentIndex: 0
     }
+    componentsStack: JSX.Element[] = [];
 
     constructor(props: PlayWorkoutProps | Readonly<PlayWorkoutProps>) {
         super(props);
@@ -28,21 +31,63 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
         if (WorkoutsSave.Instance.areWorkoutsLoaded == true && WorkoutsSave.Instance.workouts[this.id] != this.state.workout) {
             this.setWorkoutFromID();
         }
+
+        this.showNextComponent = this.showNextComponent.bind(this);
     }
 
     private setWorkoutFromID() {
-        this.setState({ workout: WorkoutsSave.Instance.workouts[this.id] });
+        const newWorkout = WorkoutsSave.Instance.workouts[this.id];
+
+        this.componentsStack = this.generateComponentsStack(newWorkout);
+        this.setState(
+            {
+                workout: newWorkout,
+                componentsIndex: 0
+            });
+    }
+
+    private generateComponentsStack(workout: Workout): JSX.Element[] {
+
+        var output: Array<JSX.Element> = [];
+
+        workout.sets.forEach((set) => {
+
+            for (var i = 0; i < set.setCount; i++) {
+                output.push(<RepExercise exerciceName={set.exercise} currentSet={i + 1} totalSet={set.setCount} repCount={set.repetitionsPerSet} onDone={this.showNextComponent} />);
+                output.push(<Rest duration={10} onSkip={this.showNextComponent} onTimerOver={this.showNextComponent} />)
+            }
+        });
+
+        console.log(output);
+
+        return output;
+    }
+
+    private showNextComponent() {
+        this.setState(
+            {
+                componentsIndex: this.state.showComponentIndex++
+            });
+
+        console.log("Next component shown. Current index = " + this.state.showComponentIndex)
     }
 
     render() {
         try {
             if (this.state.workout == undefined)
                 throw "Workout in array is undefined.";
-            else {
+            else if (this.state.showComponentIndex >= this.componentsStack.length) {
                 return (
-                    <RepExercise exerciceName="Push up" currentSet={1} totalSet={3} repCount={10} />
-
-                );
+                    <IonPage>
+                        <IonContent>
+                            <h1>Page todo</h1>
+                            <p>Components index is out of bounds. The exercise is either loading a done</p>
+                        </IonContent>
+                    </IonPage>
+                )
+            }
+            else {
+                return this.componentsStack[this.state.showComponentIndex];
             }
         }
         catch (err) {
