@@ -1,6 +1,7 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { RouteComponentProps } from "react-router";
+import RepExercise from "../components/RepExercise";
 import { Workout } from "../services/Workout";
 import { WorkoutsSave } from "../services/WorkoutsSave";
 
@@ -40,13 +41,7 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
             else {
                 return (
                     <IonPage>
-                        <IonContent fullscreen>
-                            <h1 className="ion-text-center">
-                                editing "{this.state.workout.name}"
-                            </h1>
-
-                            <p>test</p>
-                        </IonContent>
+                            <RepExercise exerciceName="Push up" currentSet={1} totalSet={3} repCount={10}/>                        
                     </IonPage >
 
                 );

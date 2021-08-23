@@ -29,6 +29,7 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import './theme/global-rules.css'
 
 /* My imports*/
 import Home from './pages/Home';
@@ -36,6 +37,7 @@ import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
 import EditWorkout from './pages/EditWorkout';
 import PlayWorkout from './pages/PlayWorkout';
+import RepExercise from './components/RepExercise';
 
 const App: React.FC = () => (
   <IonApp>
@@ -53,6 +55,7 @@ const App: React.FC = () => (
           </Route>
           <Route path="/edit-workout/:id" component={EditWorkout} />
           <Route path="/play-exercise/:id" component={PlayWorkout} />
+          <Route path="/tmp/rep-exercise" component={RepExercise} />
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>

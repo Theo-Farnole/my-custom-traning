@@ -1,0 +1,22 @@
+.pre-page-tile {
+    text-align: center !important;
+    font-size: 24;
+    font-family: Nunito;
+    font-weight: 200;
+}
+
+.page-title {
+    text-align: center !important;
+}
+
+.page-header {
+    text-align: center !important;
+    margin-top: 90px;
+}
+
+ion-content {
+    /* --background: url('../../assets/congo.png'); */
+    /* --background: url('../assets/congo.png'); */
+    /* --background: url('/assets/congo.png'); */
+    background-image: url('https://images.unsplash.com/photo-1537770721742-5bee5eaa977b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=04cbbf16dd1a25147b47a078c3ab8339&auto=format&fit=crop&w=668&q=80');
+}
