@@ -1,23 +1,21 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { RouteComponentProps } from "react-router";
-import { Workout } from "../../services/Workout";
-import { WorkoutExamples } from "../../services/WorkoutExamples";
-import { WorkoutsSave } from "../../services/WorkoutsSave";
-import Rest from "./Rest";
+import { Workout } from "../services/Workout";
+import { WorkoutsSave } from "../services/WorkoutsSave";
 
-interface EditWorkoutProps extends RouteComponentProps<{
+interface PlayWorkoutProps extends RouteComponentProps<{
     id: string;
 }> { }
 
-class Exercise extends React.Component<EditWorkoutProps> {
+class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
     id: number;
     state = {
         workout: Workout.Empty // not sure if it a good idea
     }
 
-    constructor(props: EditWorkoutProps | Readonly<EditWorkoutProps>) {
+    constructor(props: PlayWorkoutProps | Readonly<PlayWorkoutProps>) {
         super(props);
 
         this.id = parseInt(props.match.params.id);
@@ -68,4 +66,4 @@ class Exercise extends React.Component<EditWorkoutProps> {
     }
 }
 
-export default Exercise;
+export default PlayWorkout;

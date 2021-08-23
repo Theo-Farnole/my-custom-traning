@@ -1,6 +1,6 @@
 import { IonButton, IonCol, IonContent, IonFooter, IonGrid, IonPage, IonRow, IonToolbar } from "@ionic/react"
 import React from "react";
-import Timer from "../../components/Timer";
+import Timer from "./Timer";
 import "./Rest.css"
 
 interface RestProps {
