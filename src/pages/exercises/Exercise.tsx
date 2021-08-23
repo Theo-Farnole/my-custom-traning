@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router";
 import { Workout } from "../../services/Workout";
 import { WorkoutExamples } from "../../services/WorkoutExamples";
 import { WorkoutsSave } from "../../services/WorkoutsSave";
+import Rest from "./Rest";
 
 interface EditWorkoutProps extends RouteComponentProps<{
     id: string;
@@ -43,9 +44,10 @@ class Exercise extends React.Component<EditWorkoutProps> {
                     <IonPage>
                         <IonContent fullscreen>
                             <h1 className="ion-text-center">
-                                {this.state.workout.name}
+                                editing "{this.state.workout.name}"
                             </h1>
 
+                            <p>test</p>
                         </IonContent>
                     </IonPage >
 

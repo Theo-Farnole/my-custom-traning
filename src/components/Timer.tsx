@@ -9,6 +9,7 @@ import "./Timer.css"
 
 interface TimerProps {
     duration: number;
+    onTimerOver: () => void;
 };
 
 const FULL_DASH_ARRAY = 283;
@@ -44,6 +45,7 @@ class Timer extends React.Component<TimerProps> {
             this.updateVisual();
 
             if (this.state.timeLeft <= 0) {
+                this.props.onTimerOver();
                 clearInterval(this.timerIntervalID);
             }
         }, 1000);
