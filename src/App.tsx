@@ -37,11 +37,11 @@ import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
 import EditWorkout from './pages/EditWorkout';
 import PlayWorkout from './pages/PlayWorkout';
-import RepExercise from './components/RepExercise';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
+
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/home">
@@ -53,13 +53,15 @@ const App: React.FC = () => (
           <Route path="/settings">
             <Settings />
           </Route>
+
           <Route path="/edit-workout/:id" component={EditWorkout} />
           <Route path="/play-exercise/:id" component={PlayWorkout} />
-          <Route path="/tmp/rep-exercise" component={RepExercise} />
+
           <Route exact path="/">
             <Redirect to="/home" />
           </Route>
         </IonRouterOutlet>
+
         <IonTabBar slot="bottom">
           <IonTabButton tab="tab1" href="/home">
             <IonIcon icon={home} />
