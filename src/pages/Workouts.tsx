@@ -6,6 +6,7 @@ import './Workouts.css';
 import { useConstructor } from '../services/CustomHooks';
 import React from 'react';
 import DeleteWorkoutPrompt from '../components/DeleteWorkoutPrompt';
+import CreateWorkoutPrompt from '../components/CreateWorkoutPromptProps';
 
 
 class Workouts extends React.Component {
@@ -89,6 +90,12 @@ class Workouts extends React.Component {
     });
   }
 
+  closeCreateNewWorkoutPrompt() {
+    this.setState({
+      showModal: false
+    });
+  }
+
   render() {
     const workoutsList: JSX.Element[] = this.buildWorkoutsList(this.state.workouts);
 
@@ -112,30 +119,11 @@ class Workouts extends React.Component {
             <IonButton expand="block" onClick={() => this.showModal(true)}>Create a new workout</IonButton>
 
             <DeleteWorkoutPrompt isOpen={this.state.isDeletePromptOpen} workout={this.state.deletePromptWorkout} onDismiss={() => this.closeDeleteWorkoutPrompt()} />
-
-            <IonModal isOpen={this.state.showModal} cssClass='workout-name'>
-
-              <IonList>
-                <IonListHeader>
-                  <h2 className="ion-text-center">Let's give a name to your new workout!</h2>
-                </IonListHeader>
-
-                <IonItem>
-                  <IonLabel>Workout name</IonLabel>
-                  <IonInput placeholder="Enter name" clearInput></IonInput>
-                </IonItem>
-
-                <IonItem className="ion-text-center">
-
-                  <IonButton color="success" onClick={() => this.showModal(false)}>Create</IonButton>
-                  <IonButton color="danger" onClick={() => this.showModal(false)}>Cancel</IonButton>
-                </IonItem>
-              </IonList>
-            </IonModal>
+            <CreateWorkoutPrompt isOpen={this.state.showModal} onDismiss={() => this.closeCreateNewWorkoutPrompt()} />
           </IonList>
 
         </IonContent>
-      </IonPage>
+      </IonPage >
     );
   }
 }

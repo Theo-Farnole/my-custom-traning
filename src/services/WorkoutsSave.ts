@@ -112,6 +112,11 @@ export class WorkoutsSave {
         console.log("Default file created.")
     }
 
+    addWorkout(workout: Workout) {
+        this.workouts.push(workout);
+        this.saveCurrentWorkouts();
+    }
+
     removeWorkout(workout: Workout) {
         const index = this.workouts.indexOf(workout);
 
