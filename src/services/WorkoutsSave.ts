@@ -89,14 +89,20 @@ export class WorkoutsSave {
     }
 
     saveCurrentWorkouts() {
+        console.log("Workouts saving...");
+
         Filesystem.writeFile({
             path: filename,
             directory: directory,
             encoding: encoding,
-            data: JSON.stringify(this.workouts)
+            data: JSON.stringify(this._workouts)
+        }).then(() => 
+        {
+            console.log("Workouts saved...");
+        }).catch((err) =>
+        {
+            console.log("Workout failed: " + err);
         });
-
-        console.log("Workouts saved");
 
         this.fireWorkoutsModifiedEvent({});
     }

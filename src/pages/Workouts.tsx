@@ -10,7 +10,7 @@ import { useConstructor } from '../services/CustomHooks';
 
 const Workouts: React.FC = () => {
   const [showModal, setShowModal] = useState(false);
-  const [workouts, setWorkouts] = useState(WorkoutsSave.Instance.workouts);
+  const [workouts, setWorkouts] = useState([] as Workout[]);
 
   const workouts_components: JSX.Element[] = buildWorkoutsComponent(workouts);
 

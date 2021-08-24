@@ -33,7 +33,7 @@ class Home extends React.Component {
 
     }
     catch (err) {
-      
+      // TODO: modify the layout to show a warning + disable selectOptions
     }
 
     this.setState({ selectOptions: selectOptions });
