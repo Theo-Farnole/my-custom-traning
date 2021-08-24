@@ -58,8 +58,6 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
             }
         });
 
-        console.log(output);
-
         return output;
     }
 
