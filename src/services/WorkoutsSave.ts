@@ -12,7 +12,7 @@ const completePath = directory + "/" + filename;
 interface WorkoutsModifiedEvent { }
 
 export class WorkoutsSave {
-    
+
     private static _instance: WorkoutsSave;
     private _workouts: Workout[] = [];
     private _areWorkoutsLoaded: boolean = false;
@@ -72,7 +72,7 @@ export class WorkoutsSave {
 
                 this._areWorkoutsLoaded = true;
                 this.fireWorkoutsModifiedEvent({});
-                
+
                 console.log("Successfully loaded " + this.workouts.length + " workouts.");
             }).catch((error) => {
                 if (error == "Error: File does not exist.") {
@@ -96,11 +96,9 @@ export class WorkoutsSave {
             directory: directory,
             encoding: encoding,
             data: JSON.stringify(this._workouts)
-        }).then(() => 
-        {
+        }).then(() => {
             console.log("Workouts saved...");
-        }).catch((err) =>
-        {
+        }).catch((err) => {
             console.log("Workout failed: " + err);
         });
 
@@ -112,6 +110,21 @@ export class WorkoutsSave {
         this.saveCurrentWorkouts();
 
         console.log("Default file created.")
+    }
+
+    removeWorkout(workout: Workout) {
+        const index = this.workouts.indexOf(workout);
+
+        if (index > -1) {
+            this.workouts.splice(index, 1);
+
+            console.log("Workout \"" + workout + "\" at index " + index + "deleted.");
+        }
+        else {
+            console.error("Cannot delete workout " + workout.name + ": the workout you are trying to delete doesn't exist.")
+        }
+
+        this.saveCurrentWorkouts();
     }
 
     resetSave() {

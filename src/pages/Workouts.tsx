@@ -1,41 +1,52 @@
-import { IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonModal, IonPage, IonRadio, IonReorder, IonReorderGroup, IonTitle, IonToggle, IonToolbar, useIonAlert, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
+import { IonAlert, IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonModal, IonPage, IonRadio, IonReorder, IonReorderGroup, IonTitle, IonToggle, IonToolbar, useIonAlert, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
 import { useState } from 'react';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import { Workout } from "../services/Workout";
 import './Workouts.css';
 import { useConstructor } from '../services/CustomHooks';
 import React from 'react';
+import DeleteWorkoutPrompt from '../components/DeleteWorkoutPrompt';
 
 
 class Workouts extends React.Component {
 
   state = {
     showModal: false,
-    workouts: [] as Workout[]
+    workouts: [] as Workout[],
+    isDeletePromptOpen: false,
+    deletePromptWorkout: Workout.Empty
   }
 
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
     WorkoutsSave.Instance.attachOnWorkoutsModified(event => {
-      this.setState(
-        { workouts: WorkoutsSave.Instance.workouts });
+      this.setWorkoutsFromSave();
     });
   }
 
-  buildWorkoutsComponent(workouts: Workout[]) {
+  setWorkoutsFromSave() {
+    this.setState(
+      {
+        workouts: WorkoutsSave.Instance.workouts
+      });
+  }
+
+  buildWorkoutsList(workouts: Workout[]) {
     const output: JSX.Element[] = [];
 
-    workouts.forEach(element => {
-      output.push(<IonItem key={element.name}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
-        <IonLabel>{element.name}</IonLabel>
-        <IonLabel className="ion-text-center">{element.duration}</IonLabel>
+    for (var i = 0; i < workouts.length; i++) {
+      const workout = workouts[i];
+
+      output.push(<IonItem key={workout.name}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
+        <IonLabel>{workout.name}</IonLabel>
+        <IonLabel className="ion-text-center">{workout.duration}</IonLabel>
         <IonLabel class="ion-text-right">
-          <IonButton routerLink={"/edit-workout/" + workouts.indexOf(element)} color="secondary">edit</IonButton>
-          <IonButton color="danger" >delete</IonButton>
+          <IonButton routerLink={"/edit-workout/" + workouts.indexOf(workout)} color="secondary">edit</IonButton>
+          <IonButton onClick={() => this.showDeleteWorkoutPrompt(workout)} color="danger">delete</IonButton>
         </IonLabel>
       </IonItem>);
-    });
+    }
 
     return output;
   }
@@ -44,8 +55,16 @@ class Workouts extends React.Component {
     this.setState({ showModal: active });
   }
 
+  showDeleteWorkoutPrompt(workout: Workout) {
+    this.setState({
+      isDeletePromptOpen: true,
+      deletePromptWorkout: workout
+    });
+  }
+
   render() {
-    const workouts_components: JSX.Element[] = this.buildWorkoutsComponent(this.state.workouts);
+    const workoutsList: JSX.Element[] = this.buildWorkoutsList(this.state.workouts);
+
 
     return (
       <IonPage>
@@ -61,9 +80,11 @@ class Workouts extends React.Component {
               <IonLabel class="ion-text-right"><b>Actions</b></IonLabel>
             </IonListHeader>
 
-            {workouts_components}
+            {workoutsList}
 
             <IonButton expand="block" onClick={() => this.showModal(true)}>Create a new workout</IonButton>
+
+            <DeleteWorkoutPrompt isOpen={this.state.isDeletePromptOpen} workout={this.state.deletePromptWorkout} />
 
             <IonModal isOpen={this.state.showModal} cssClass='workout-name'>
 
@@ -93,4 +114,3 @@ class Workouts extends React.Component {
 }
 
 export default Workouts;
-
