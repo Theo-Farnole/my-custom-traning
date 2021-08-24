@@ -5,18 +5,15 @@ import { WorkoutsSave } from "../services/WorkoutsSave";
 
 interface DeleteWorkoutPromptProps {
     workout: Workout,
-    isOpen: boolean
+    isOpen: boolean,
+    onDismiss: () => void
 }
 
-const DeleteWorkoutPrompt: React.FC<DeleteWorkoutPromptProps> = ({ workout, isOpen }) => {
-
-    if ((workout == undefined || workout == null) && isOpen == true)
-        throw "Cannot open delete workout prompt. The workout to delete is undefined."
-
+const DeleteWorkoutPrompt: React.FC<DeleteWorkoutPromptProps> = ({ workout, isOpen, onDismiss }) => {
     return (
         <IonAlert
             isOpen={isOpen}
-            //   onDidDismiss={() => setShowAlert3(false)}
+            onDidDismiss={onDismiss}
             header={'Delete ' + workout.name + '?'}
             message={'<p>This operation cannot be reverted.</p>Are you sure to delete <strong>' + workout.name + '</strong>?'}
             buttons={[

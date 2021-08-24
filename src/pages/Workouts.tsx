@@ -62,6 +62,12 @@ class Workouts extends React.Component {
     });
   }
 
+  closeDeleteWorkoutPrompt() {
+    this.setState({
+      isDeletePromptOpen: false
+    });
+  }
+
   render() {
     const workoutsList: JSX.Element[] = this.buildWorkoutsList(this.state.workouts);
 
@@ -84,7 +90,7 @@ class Workouts extends React.Component {
 
             <IonButton expand="block" onClick={() => this.showModal(true)}>Create a new workout</IonButton>
 
-            <DeleteWorkoutPrompt isOpen={this.state.isDeletePromptOpen} workout={this.state.deletePromptWorkout} />
+            <DeleteWorkoutPrompt isOpen={this.state.isDeletePromptOpen} workout={this.state.deletePromptWorkout} onDismiss={() => this.closeDeleteWorkoutPrompt()} />
 
             <IonModal isOpen={this.state.showModal} cssClass='workout-name'>
 
