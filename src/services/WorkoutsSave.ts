@@ -12,20 +12,17 @@ const completePath = directory + "/" + filename;
 interface WorkoutsModifiedEvent { }
 
 export class WorkoutsSave {
-
-    public workouts: Workout[] = [];
-    private static instance: WorkoutsSave;
-
+    
+    private static _instance: WorkoutsSave;
+    private _workouts: Workout[] = [];
     private _areWorkoutsLoaded: boolean = false;
+    private _workoutsModifiedDispatcher = new EventDispatcher<WorkoutsModifiedEvent>();
 
-    private workoutsModifiedDispatcher = new EventDispatcher<WorkoutsModifiedEvent>();
+    public get workouts(): Workout[] {
+        if (this._areWorkoutsLoaded == false)
+            throw "Cannot get workout: Workout not loaded.";
 
-    public attachOnWorkoutsModified(handler: Handler<WorkoutsModifiedEvent>) {
-        this.workoutsModifiedDispatcher.register(handler);
-    }
-
-    private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {
-        this.workoutsModifiedDispatcher.fire(event);
+        return this._workouts;
     }
 
     public get areWorkoutsLoaded(): boolean {
@@ -33,7 +30,15 @@ export class WorkoutsSave {
     }
 
     public static get Instance(): WorkoutsSave {
-        return this.instance || (this.instance = new this());
+        return this._instance || (this._instance = new this());
+    }
+
+    public attachOnWorkoutsModified(handler: Handler<WorkoutsModifiedEvent>) {
+        this._workoutsModifiedDispatcher.register(handler);
+    }
+
+    private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {
+        this._workoutsModifiedDispatcher.fire(event);
     }
 
     loadWorkouts() {
@@ -44,7 +49,7 @@ export class WorkoutsSave {
                 encoding: encoding
             }).then((raw_json) => {
                 var json = JSON.parse(raw_json.data);
-                this.workouts = []
+                this._workouts = []
 
                 try {
                     json.forEach((workoutData: Workout) => {
@@ -58,18 +63,17 @@ export class WorkoutsSave {
                             emptyWorkout.sets.push(Object.assign(new Set("", "", 0), workoutData.sets[i]));
                         }
 
-                        this.workouts.push(fullfilledWorkout);
+                        this._workouts.push(fullfilledWorkout);
                     });
                 }
                 catch (err) {
                     console.error("Error while parsing: " + err);
                 }
 
-
-                console.log("Successfully loaded " + this.workouts.length + " workouts.");
-
                 this._areWorkoutsLoaded = true;
                 this.fireWorkoutsModifiedEvent({});
+                
+                console.log("Successfully loaded " + this.workouts.length + " workouts.");
             }).catch((error) => {
                 if (error == "Error: File does not exist.") {
                     console.log("Cannot find workouts file. Creating default file...");
@@ -98,7 +102,7 @@ export class WorkoutsSave {
     }
 
     createDefaultConfiguration() {
-        this.workouts = WorkoutExamples.getAllExamples();
+        this._workouts = WorkoutExamples.getAllExamples();
         this.saveCurrentWorkouts();
 
         console.log("Default file created.")

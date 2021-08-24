@@ -21,11 +21,19 @@ class Home extends React.Component {
   }
 
   setSelectOptions() {
-    const workouts = WorkoutsSave.Instance.workouts;
     var selectOptions = [];
 
-    for (var i = 0; i < workouts.length; i++) {
-      selectOptions.push(<IonSelectOption key={i} value={i}>{workouts[i].name}</IonSelectOption>)
+    try {
+
+      const workouts = WorkoutsSave.Instance.workouts;
+
+      for (var i = 0; i < workouts.length; i++) {
+        selectOptions.push(<IonSelectOption key={i} value={i}>{workouts[i].name}</IonSelectOption>)
+      }
+
+    }
+    catch (err) {
+      
     }
 
     this.setState({ selectOptions: selectOptions });
