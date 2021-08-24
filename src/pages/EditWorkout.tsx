@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
+import { IonButton, IonContent, IonFooter, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
 import { exception } from 'console';
 import { useReducer, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
@@ -12,6 +12,7 @@ import { WorkoutExamples } from '../services/WorkoutExamples';
 import { refresh } from 'ionicons/icons';
 import { forceUpdate } from 'ionicons/dist/types/stencil-public-runtime';
 import { Set } from '../services/Set';
+import ErrorPage from '../components/ErrorPage';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -119,15 +120,7 @@ const EditWorkout: React.FC<EditWorkoutProps> = ({ match }) => {
         );
     }
     catch (err) {
-        return (
-            <IonPage>
-                <IonContent>
-                    <h1>Error, cannot load the workout of id "{id}" because it doesn't exit or is empty</h1>
-                    <p>Please, return home.</p>
-                    <p>{err}</p>
-                </IonContent>
-            </IonPage>
-        )
+        return <ErrorPage err={err} />
     }
 };
 

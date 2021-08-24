@@ -1,6 +1,7 @@
 import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { RouteComponentProps } from "react-router";
+import ErrorPage from "../components/ErrorPage";
 import RepExercise from "../components/RepExercise";
 import Rest from "../components/Rest";
 import { Workout } from "../services/Workout";
@@ -72,32 +73,10 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
     render() {
         try {
-            if (this.state.workout == undefined)
-                throw "Workout in array is undefined.";
-            else if (this.state.showComponentIndex >= this.componentsStack.length) {
-                return (
-                    <IonPage>
-                        <IonContent>
-                            <h1>Page todo</h1>
-                            <p>Components index is out of bounds. The exercise is either loading a done</p>
-                        </IonContent>
-                    </IonPage>
-                )
-            }
-            else {
-                return this.componentsStack[this.state.showComponentIndex];
-            }
+            return this.componentsStack[this.state.showComponentIndex];
         }
         catch (err) {
-            return (
-                <IonPage>
-                    <IonContent>
-                        <h1>Error, cannot load the workout of id "{this.id}" because it doesn't exit or is empty</h1>
-                        <p>Please, return home.</p>
-                        <p>{err}</p>
-                    </IonContent>
-                </IonPage>
-            )
+            return <ErrorPage err={err} />
         }
     }
 }
