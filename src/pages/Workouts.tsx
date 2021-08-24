@@ -17,6 +17,9 @@ class Workouts extends React.Component {
     deletePromptWorkout: Workout.Empty
   }
 
+  isComponentedMounted: boolean = false;
+  reloadWorkoutOnMounted: boolean = false;
+
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
@@ -26,10 +29,15 @@ class Workouts extends React.Component {
   }
 
   setWorkoutsFromSave() {
-    this.setState(
-      {
-        workouts: WorkoutsSave.Instance.workouts
-      });
+    if (this.isComponentedMounted == true) {
+      this.setState(
+        {
+          workouts: WorkoutsSave.Instance.workouts
+        });
+    }
+    else {
+      this.reloadWorkoutOnMounted = true;
+    }
   }
 
   buildWorkoutsList(workouts: Workout[]) {
@@ -49,6 +57,19 @@ class Workouts extends React.Component {
     }
 
     return output;
+  }
+
+  componentDidMount() {
+    this.isComponentedMounted = true;
+
+    if (this.reloadWorkoutOnMounted == true) {
+      this.reloadWorkoutOnMounted = false;
+      this.setWorkoutsFromSave();
+    }
+  }
+
+  componentWillUnmount() {
+    this.isComponentedMounted = false;
   }
 
   showModal(active: boolean) {
