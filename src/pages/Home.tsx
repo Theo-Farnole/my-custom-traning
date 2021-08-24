@@ -14,12 +14,10 @@ class Home extends React.Component {
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
-    console.log("ctor");
+    this.onSelectChange = this.onSelectChange.bind(this);
 
     this.setSelectOptions();
     WorkoutsSave.Instance.attachOnWorkoutsModified(() => this.setSelectOptions());
-
-    this.onSelectChange = this.onSelectChange.bind(this);
   }
 
   setSelectOptions() {

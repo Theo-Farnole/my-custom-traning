@@ -21,8 +21,10 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
     constructor(props: PlayWorkoutProps | Readonly<PlayWorkoutProps>) {
         super(props);
-
         this.id = parseInt(props.match.params.id);
+
+        this.showNextComponent = this.showNextComponent.bind(this);
+        this.setState = this.setState.bind(this);
 
         WorkoutsSave.Instance.attachOnWorkoutsModified(e => {
             this.setWorkoutFromID();
@@ -31,8 +33,6 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
         if (WorkoutsSave.Instance.areWorkoutsLoaded == true && WorkoutsSave.Instance.workouts[this.id] != this.state.workout) {
             this.setWorkoutFromID();
         }
-
-        this.showNextComponent = this.showNextComponent.bind(this);
     }
 
     private setWorkoutFromID() {
