@@ -39,7 +39,7 @@
 .repCount {
     grid-area: repCount;
     color: var(--ion-color-primary);
-    font-size: 128px;
+    font-size: min(10vw, 128px);
 }
 
 .repLabel {
