@@ -39,20 +39,14 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
                     handler: (data) => {
                         const saveInstance = WorkoutsSave.Instance;
 
-                        const workout = new Workout(data.name, [], 90);
+                        const workoutName = isBlank(data.name) ? "workout #" + (saveInstance.workouts.length+1) : data.name;
+                        const workout = new Workout(workoutName, [], 90);
                         saveInstance.addWorkout(workout);
 
                         const workoutIndex = saveInstance.workouts.indexOf(workout);
 
-                        if (workoutIndex != -1) {
-
-                            var url = "/edit-workout/" + workoutIndex;
-                            history.push(url);
-                            // open edit page 
-                        }
-                        else {
-
-                        }
+                        var url = "/edit-workout/" + workoutIndex;
+                        history.push(url);
                     }
                 }
             ]}
@@ -61,3 +55,7 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
 };
 
 export default CreateWorkoutPrompt;
+
+function isBlank(str: string) {
+    return (!str || /^\s*$/.test(str));
+}
