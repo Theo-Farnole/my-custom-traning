@@ -1,10 +1,14 @@
 import { IonAvatar, IonButton, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
 import { pin, heart, closeCircle } from 'ionicons/icons';
+import { useState } from 'react';
+import EraseAllWorkoutsPrompt from '../components/EraseAllWorkoutsPrompt';
 import ExploreContainer from '../components/ExploreContainer';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './Settings.css';
 
 const Settings: React.FC = () => {
+  const [isErasePromptOpen, setIsErasePromptOpen] = useState(false);
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -13,9 +17,6 @@ const Settings: React.FC = () => {
         </h1>
 
         <IonList>
-
-          { /* <IonItemDivider>Toggles in a List</IonItemDivider> */}
-
           <IonItem>
             <IonLabel>Dark mode</IonLabel>
             <IonToggle checked value="dark-mode" />
@@ -28,9 +29,11 @@ const Settings: React.FC = () => {
 
           <IonItem>
             <IonLabel>Reset save?</IonLabel>
-            <IonButton color="danger" onClick={WorkoutsSave.Instance.resetSave}>Reset save</IonButton>
+            <IonButton color="danger" onClick={() => setIsErasePromptOpen(true)}>Reset save</IonButton>
           </IonItem>
         </IonList>
+
+        <EraseAllWorkoutsPrompt isOpen={isErasePromptOpen} onDismiss={() => setIsErasePromptOpen(false)}/>
       </IonContent>
     </IonPage>
   );

@@ -140,8 +140,8 @@ export class WorkoutsSave {
             console.log("File " + filename + " succesfuly deleted.")
             this.createDefaultConfiguration();
         })
-            .catch((err) => {
-                console.log("Deleting " + filename + " failed: " + err);
-            });
+        .catch((err) => {
+            console.log("Deleting " + filename + " failed: " + err);
+        });
     }
 }
