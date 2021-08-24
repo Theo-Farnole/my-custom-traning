@@ -67,6 +67,10 @@ class Workouts extends React.Component {
       this.reloadWorkoutOnMounted = false;
       this.setWorkoutsFromSave();
     }
+
+    if (WorkoutsSave.Instance.areWorkoutsLoaded) {
+      this.setWorkoutsFromSave();
+    }
   }
 
   componentWillUnmount() {

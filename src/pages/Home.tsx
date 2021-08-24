@@ -20,6 +20,12 @@ class Home extends React.Component {
     WorkoutsSave.Instance.attachOnWorkoutsModified(() => this.setSelectOptions());
   }
 
+  componentDidMount() {
+    if (WorkoutsSave.Instance.areWorkoutsLoaded) {
+      this.setSelectOptions();
+    }
+  }
+
   setSelectOptions() {
     var selectOptions = [];
 
