@@ -20,10 +20,17 @@ ion-content .informations *:not(:last-child) {
 }
 
 /** * Extracted from: SweetAlert * Modified by: Istiak Tridip */
+
+:root {
+  --main-color: var(--ion-color-primary);
+  --main-color-half: rgba(var(--ion-color-primary-rgb), 0.5);
+}
+
 .success-checkmark {
   width: 80px;
   height: 115px;
   margin: 0 auto;
+  transform: scale(2);
 }
 .success-checkmark .check-icon {
   width: 80px;
@@ -31,7 +38,7 @@ ion-content .informations *:not(:last-child) {
   position: relative;
   border-radius: 50%;
   box-sizing: content-box;
-  border: 4px solid #4caf50;
+  border: 4px solid var(--main-color);
 }
 .success-checkmark .check-icon::before {
   top: 3px;
@@ -57,7 +64,7 @@ ion-content .informations *:not(:last-child) {
 }
 .success-checkmark .check-icon .icon-line {
   height: 5px;
-  background-color: #4caf50;
+  background-color: var(--main-color);
   display: block;
   border-radius: 2px;
   position: absolute;
@@ -86,7 +93,7 @@ ion-content .informations *:not(:last-child) {
   border-radius: 50%;
   position: absolute;
   box-sizing: content-box;
-  border: 4px solid rgba(76, 175, 80, .5);
+  border: 4px solid var(--main-color-half);
 }
 .success-checkmark .check-icon .icon-fix {
   top: 8px;
