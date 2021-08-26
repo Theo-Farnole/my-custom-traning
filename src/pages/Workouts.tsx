@@ -95,9 +95,12 @@ class Workouts extends React.Component {
   }
 
   closeCreateNewWorkoutPrompt() {
-    this.setState({
-      showModal: false
-    });
+    // close can be called when leaving this page, so we must add this security
+    if (this.isComponentedMounted == true) {
+      this.setState({
+        showModal: false
+      });
+    }
   }
 
   render() {
@@ -123,7 +126,9 @@ class Workouts extends React.Component {
             <IonButton expand="block" onClick={() => this.showModal(true)}>Create a new workout</IonButton>
 
             <DeleteWorkoutPrompt isOpen={this.state.isDeletePromptOpen} workout={this.state.deletePromptWorkout} onDismiss={() => this.closeDeleteWorkoutPrompt()} />
-            <CreateWorkoutPrompt isOpen={this.state.showModal} onDismiss={() => this.closeCreateNewWorkoutPrompt()} />
+            <CreateWorkoutPrompt isOpen={this.state.showModal} onDismiss={() => {
+              this.closeCreateNewWorkoutPrompt()
+            }} />
           </IonList>
 
         </IonContent>

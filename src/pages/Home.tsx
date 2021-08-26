@@ -17,13 +17,19 @@ class Home extends React.Component {
     this.onSelectChange = this.onSelectChange.bind(this);
 
     this.setSelectOptions();
-    WorkoutsSave.Instance.attachOnWorkoutsModified(() => this.setSelectOptions());
+
   }
 
   componentDidMount() {
     if (WorkoutsSave.Instance.areWorkoutsLoaded) {
       this.setSelectOptions();
     }
+
+    WorkoutsSave.Instance.attachOnWorkoutsModified(this.setSelectOptions);
+  }
+
+  componentWillUnmount() {
+    WorkoutsSave.Instance.dettachOnWorkoutsModified(this.setSelectOptions);
   }
 
   setSelectOptions() {
@@ -54,8 +60,6 @@ class Home extends React.Component {
   }
 
   render() {
-    console.log("rendering home");
-
     return (
       <IonPage>
 

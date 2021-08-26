@@ -119,8 +119,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         const sets_list = this.generateWorkoutList();
         const workout = this.state.workout;
 
-        console.log("Rendering id " + this.id);
-
         try {
             if (workout == undefined)
                 throw "Workout in array is undefined.";
