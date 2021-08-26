@@ -112,16 +112,13 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     }
 
     startRenaming() {
-        this.setState({ isRenamingWorkout: true })
+        this.setState({ isRenamingWorkout: true });
     }
 
-    validateRenaming(newName: string | null) {
-        this.setState({ isRenamingWorkout: false })
+    validateRenaming(newName: string) {
+        this.setState({ isRenamingWorkout: false });
 
-        if (newName != null) {
-            this.state.workout.name = newName;
-        }
-
+        this.state.workout.name = newName;
         WorkoutsSave.Instance.saveCurrentWorkouts();
     }
 
@@ -143,7 +140,15 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
                             <h1 className="page-title" >
                                 <div className="btn-container">
-                                <IonInput disabled={!this.state.isRenamingWorkout} className="rename-input" value={workout.name} onClick={() => this.startRenaming()} onBlur={(e) => this.validateRenaming(e.target.value?.toString() ?? null)}></IonInput>
+                                    <IonInput disabled={!this.state.isRenamingWorkout} id="rename-input" value={workout.name}
+                                        onBlur={(e) => {
+                                            this.state.workout.name = e.target.value?.toString() ?? this.state.workout.name;
+                                        }}
+                                    // onClick={() => {
+                                    //     this.startRenaming();
+                                    //     console.log("on click");
+                                    // }} 
+                                    />
                                     {rename_button}
                                 </div>
                             </h1>
@@ -177,14 +182,17 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     private buildRenameButton() {
         if (this.state.isRenamingWorkout == true) {
             return (
-                <IonButton className="validate-rename-button" onClick={(e) => this.validateRenaming(this.state.workout.name)}>
+                <IonButton color="light" className="validate-rename-button" onClick={(e) => this.validateRenaming(this.state.workout.name)}>
                     <IonIcon icon={checkmark}></IonIcon>
                 </IonButton>
             );
         }
         else {
             return (
-                <IonButton className="rename-button" onClick={() => this.startRenaming()} >
+                <IonButton color="light" className="rename-button" onClick={() => {
+                    console.log("click on rename button");
+                    this.startRenaming()
+                }} >
                     rename
                     <IonIcon icon={pencil}></IonIcon>
                 </IonButton>
