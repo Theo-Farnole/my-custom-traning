@@ -33,9 +33,12 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         super(props);
 
         this.id = parseInt(props.match.params.id);
-
-        console.log("ctor");
+        this.onDeleteSetClick = this.onDeleteSetClick.bind(this);
+        this.forceUpdate = this.forceUpdate.bind(this);
+        this.onWorkoutModified = this.onWorkoutModified.bind(this);
     }
+
+    mounted: boolean = false;
 
     componentDidMount() {
         WorkoutsSave.Instance.attachOnWorkoutsModified(this.onWorkoutModified);
@@ -43,14 +46,18 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         if (WorkoutsSave.Instance.areWorkoutsLoaded == true && WorkoutsSave.Instance.workouts[this.id] != this.state.workout) {
             this.setWorkout(WorkoutsSave.Instance.workouts[this.id]);
         }
+
+        this.mounted = true;
     }
 
     componentWillUnmount() {
         WorkoutsSave.Instance.dettachOnWorkoutsModified(this.onWorkoutModified);
+        this.mounted = false;
+        console.log("unmount");
     }
 
-    onWorkoutModified() {
-        console.log("on workout modified");
+    onWorkoutModified() {        
+        console.log("on workout modified; is mounted = " + this.mounted);
         this.setWorkout(WorkoutsSave.Instance.workouts[this.id]);
     }
 
