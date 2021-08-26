@@ -37,6 +37,7 @@ import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
 import EditWorkout from './pages/EditWorkout';
 import PlayWorkout from './pages/PlayWorkout';
+import WorkoutFinished from './components/WorkoutFinished';
 
 const App: React.FC = () => (
   <IonApp>
@@ -58,6 +59,7 @@ const App: React.FC = () => (
 
             <Route path="/edit-workout/:id" component={EditWorkout} />
             <Route path="/play-exercise/:id" component={PlayWorkout} />
+            <Route path="/pd" component={WorkoutFinished} />
 
             <Route exact path="/">
               <Redirect to="/home" />
