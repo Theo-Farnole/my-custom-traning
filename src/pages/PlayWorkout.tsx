@@ -51,13 +51,22 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
         var output: Array<JSX.Element> = [];
 
-        workout.sets.forEach((set) => {
+        for (var i = 0; i < workout.sets.length; i++) {
+            const set = workout.sets[i];
 
-            for (var i = 0; i < set.setCount; i++) {
-                output.push(<RepExercise exerciceName={set.exercise} currentSet={i + 1} totalSet={set.setCount} repCount={set.repetitionsPerSet} onDone={this.showNextComponent} />);
-                output.push(<Rest duration={10} onSkip={this.showNextComponent} onTimerOver={this.showNextComponent} />)
+            for (var j = 0; j < set.setCount; j++) {
+                const isLastSet = (i + 1 == workout.sets.length) && (j + 1 == set.setCount);
+
+                output.push(<RepExercise exerciceName={set.exercise} currentSet={j + 1} totalSet={set.setCount} repCount={set.repetitionsPerSet} onDone={this.showNextComponent} />);
+
+                if (isLastSet == false) {
+                    output.push(<Rest duration={10} onSkip={this.showNextComponent} onTimerOver={this.showNextComponent} />)
+                }
+                else {
+
+                }
             }
-        });
+        }
 
         return output;
     }

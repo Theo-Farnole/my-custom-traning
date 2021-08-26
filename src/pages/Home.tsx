@@ -15,6 +15,7 @@ class Home extends React.Component {
     super(props);
 
     this.onSelectChange = this.onSelectChange.bind(this);
+    this.setSelectOptions = this.setSelectOptions.bind(this);
 
     this.setSelectOptions();
 
