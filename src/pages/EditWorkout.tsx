@@ -38,26 +38,19 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         this.onWorkoutModified = this.onWorkoutModified.bind(this);
     }
 
-    mounted: boolean = false;
-
     componentDidMount() {
         WorkoutsSave.Instance.attachOnWorkoutsModified(this.onWorkoutModified);
 
         if (WorkoutsSave.Instance.areWorkoutsLoaded == true && WorkoutsSave.Instance.workouts[this.id] != this.state.workout) {
             this.setWorkout(WorkoutsSave.Instance.workouts[this.id]);
         }
-
-        this.mounted = true;
     }
 
     componentWillUnmount() {
         WorkoutsSave.Instance.dettachOnWorkoutsModified(this.onWorkoutModified);
-        this.mounted = false;
-        console.log("unmount");
     }
 
-    onWorkoutModified() {        
-        console.log("on workout modified; is mounted = " + this.mounted);
+    onWorkoutModified() {
         this.setWorkout(WorkoutsSave.Instance.workouts[this.id]);
     }
 
