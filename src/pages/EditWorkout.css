@@ -23,6 +23,23 @@
     display: inline-block;
 }
 
-/* .rename-input :disabled{
-    
-} */
+.rename-button, .validate-rename-button {
+    vertical-align: middle;
+    float: right;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+.rename-input {
+    width: auto;
+}
+
+.rename-button ion-icon {
+    margin-left: 10px;
+}
+
+.page-title {
+    position: relative;
+}

@@ -113,7 +113,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
     startRenaming() {
         this.setState({ isRenamingWorkout: true })
-        console.log("renaming enabled");
     }
 
     validateRenaming(newName: string | null) {
@@ -143,8 +142,10 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             <p className="pre-page-title">editing</p>
 
                             <h1 className="page-title" >
-                                <IonInput disabled={!this.state.isRenamingWorkout} className="rename-input" value={workout.name} onBlur={(e) => this.validateRenaming(e.target.value?.toString() ?? null)}></IonInput>
-                                {rename_button}
+                                <div className="btn-container">
+                                <IonInput disabled={!this.state.isRenamingWorkout} className="rename-input" value={workout.name} onClick={() => this.startRenaming()} onBlur={(e) => this.validateRenaming(e.target.value?.toString() ?? null)}></IonInput>
+                                    {rename_button}
+                                </div>
                             </h1>
 
                         </header>
@@ -176,7 +177,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     private buildRenameButton() {
         if (this.state.isRenamingWorkout == true) {
             return (
-                <IonButton className="rename-button" onClick={(e) => this.validateRenaming(this.state.workout.name)}>
+                <IonButton className="validate-rename-button" onClick={(e) => this.validateRenaming(this.state.workout.name)}>
                     <IonIcon icon={checkmark}></IonIcon>
                 </IonButton>
             );
@@ -184,6 +185,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         else {
             return (
                 <IonButton className="rename-button" onClick={() => this.startRenaming()} >
+                    rename
                     <IonIcon icon={pencil}></IonIcon>
                 </IonButton>
             );
