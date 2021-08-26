@@ -1,3 +1,4 @@
+import { Utilities } from "../utilities/utilities";
 import { Set } from "./Set";
 
 export class Workout {
@@ -5,11 +6,18 @@ export class Workout {
     secondsBetweenSets: number = 0;
     name: string = "";
     duration: string = "DURATION NOT IMPLEMENTED";
+    
+    private _uid: string;
+
+    public get uid(): string {
+        return this._uid;
+    }
 
     constructor(name: string, sets: Set[], secondsBetweenSets: number) {
         this.sets = sets;
         this.secondsBetweenSets = secondsBetweenSets;
         this.name = name;
+        this._uid = Utilities.generateUID();
     }
 
     static get Empty() {

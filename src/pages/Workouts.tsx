@@ -47,7 +47,7 @@ class Workouts extends React.Component {
     for (var i = 0; i < workouts.length; i++) {
       const workout = workouts[i];
 
-      output.push(<IonItem key={workout.name}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
+      output.push(<IonItem key={workout.uid}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
         <IonLabel>{workout.name}</IonLabel>
         <IonLabel className="ion-text-center">{workout.duration}</IonLabel>
         <IonLabel class="ion-text-right">
