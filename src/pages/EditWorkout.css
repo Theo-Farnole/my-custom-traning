@@ -18,3 +18,11 @@
     margin-left: 80px;
     width: calc(100%-80px);
 }
+
+.rename-button, .rename-input {
+    display: inline-block;
+}
+
+/* .rename-input :disabled{
+    
+} */

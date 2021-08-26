@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonFooter, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
+import { IonButton, IonContent, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
 import { exception } from 'console';
 import { useReducer, useState } from 'react';
 import { RouteComponentProps } from 'react-router';
@@ -9,11 +9,13 @@ import './EditWorkout.css';
 import Workouts from './Workouts';
 import { ItemReorderEventDetail } from '@ionic/core';
 import { WorkoutExamples } from '../services/WorkoutExamples';
-import { refresh } from 'ionicons/icons';
+import { checkmark, handRight, refresh } from 'ionicons/icons';
 import { forceUpdate } from 'ionicons/dist/types/stencil-public-runtime';
 import { Set } from '../services/Set';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
+import { pencil } from 'ionicons/icons'
+import { add, settings, share, person, arrowForwardCircle, arrowBackCircle, arrowUpCircle, logoVimeo, logoFacebook, logoInstagram, logoTwitter } from 'ionicons/icons';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -26,7 +28,8 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
     state = {
         ignored: 0,
-        workout: Workout.Empty
+        workout: Workout.Empty,
+        isRenamingWorkout: false
     }
 
     constructor(props: EditWorkoutProps | Readonly<EditWorkoutProps>) {
@@ -108,9 +111,26 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         WorkoutsSave.Instance.saveCurrentWorkouts();
     }
 
+    startRenaming() {
+        this.setState({ isRenamingWorkout: true })
+        console.log("renaming enabled");
+    }
+
+    validateRenaming(newName: string | null) {
+        this.setState({ isRenamingWorkout: false })
+
+        if (newName != null) {
+            this.state.workout.name = newName;
+        }
+
+        WorkoutsSave.Instance.saveCurrentWorkouts();
+    }
+
     render() {
         const sets_list = this.generateWorkoutList();
         const workout = this.state.workout;
+
+        const rename_button = this.buildRenameButton();
 
         try {
             if (workout == undefined)
@@ -119,9 +139,15 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
             return (
                 <IonPage>
                     <IonContent fullscreen>
-                        <h1 className="ion-text-center">
-                            editing workout {workout.name}
-                        </h1>
+                        <header className="page-header">
+                            <p className="pre-page-title">editing</p>
+
+                            <h1 className="page-title" >
+                                <IonInput disabled={!this.state.isRenamingWorkout} className="rename-input" value={workout.name} onBlur={(e) => this.validateRenaming(e.target.value?.toString() ?? null)}></IonInput>
+                                {rename_button}
+                            </h1>
+
+                        </header>
 
                         <IonReorderGroup disabled={false} onIonItemReorder={(e) => this.doReorder(e, workout)}>
                             <IonListHeader className="set-list-header">
@@ -144,6 +170,23 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         }
         catch (err) {
             return <ErrorPage err={err} />
+        }
+    }
+
+    private buildRenameButton() {
+        if (this.state.isRenamingWorkout == true) {
+            return (
+                <IonButton className="rename-button" onClick={(e) => this.validateRenaming(this.state.workout.name)}>
+                    <IonIcon icon={checkmark}></IonIcon>
+                </IonButton>
+            );
+        }
+        else {
+            return (
+                <IonButton className="rename-button" onClick={() => this.startRenaming()} >
+                    <IonIcon icon={pencil}></IonIcon>
+                </IonButton>
+            );
         }
     }
 }
