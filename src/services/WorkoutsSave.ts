@@ -1,5 +1,5 @@
 import { Filesystem, Directory, Encoding, ReadFileResult } from '@capacitor/filesystem';
-import { EventDispatcher, Handler } from '../utilities/EventEmitter';
+import { EventDispatcher, Handler } from '../utilities/EventDispatcher';
 import { Workout } from './Workout';
 import { WorkoutExamples } from './WorkoutExamples';
 import { Set } from './Set';
@@ -35,6 +35,10 @@ export class WorkoutsSave {
 
     public attachOnWorkoutsModified(handler: Handler<WorkoutsModifiedEvent>) {
         this._workoutsModifiedDispatcher.register(handler);
+    }
+
+    public dettachOnWorkoutsModified(handler: Handler<WorkoutsModifiedEvent>) {
+        this._workoutsModifiedDispatcher.unregister(handler);
     }
 
     private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {

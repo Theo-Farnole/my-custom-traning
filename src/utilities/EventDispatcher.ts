@@ -11,4 +11,12 @@ export class EventDispatcher<E> {
     register(handler: Handler<E>) {
         this.handlers.push(handler);
     }
+    unregister(handler: Handler<E>) {
+        if (this.handlers.indexOf(handler) == -1)
+        {
+            console.log("Cannot unregister this handler because it is not register.");
+        }
+        
+        this.handlers.remove(handler);
+    }
 }

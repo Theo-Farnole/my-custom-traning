@@ -9,11 +9,11 @@ Array.prototype.move = function (from: number, to: number) {
     return this;
 };
 
+// source: https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
 Array.prototype.remove = function <T>(element: T) {
     const index = this.indexOf(element);
-
-    if (index > -1) {
-        this.slice(index, 1);
+    if (index != -1) {
+        this.splice(index, 1);
     }
 
     return this;
