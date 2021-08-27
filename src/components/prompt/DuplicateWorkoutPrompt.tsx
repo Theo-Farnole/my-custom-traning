@@ -7,24 +7,25 @@ import { Utilities } from "../../utilities/utilities";
 
 interface DuplicateWorkoutPromptProps {
     isOpen: boolean,
-    workout: Workout,
+    workoutToDuplicate: Workout,
     onDismiss: () => void
 }
 
-const DuplicateWorkoutPrompt: React.FC<DuplicateWorkoutPromptProps> = ({ isOpen, onDismiss, workout }) => {
+const DuplicateWorkoutPrompt: React.FC<DuplicateWorkoutPromptProps> = ({ isOpen, onDismiss, workoutToDuplicate }) => {
     const history = useHistory();
 
     return (
         <IonAlert
             isOpen={isOpen}
             onDidDismiss={() => onDismiss()}
-            header={'Duplicating workout' + Utilities.truncateString(workout.name, 30)}
+            header={'Duplicating workout ' + Utilities.truncateString(workoutToDuplicate.name, 30)}
             inputs={[
                 {
                     name: 'Duplicated workout name',
                     label: 'name',
                     type: 'text',
-                    value: workout.name
+                    placeholder: "Copy of " + workoutToDuplicate.name,
+                    value: "Copy of " + workoutToDuplicate.name
                 }
             ]}
             buttons={[
@@ -41,8 +42,9 @@ const DuplicateWorkoutPrompt: React.FC<DuplicateWorkoutPromptProps> = ({ isOpen,
                     handler: (data) => {
                         const saveInstance = WorkoutsSave.Instance;
 
-                        const workoutName = Utilities.isBlank(data.name) ? "workout #" + (saveInstance.workouts.length + 1) : data.name;
-                        const workout = new Workout(workoutName, [], 90);
+                        const workoutName = Utilities.isBlank(data.name) ? "Copy of " + workoutToDuplicate.name : data.name;
+                        const workout = workoutToDuplicate.getACopy();
+                        workout.name = workoutName;
                         saveInstance.addWorkout(workout);
 
                         const workoutIndex = saveInstance.workouts.indexOf(workout);

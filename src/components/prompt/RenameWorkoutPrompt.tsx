@@ -22,6 +22,7 @@ const RenameWorkoutPrompt: React.FC<RenameWorkoutPromptProps> = ({ isOpen, worko
                     name: 'name',
                     label: 'name',
                     type: 'text',
+                    placeholder: workout.name,
                     value: workout.name
                 }
             ]}

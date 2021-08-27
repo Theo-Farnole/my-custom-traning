@@ -4,6 +4,7 @@ import { Workout } from "../services/Workout";
 import DeleteWorkoutPrompt from "./prompt/DeleteWorkoutPrompt";
 import { ellipsisVertical } from "ionicons/icons"
 import RenameWorkoutPrompt from "./prompt/RenameWorkoutPrompt";
+import DuplicateWorkoutPrompt from "./prompt/DuplicateWorkoutPrompt";
 
 interface WorkoutItemProps {
     workout: Workout;
@@ -19,12 +20,18 @@ const PopoverList: React.FC<PopoverListProps> = ({ workout, onHide }) => {
 
     const [isDeleteOpen, openDeletePrompt] = useState(false);
     const [isRenameOpen, openRenamePrompt] = useState(false);
+    const [isDuplicateOpen, openDuplicatePrompt] = useState(false);
 
     return (
         <div>
 
             <RenameWorkoutPrompt isOpen={isRenameOpen} workout={workout} onDismiss={() => {
                 openRenamePrompt(false);
+                onHide();
+            }} />
+
+            <DuplicateWorkoutPrompt isOpen={isDuplicateOpen} workoutToDuplicate={workout} onDismiss={() => {
+                openDuplicatePrompt(false);
                 onHide();
             }} />
 
@@ -36,7 +43,7 @@ const PopoverList: React.FC<PopoverListProps> = ({ workout, onHide }) => {
             <IonList>
                 <IonListHeader>Options</IonListHeader>
                 <IonItem button onClick={() => openRenamePrompt(true)}>Rename</IonItem>
-                <IonItem button>Duplicate</IonItem>
+                <IonItem button onClick={() => openDuplicatePrompt(true)}>Duplicate</IonItem>
                 <IonItem button color="danger" onClick={() => openDeletePrompt(true)}>Delete</IonItem>
             </IonList>
         </div>
