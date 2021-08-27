@@ -7,11 +7,13 @@ import "./Timer.css"
 // source: https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/
 
 interface TimerProps {
-    duration: number;
+    duration: number,
+    isPaused: boolean,
     onTimerOver: () => void;
 };
 
 const FULL_DASH_ARRAY = 283;
+const VISUAL_INTERVAL_MS = 125; // baisser cette valeur fluidise la reprise de la pause
 
 class Timer extends React.Component<TimerProps> {
 
@@ -42,14 +44,18 @@ class Timer extends React.Component<TimerProps> {
         this.updateVisual();
 
         this.timerIntervalID = window.setInterval(() => {
-            this.timePassed++;
+
+            if (this.props.isPaused == true) return;
+
+            this.timePassed += VISUAL_INTERVAL_MS / 1000;
             this.updateVisual();
+
 
             if (this.state.timeLeft <= 0) {
                 this.props.onTimerOver();
                 clearInterval(this.timerIntervalID);
             }
-        }, 1000);
+        }, VISUAL_INTERVAL_MS);
     }
 
     componentWillUnmount() {
@@ -97,7 +103,7 @@ class Timer extends React.Component<TimerProps> {
 
                     <path
                         strokeDasharray={this.state.dash}
-                        className="remaining"
+                        className={(this.props.isPaused == true) ? "remaining paused" : "remaining"}
                         d="
                             M 50, 50
                             m -45, 0
@@ -107,7 +113,7 @@ class Timer extends React.Component<TimerProps> {
                     ></path>
                 </svg>
                 <span className="time-label">
-                    {this.state.timeLeft}
+                    {Math.ceil(this.state.timeLeft)}
                 </span>
             </div>
         )
