@@ -49,7 +49,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout, editID }) => {
                 <IonLabel className="ion-text-center">{workout.duration}</IonLabel>
                 <IonLabel class="ion-text-right">
                     <IonButton routerLink={"/edit-workout/" + editID}>edit</IonButton>                    
-                    <IonButton onClick={() => showPopover()}>
+                    <IonButton onClick={(e) => showPopover({event: e.nativeEvent})}>
                         <IonIcon slot="icon-only" icon={ellipsisVertical} />
                     </IonButton>
                 </IonLabel>
