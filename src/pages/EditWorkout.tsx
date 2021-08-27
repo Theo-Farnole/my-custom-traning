@@ -1,21 +1,14 @@
-import { IonButton, IonContent, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
-import { exception } from 'console';
-import { useReducer, useState } from 'react';
+import { IonButton, IonContent, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
-import { useConstructor } from '../services/CustomHooks';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
-import Workouts from './Workouts';
 import { ItemReorderEventDetail } from '@ionic/core';
-import { WorkoutExamples } from '../services/WorkoutExamples';
-import { checkmark, handRight, refresh } from 'ionicons/icons';
-import { forceUpdate } from 'ionicons/dist/types/stencil-public-runtime';
+import { checkmark } from 'ionicons/icons';
 import { Set } from '../services/Set';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import { pencil } from 'ionicons/icons'
-import { add, settings, share, person, arrowForwardCircle, arrowBackCircle, arrowUpCircle, logoVimeo, logoFacebook, logoInstagram, logoTwitter } from 'ionicons/icons';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{

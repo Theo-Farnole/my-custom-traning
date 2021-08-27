@@ -67,11 +67,15 @@ class Home extends React.Component {
     return (
       <IonPage>
 
-        <IonContent fullscreen>
+        <IonHeader>
 
           <h1 className="ion-text-center">
             Custom Workouts
           </h1>
+        </IonHeader>
+
+        <IonContent fullscreen>
+
 
           <WorkoutsList />
           <CreateWorkoutButton />
