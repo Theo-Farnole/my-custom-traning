@@ -23,13 +23,12 @@ class Rest extends React.Component {
                     </div>
 
                     <div className="informations">
-                        {/* <img src="./assets/party-popper.png" alt="party popper" /> */}
                         <h1 className="ion-text-center">Great job! 🎉</h1>
                         <p className="ion-text-center">
                             You have completed your workout.<br />
                             Keep it up!
                         </p>
-                        <IonButton class="action-button" expand="block">Continue</IonButton>
+                        <IonButton routerLink="/home" className="action" expand="block">Continue</IonButton>
                     </div>
 
 

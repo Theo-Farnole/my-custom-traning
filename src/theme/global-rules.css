@@ -36,10 +36,12 @@ ion-content {
     transform: translate(-50%, -50%);
 }
 
-ion-button {
+ion-button.action {
     --border-radius: 999px;
     width: 200px;
     height: 36px;
     margin: auto;
+    margin-top: 4px;
+    margin-bottom: 4px;
     text-transform: none;
 }
