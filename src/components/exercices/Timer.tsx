@@ -2,7 +2,6 @@ import { timelineEnd } from "console";
 import { extensionPuzzleSharp, flaskOutline } from "ionicons/icons";
 import React from "react";
 import { useState } from "react";
-import { useConstructor } from "../services/CustomHooks";
 import "./Timer.css"
 
 // source: https://css-tricks.com/how-to-create-an-animated-countdown-timer-with-html-css-and-javascript/

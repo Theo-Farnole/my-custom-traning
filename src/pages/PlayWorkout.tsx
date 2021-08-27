@@ -2,9 +2,9 @@ import { IonContent, IonPage } from "@ionic/react";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import ErrorPage from "../components/ErrorPage";
-import RepExercise from "../components/RepExercise";
-import Rest from "../components/Rest";
-import WorkoutFinished from "../components/WorkoutFinished";
+import RepExercise from "../components/exercices/RepExercise";
+import Rest from "../components/exercices/Rest";
+import WorkoutFinished from "../components/exercices/WorkoutFinished";
 import { Workout } from "../services/Workout";
 import { WorkoutsSave } from "../services/WorkoutsSave";
 

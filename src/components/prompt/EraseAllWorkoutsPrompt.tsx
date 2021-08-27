@@ -1,7 +1,5 @@
 import { IonAlert } from "@ionic/react";
-import { Workout } from "../services/Workout";
-import { WorkoutExamples } from "../services/WorkoutExamples";
-import { WorkoutsSave } from "../services/WorkoutsSave";
+import { WorkoutsSave } from "../../services/WorkoutsSave";
 
 interface EraseAllWorkoutsPromptProps {    
     isOpen: boolean,

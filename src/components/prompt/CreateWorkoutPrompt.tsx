@@ -1,8 +1,8 @@
 import { IonAlert } from "@ionic/react";
 import { useHistory } from "react-router-dom";
-import { Workout } from "../services/Workout";
-import { WorkoutExamples } from "../services/WorkoutExamples";
-import { WorkoutsSave } from "../services/WorkoutsSave";
+import { Workout } from "../../services/Workout";
+import { WorkoutExamples } from "../../services/WorkoutExamples";
+import { WorkoutsSave } from "../../services/WorkoutsSave";
 
 interface CreateWorkoutPromptProps {
     isOpen: boolean,

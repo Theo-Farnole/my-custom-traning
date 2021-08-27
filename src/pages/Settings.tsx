@@ -1,8 +1,7 @@
 import { IonAvatar, IonButton, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
 import { pin, heart, closeCircle } from 'ionicons/icons';
 import { useState } from 'react';
-import EraseAllWorkoutsPrompt from '../components/EraseAllWorkoutsPrompt';
-import ExploreContainer from '../components/ExploreContainer';
+import EraseAllWorkoutsPrompt from '../components/prompt/EraseAllWorkoutsPrompt';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './Settings.css';
 

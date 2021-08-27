@@ -1,7 +1,6 @@
 import { IonAlert } from "@ionic/react";
-import { Workout } from "../services/Workout";
-import { WorkoutExamples } from "../services/WorkoutExamples";
-import { WorkoutsSave } from "../services/WorkoutsSave";
+import { Workout } from "../../services/Workout";
+import { WorkoutsSave } from "../../services/WorkoutsSave";
 
 interface DeleteWorkoutPromptProps {
     workout: Workout,

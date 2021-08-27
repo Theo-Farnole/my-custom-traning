@@ -37,7 +37,7 @@ import Workouts from './pages/Workouts';
 import Settings from './pages/Settings';
 import EditWorkout from './pages/EditWorkout';
 import PlayWorkout from './pages/PlayWorkout';
-import WorkoutFinished from './components/WorkoutFinished';
+import WorkoutFinished from './components/exercices/WorkoutFinished';
 
 const App: React.FC = () => (
   <IonApp>

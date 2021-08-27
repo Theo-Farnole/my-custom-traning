@@ -5,8 +5,8 @@ import { Workout } from "../services/Workout";
 import './Workouts.css';
 import { useConstructor } from '../services/CustomHooks';
 import React from 'react';
-import DeleteWorkoutPrompt from '../components/DeleteWorkoutPrompt';
-import CreateWorkoutPrompt from '../components/CreateWorkoutPrompt';
+import DeleteWorkoutPrompt from '../components/prompt/DeleteWorkoutPrompt';
+import CreateWorkoutPrompt from '../components/prompt/CreateWorkoutPrompt';
 
 
 class Workouts extends React.Component {
