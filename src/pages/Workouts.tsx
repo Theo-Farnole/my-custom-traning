@@ -1,4 +1,4 @@
-import { IonAlert, IonButton, IonCheckbox, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonModal, IonPage, IonRadio, IonReorder, IonReorderGroup, IonTitle, IonToggle, IonToolbar, useIonAlert, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
+import { IonAlert, IonButton, IonCheckbox, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonInput, IonItem, IonItemOption, IonItemOptions, IonItemSliding, IonLabel, IonList, IonListHeader, IonLoading, IonModal, IonPage, IonRadio, IonReorder, IonReorderGroup, IonTitle, IonToggle, IonToolbar, useIonAlert, useIonViewDidEnter, useIonViewDidLeave, useIonViewWillEnter, useIonViewWillLeave } from '@ionic/react';
 import { useState } from 'react';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import { Workout } from "../services/Workout";
@@ -8,6 +8,8 @@ import React from 'react';
 import DeleteWorkoutPrompt from '../components/prompt/DeleteWorkoutPrompt';
 import CreateWorkoutPrompt from '../components/prompt/CreateWorkoutPrompt';
 import WorkoutItem from '../components/WorkoutItem';
+import { arrowForwardCircle, add } from 'ionicons/icons';
+import CreateWorkoutButton from '../components/CreateWorkoutButton';
 
 
 class Workouts extends React.Component {
@@ -100,14 +102,9 @@ class Workouts extends React.Component {
             </IonListHeader>
 
             {workoutsList}
-
-            <IonButton expand="block" onClick={() => this.showModal(true)}>Create a new workout</IonButton>
-
-            <CreateWorkoutPrompt isOpen={this.state.showModal} onDismiss={() => {
-              this.closeCreateNewWorkoutPrompt()
-            }} />
           </IonList>
 
+          <CreateWorkoutButton />
         </IonContent>
       </IonPage >
     );
