@@ -96,7 +96,6 @@ class Workouts extends React.Component {
           <IonList>
             <IonListHeader class="list-header">
               <IonLabel><b>Name</b></IonLabel>
-              <IonLabel className="ion-text-center"><b>Duration</b></IonLabel>
               <IonLabel class="ion-text-right"><b>Actions</b></IonLabel>
             </IonListHeader>
 

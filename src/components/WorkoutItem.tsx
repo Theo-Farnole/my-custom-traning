@@ -61,14 +61,12 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout, editID }) => {
         <div>
             <IonItem key={workout.uid}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
                 <IonLabel>{workout.name}</IonLabel>
-                <IonLabel className="ion-text-center">{workout.duration}</IonLabel>
                 {/* IonLabel containing buttons is a hack to get the right order corresponding to list header */}
-                <IonLabel class="ion-text-right">
-                    <IonButton routerLink={"/edit-workout/" + editID}>edit</IonButton>
-                    <IonButton onClick={(e) => showPopover({ event: e.nativeEvent })} icon-only fill="clear">
-                        <IonIcon slot="icon-only" icon={ellipsisVertical} />
-                    </IonButton>
-                </IonLabel>
+
+                <IonButton routerLink={"/edit-workout/" + editID}>edit</IonButton>
+                <IonButton onClick={(e) => showPopover({ event: e.nativeEvent })} icon-only fill="clear">
+                    <IonIcon slot="icon-only" icon={ellipsisVertical} />
+                </IonButton>
             </IonItem>
         </div>
     );
