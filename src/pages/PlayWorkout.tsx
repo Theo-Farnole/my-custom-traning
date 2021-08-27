@@ -1,10 +1,11 @@
-import { IonContent, IonPage } from "@ionic/react";
+import { IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import ErrorPage from "../components/ErrorPage";
 import RepExercise from "../components/exercices/RepExercise";
 import Rest from "../components/exercices/Rest";
 import WorkoutFinished from "../components/exercices/WorkoutFinished";
+import HomeButton from "../components/HomeButton";
 import { Workout } from "../services/Workout";
 import { WorkoutsSave } from "../services/WorkoutsSave";
 
@@ -61,7 +62,7 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
                 output.push(<RepExercise exerciceName={set.exercise} currentSet={j + 1} totalSet={set.setCount} repCount={set.repetitionsPerSet} onDone={this.showNextComponent} />);
 
                 if (isLastSet == false) {
-                    output.push(<Rest duration={10} onSkip={this.showNextComponent} onTimerOver={this.showNextComponent} />);
+                    output.push(<Rest duration={workout.secondsBetweenSets} onSkip={this.showNextComponent} onTimerOver={this.showNextComponent} />);
                 }
                 else {
                     output.push(<WorkoutFinished />);
@@ -83,7 +84,22 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
     render() {
         try {
-            return this.componentsStack[this.state.showComponentIndex];
+            return (
+                <IonPage>
+                    <IonHeader>
+                        <IonToolbar>
+                            <IonButtons slot="start">
+                                <HomeButton />
+                            </IonButtons>
+                            <IonTitle>{this.state.workout.name ?? "Exercise name"}</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
+
+                    <IonContent>
+                        {this.componentsStack[this.state.showComponentIndex]}
+                    </IonContent>
+                </IonPage>
+            );
         }
         catch (err) {
             return <ErrorPage err={err} />

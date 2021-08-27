@@ -9,6 +9,7 @@ import { Set } from '../services/Set';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import { pencil } from 'ionicons/icons'
+import HomeButton from '../components/HomeButton';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -128,12 +129,11 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     <IonHeader>
                         <IonToolbar>
                             <IonButtons slot="start">
-                                <IonBackButton />
+                                <HomeButton />
                             </IonButtons>
                             <IonTitle>{workout.name}</IonTitle>
                         </IonToolbar>
                     </IonHeader>
-
 
                     <IonContent fullscreen>
 

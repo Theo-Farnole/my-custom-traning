@@ -1,7 +1,8 @@
-import { IonButton, IonCol, IonContent, IonFooter, IonGrid, IonPage, IonRow, IonToolbar } from "@ionic/react"
+import { IonButton, IonCol, IonContent, IonFooter, IonGrid, IonIcon, IonPage, IonRow, IonToolbar } from "@ionic/react"
 import React from "react";
 import Timer from "./Timer";
 import "./Rest.css"
+import { pauseOutline } from "ionicons/icons"
 
 interface RestProps {
     duration: number;
@@ -17,17 +18,20 @@ class Rest extends React.Component<RestProps> {
 
     render() {
         return (
-            <IonPage>
-                <IonContent className="ion-text-center">
-                    <h1 className="ion-text-center">Rest</h1>
-                    <Timer onTimerOver={this.props.onTimerOver} duration={this.props.duration}></Timer>
-                </IonContent>
+            <>
+                <header className="page-header">
+                    <h1 className="page-title">Rest</h1>
+                </header>
 
-                <IonFooter>
-                    <IonButton expand="block" size="large" color="light">Pause</IonButton>
-                    <IonButton onClick={this.props.onTimerOver} expand="block" size="large" color="danger">Skip</IonButton>
-                </IonFooter>
-            </IonPage>
+                <Timer onTimerOver={this.props.onTimerOver} duration={this.props.duration} />
+
+                <div className="buttons">
+                    <IonButton id="pause-button" color="light">
+                        <IonIcon slot="icon-only" icon={pauseOutline} />
+                    </IonButton>
+                    <IonButton id="skip-button" onClick={this.props.onTimerOver} expand="block" size="large" color="danger" className="action">Skip</IonButton>
+                </div>
+            </>
         )
     }
 }

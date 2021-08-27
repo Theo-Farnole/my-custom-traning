@@ -56,15 +56,16 @@ const App: React.FC = () => (
               <Settings />
             </Route>
 
-            <Route path="/edit-workout/:id" component={EditWorkout} />
-            <Route path="/play-workout/:id" component={PlayWorkout} />
-
             <Route exact path="/">
               <Redirect to="/home" />
             </Route>
           </Switch>
         </IonRouterOutlet>
       </IonSplitPane>
+
+
+      <Route path="/edit-workout/:id" component={EditWorkout} />
+      <Route path="/play-workout/:id" component={PlayWorkout} />
     </IonReactRouter>
   </IonApp>
 );
