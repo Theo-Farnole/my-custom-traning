@@ -58,8 +58,7 @@ const App: React.FC = () => (
             </Route>
 
             <Route path="/edit-workout/:id" component={EditWorkout} />
-            <Route path="/play-exercise/:id" component={PlayWorkout} />
-            <Route path="/pd" component={WorkoutFinished} />
+            <Route path="/play-workout/:id" component={PlayWorkout} />            
 
             <Route exact path="/">
               <Redirect to="/home" />

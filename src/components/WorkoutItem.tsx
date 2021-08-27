@@ -63,8 +63,9 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout, editID }) => {
                 <IonLabel>{workout.name}</IonLabel>
                 {/* IonLabel containing buttons is a hack to get the right order corresponding to list header */}
 
-                <IonButton routerLink={"/edit-workout/" + editID}>edit</IonButton>
-                <IonButton onClick={(e) => showPopover({ event: e.nativeEvent })} icon-only fill="clear">
+                <IonButton routerLink={"/play-workout/" + editID}>start routine</IonButton>
+                <IonButton routerLink={"/edit-workout/" + editID} color="light">edit</IonButton>
+                <IonButton onClick={(e) => showPopover({ event: e.nativeEvent })} icon-only fill="clear" color="dark">
                     <IonIcon slot="icon-only" icon={ellipsisVertical} />
                 </IonButton>
             </IonItem>

@@ -3,6 +3,9 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonTabButton, Ion
 import './Home.css';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import { Workout } from '../services/Workout';
+import WorkoutsList from '../components/WorkoutsList';
+import CreateWorkoutPrompt from '../components/prompt/CreateWorkoutPrompt';
+import CreateWorkoutButton from '../components/CreateWorkoutButton';
 
 class Home extends React.Component {
 
@@ -70,18 +73,8 @@ class Home extends React.Component {
             Custom Workouts
           </h1>
 
-          <IonItem>
-            <IonLabel>Select workout</IonLabel>
-            <IonSelect value={this.state.selectedWorkoutID} onIonChange={this.onSelectChange} cancelText="Dismiss" okText="Select" interface="popover" multiple={false} placeholder="Select One">
-              {this.state.selectOptions}
-            </IonSelect>
-          </IonItem>
-
-          <div className="ion-text-center">
-            <IonButton routerLink={"/play-exercise/" + this.state.selectedWorkoutID} expand="block" color="primary" className="ion-text-center">
-              <IonLabel>Start workout</IonLabel>
-            </IonButton>
-          </div>
+          <WorkoutsList />
+          <CreateWorkoutButton />
         </IonContent>
       </IonPage>
     );
