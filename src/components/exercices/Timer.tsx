@@ -17,7 +17,7 @@ class Timer extends React.Component<TimerProps> {
 
     state = {
         timeLeft: 0,
-        dash: FULL_DASH_ARRAY.toString()
+        dash: ""
     };
 
     timePassed: number;
@@ -34,11 +34,13 @@ class Timer extends React.Component<TimerProps> {
         this.state =
         {
             timeLeft: props.duration,
-            dash: FULL_DASH_ARRAY.toString()
+            dash: "0 " + FULL_DASH_ARRAY.toString()
         }
     }
 
     componentDidMount() {
+        this.updateVisual();
+
         this.timerIntervalID = window.setInterval(() => {
             this.timePassed++;
             this.updateVisual();
@@ -48,6 +50,13 @@ class Timer extends React.Component<TimerProps> {
                 clearInterval(this.timerIntervalID);
             }
         }, 1000);
+    }
+
+    componentWillUnmount() {
+        if (this.timerIntervalID != -1) {
+            clearInterval(this.timerIntervalID);
+            this.timerIntervalID = -1;
+        }
     }
 
     updateVisual() {
@@ -66,16 +75,8 @@ class Timer extends React.Component<TimerProps> {
 
     }
 
-    componentWillUnmount() {
-        if (this.timerIntervalID != -1) {
-            clearInterval(this.timerIntervalID);
-            this.timerIntervalID = -1;
-        }
-    }
-
     calculateTimeFraction() {
-        const rawTimeFraction = this.state.timeLeft / this.duration;
-        return rawTimeFraction - (1 / this.duration) * (1 - rawTimeFraction);
+        return (this.timePassed) / (this.duration - 1);
     }
 
     calculateCircleDashArray() {
