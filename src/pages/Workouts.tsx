@@ -7,6 +7,7 @@ import { useConstructor } from '../services/CustomHooks';
 import React from 'react';
 import DeleteWorkoutPrompt from '../components/prompt/DeleteWorkoutPrompt';
 import CreateWorkoutPrompt from '../components/prompt/CreateWorkoutPrompt';
+import WorkoutItem from '../components/WorkoutItem';
 
 
 class Workouts extends React.Component {
@@ -45,16 +46,9 @@ class Workouts extends React.Component {
     const output: JSX.Element[] = [];
 
     for (var i = 0; i < workouts.length; i++) {
-      const workout = workouts[i];
+      const workout = workouts[i];      
 
-      output.push(<IonItem key={workout.uid}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
-        <IonLabel>{workout.name}</IonLabel>
-        <IonLabel className="ion-text-center">{workout.duration}</IonLabel>
-        <IonLabel class="ion-text-right">
-          <IonButton routerLink={"/edit-workout/" + workouts.indexOf(workout)} color="secondary">edit</IonButton>
-          <IonButton onClick={() => this.showDeleteWorkoutPrompt(workout)} color="danger">delete</IonButton>
-        </IonLabel>
-      </IonItem>);
+      output.push(<WorkoutItem editID={i} workout={workout}/>)
     }
 
     return output;
