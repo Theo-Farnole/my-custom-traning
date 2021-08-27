@@ -6,7 +6,7 @@ export class Workout {
     secondsBetweenSets: number = 0;
     name: string = "";
     duration: string = "DURATION NOT IMPLEMENTED";
-    
+
     private _uid: string;
 
     public get uid(): string {
@@ -22,6 +22,18 @@ export class Workout {
 
     static get Empty() {
         return new Workout("", [], 0);
+    }
+
+    getACopy(): Workout {
+        var copy: Workout = Object.assign(Workout.Empty, JSON.parse(JSON.stringify(this)));
+
+        for (var i = 0; i < copy.sets.length; i++) {
+            copy.sets[i] = Object.assign(Set.Empty, copy.sets[i]);
+            copy.sets[i].uid = Utilities.generateUID();
+        }
+
+        copy._uid = Utilities.generateUID();
+        return copy;
     }
 
     addEmptySet() {
