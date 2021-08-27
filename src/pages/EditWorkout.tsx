@@ -1,10 +1,10 @@
-import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonMenuButton, IonPage, IonReorder, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonMenuButton, IonPage, IonReorder, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
 import { ItemReorderEventDetail } from '@ionic/core';
-import { checkmark } from 'ionicons/icons';
+import { add, checkmark } from 'ionicons/icons';
 import { Set } from '../services/Set';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
@@ -147,9 +147,11 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             {sets_list}
                         </IonReorderGroup>
 
-                        <IonButton onClick={() => { this.addSetClicked(workout); this.forceUpdate(); }} expand="block">
-                            Add a set
-                        </IonButton>
+                        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+                            <IonFabButton onClick={() => { this.addSetClicked(workout); this.forceUpdate(); }}>
+                                <IonIcon icon={add} />
+                            </IonFabButton>
+                        </IonFab>
 
                     </IonContent>
                 </IonPage >
