@@ -14,9 +14,7 @@ class Workouts extends React.Component {
 
   state = {
     showModal: false,
-    workouts: [] as Workout[],
-    isDeletePromptOpen: false,
-    deletePromptWorkout: Workout.Empty
+    workouts: [] as Workout[]
   }
 
   isComponentedMounted: boolean = false;
@@ -46,9 +44,9 @@ class Workouts extends React.Component {
     const output: JSX.Element[] = [];
 
     for (var i = 0; i < workouts.length; i++) {
-      const workout = workouts[i];      
+      const workout = workouts[i];
 
-      output.push(<WorkoutItem editID={i} workout={workout}/>)
+      output.push(<WorkoutItem editID={i} workout={workout} />)
     }
 
     return output;
@@ -73,19 +71,6 @@ class Workouts extends React.Component {
 
   showModal(active: boolean) {
     this.setState({ showModal: active });
-  }
-
-  showDeleteWorkoutPrompt(workout: Workout) {
-    this.setState({
-      isDeletePromptOpen: true,
-      deletePromptWorkout: workout
-    });
-  }
-
-  closeDeleteWorkoutPrompt() {
-    this.setState({
-      isDeletePromptOpen: false
-    });
   }
 
   closeCreateNewWorkoutPrompt() {
@@ -119,7 +104,6 @@ class Workouts extends React.Component {
 
             <IonButton expand="block" onClick={() => this.showModal(true)}>Create a new workout</IonButton>
 
-            <DeleteWorkoutPrompt isOpen={this.state.isDeletePromptOpen} workout={this.state.deletePromptWorkout} onDismiss={() => this.closeDeleteWorkoutPrompt()} />
             <CreateWorkoutPrompt isOpen={this.state.showModal} onDismiss={() => {
               this.closeCreateNewWorkoutPrompt()
             }} />
