@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router";
 import ErrorPage from "../components/ErrorPage";
 import RepExercise from "../components/RepExercise";
 import Rest from "../components/Rest";
+import WorkoutFinished from "../components/WorkoutFinished";
 import { Workout } from "../services/Workout";
 import { WorkoutsSave } from "../services/WorkoutsSave";
 
@@ -60,10 +61,10 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
                 output.push(<RepExercise exerciceName={set.exercise} currentSet={j + 1} totalSet={set.setCount} repCount={set.repetitionsPerSet} onDone={this.showNextComponent} />);
 
                 if (isLastSet == false) {
-                    output.push(<Rest duration={10} onSkip={this.showNextComponent} onTimerOver={this.showNextComponent} />)
+                    output.push(<Rest duration={10} onSkip={this.showNextComponent} onTimerOver={this.showNextComponent} />);
                 }
                 else {
-
+                    output.push(<WorkoutFinished />);
                 }
             }
         }
