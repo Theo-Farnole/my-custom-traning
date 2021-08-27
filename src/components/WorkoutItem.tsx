@@ -1,4 +1,4 @@
-import { IonItem, IonLabel, IonButton, IonIcon, useIonPopover, IonList, IonListHeader } from "@ionic/react";
+import { IonItem, IonLabel, IonButton, IonIcon, useIonPopover, IonList, IonListHeader, IonHeader } from "@ionic/react";
 import { useState } from "react";
 import { Workout } from "../services/Workout";
 import DeleteWorkoutPrompt from "./prompt/DeleteWorkoutPrompt";
@@ -34,6 +34,7 @@ const PopoverList: React.FC<PopoverListProps> = ({ workout, onHide }) => {
             }} />
 
             <IonList>
+                <IonListHeader>Options</IonListHeader>
                 <IonItem button onClick={() => openRenamePrompt(true)}>Rename</IonItem>
                 <IonItem button>Duplicate</IonItem>
                 <IonItem button color="danger" onClick={() => openDeletePrompt(true)}>Delete</IonItem>
