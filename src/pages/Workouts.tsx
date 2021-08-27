@@ -15,7 +15,6 @@ import CreateWorkoutButton from '../components/CreateWorkoutButton';
 class Workouts extends React.Component {
 
   state = {
-    showModal: false,
     workouts: [] as Workout[]
   }
 
@@ -71,22 +70,8 @@ class Workouts extends React.Component {
     this.isComponentedMounted = false;
   }
 
-  showModal(active: boolean) {
-    this.setState({ showModal: active });
-  }
-
-  closeCreateNewWorkoutPrompt() {
-    // close can be called when leaving this page, so we must add this security
-    if (this.isComponentedMounted == true) {
-      this.setState({
-        showModal: false
-      });
-    }
-  }
-
   render() {
     const workoutsList: JSX.Element[] = this.buildWorkoutsList(this.state.workouts);
-
 
     return (
       <IonPage>
