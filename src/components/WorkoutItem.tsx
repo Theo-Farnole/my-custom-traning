@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Workout } from "../services/Workout";
 import DeleteWorkoutPrompt from "./prompt/DeleteWorkoutPrompt";
 import { ellipsisVertical } from "ionicons/icons"
+import RenameWorkoutPrompt from "./prompt/RenameWorkoutPrompt";
 
 interface WorkoutItemProps {
     workout: Workout;
@@ -17,9 +18,15 @@ interface PopoverListProps {
 const PopoverList: React.FC<PopoverListProps> = ({ workout, onHide }) => {
 
     const [isDeleteOpen, openDeletePrompt] = useState(false);
+    const [isRenameOpen, openRenamePrompt] = useState(false);
 
     return (
         <div>
+
+            <RenameWorkoutPrompt isOpen={isRenameOpen} workout={workout} onDismiss={() => {
+                openRenamePrompt(false);
+                onHide();
+            }} />
 
             <DeleteWorkoutPrompt isOpen={isDeleteOpen} workout={workout} onDismiss={() => {
                 openDeletePrompt(false);
@@ -27,7 +34,7 @@ const PopoverList: React.FC<PopoverListProps> = ({ workout, onHide }) => {
             }} />
 
             <IonList>
-                <IonItem button>Rename</IonItem>
+                <IonItem button onClick={() => openRenamePrompt(true)}>Rename</IonItem>
                 <IonItem button>Duplicate</IonItem>
                 <IonItem button color="danger" onClick={() => openDeletePrompt(true)}>Delete</IonItem>
             </IonList>
@@ -48,8 +55,8 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout, editID }) => {
                 <IonLabel>{workout.name}</IonLabel>
                 <IonLabel className="ion-text-center">{workout.duration}</IonLabel>
                 <IonLabel class="ion-text-right">
-                    <IonButton routerLink={"/edit-workout/" + editID}>edit</IonButton>                    
-                    <IonButton onClick={(e) => showPopover({event: e.nativeEvent})}>
+                    <IonButton routerLink={"/edit-workout/" + editID}>edit</IonButton>
+                    <IonButton onClick={(e) => showPopover({ event: e.nativeEvent })}>
                         <IonIcon slot="icon-only" icon={ellipsisVertical} />
                     </IonButton>
                 </IonLabel>

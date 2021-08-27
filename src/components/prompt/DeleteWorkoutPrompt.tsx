@@ -1,6 +1,7 @@
 import { IonAlert } from "@ionic/react";
 import { Workout } from "../../services/Workout";
 import { WorkoutsSave } from "../../services/WorkoutsSave";
+import { Utilities } from "../../utilities/utilities";
 
 interface DeleteWorkoutPromptProps {
     workout: Workout,
@@ -13,8 +14,8 @@ const DeleteWorkoutPrompt: React.FC<DeleteWorkoutPromptProps> = ({ workout, isOp
         <IonAlert
             isOpen={isOpen}
             onDidDismiss={onDismiss}
-            header={'Delete ' + truncateString(workout.name, 30) + '?'}
-            message={'<p>This operation cannot be reverted.</p>Are you sure to delete <strong>' + truncateString(workout.name, 30) + '</strong>?'}
+            header={'Delete ' + Utilities.truncateString(workout.name, 30) + '?'}
+            message={'<p>This operation cannot be reverted.</p>Are you sure to delete <strong>' + Utilities.truncateString(workout.name, 30) + '</strong>?'}
             buttons={[
                 {
                     text: 'Cancel',
@@ -31,15 +32,5 @@ const DeleteWorkoutPrompt: React.FC<DeleteWorkoutPromptProps> = ({ workout, isOp
         />
     );
 };
-
-function truncateString(str: string, num: number) {
-    // If the length of str is less than or equal to num
-    // just return str--don't truncate it.
-    if (str.length <= num) {
-      return str
-    }
-    // Return str truncated with '...' concatenated to the end of str.
-    return str.slice(0, num) + '...'
-  }
 
 export default DeleteWorkoutPrompt;

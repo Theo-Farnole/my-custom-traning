@@ -5,25 +5,24 @@ import { WorkoutExamples } from "../../services/WorkoutExamples";
 import { WorkoutsSave } from "../../services/WorkoutsSave";
 import { Utilities } from "../../utilities/utilities";
 
-interface CreateWorkoutPromptProps {
+interface RenameWorkoutPromptProps {
     isOpen: boolean,
+    workout: Workout
     onDismiss: () => void
 }
 
-const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDismiss }) => {
-    const history = useHistory();
-
+const RenameWorkoutPrompt: React.FC<RenameWorkoutPromptProps> = ({ isOpen, workout, onDismiss }) => {
     return (
         <IonAlert
             isOpen={isOpen}
             onDidDismiss={() => onDismiss()}
-            header={'Creating workout!'}
+            header={'Renaming workout ' + Utilities.truncateString(workout.name, 30)}
             inputs={[
                 {
                     name: 'name',
                     label: 'name',
                     type: 'text',
-                    placeholder: 'legz day'
+                    value: workout.name
                 }
             ]}
             buttons={[
@@ -36,18 +35,16 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
                     }
                 },
                 {
-                    text: 'Create',
+                    text: 'Rename',
                     handler: (data) => {
-                        const saveInstance = WorkoutsSave.Instance;
 
-                        const workoutName = Utilities.isBlank(data.name) ? "workout #" + (saveInstance.workouts.length + 1) : data.name;
-                        const workout = new Workout(workoutName, [], 90);
-                        saveInstance.addWorkout(workout);
-
-                        const workoutIndex = saveInstance.workouts.indexOf(workout);
-
-                        var url = "/edit-workout/" + workoutIndex;
-                        history.push(url);
+                        if (Utilities.isBlank(data.name) == false) {
+                            workout.name = data.name;
+                            WorkoutsSave.Instance.saveCurrentWorkouts();
+                        }
+                        else {
+                            console.log("We cannot rename the workout \"" + workout.name + "\" by a blank name.");
+                        }
                     }
                 }
             ]}
@@ -55,4 +52,4 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
     );
 };
 
-export default CreateWorkoutPrompt;
+export default RenameWorkoutPrompt;
