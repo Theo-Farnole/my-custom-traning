@@ -21,19 +21,16 @@ class RepExercise extends React.Component<RepExerciceProps> {
 
                     <header className="page-header">
                         <p className="pre-page-title">Current exercise</p>
-                        <h1 className="page-title">{this.props.exerciceName ?? "Exercise name"}</h1>
+                        <h1 className="page-title">{this.props.exerciceName}</h1>
                     </header>
 
-
-                    <div className="container">
-                        <div className="setLabel">Set</div>
-                        <div className="setCount">{this.props.currentSet ?? 999}/{this.props.totalSet ?? 999}</div>
-                        <div className="repCount">{this.props.repCount ?? 999}</div>
-                        <div className="repLabel">Rep</div>
+                    <div className="center">
+                        <div className="repCount">{this.props.repCount}</div>
+                        <div className="setCount">set <b>{this.props.currentSet}/{this.props.totalSet}</b></div>
                     </div>
                 </div>
 
-                <IonButton onClick={this.props.onDone} expand="block" className="action" id="done-btn">Mark as done</IonButton>
+                <IonButton onClick={this.props.onDone} expand="block" className="action" id="done-btn">Set achieved</IonButton>
             </>
         );
     }

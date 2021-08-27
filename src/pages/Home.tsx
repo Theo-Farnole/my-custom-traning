@@ -72,7 +72,7 @@ class Home extends React.Component {
             <IonButtons slot="start">
               <IonMenuButton />
             </IonButtons>
-            <IonTitle>Custom Workouts</IonTitle>
+            <IonTitle>My Workouts</IonTitle>
           </IonToolbar>
         </IonHeader>
 

@@ -28,7 +28,7 @@ class Rest extends React.Component {
                             You have completed your workout.<br />
                             Keep it up!
                         </p>
-                        <IonButton routerLink="/home" className="action" expand="block">Continue</IonButton>
+                        <IonButton routerLink="/home" className="action continue" expand="block">Continue</IonButton>
                     </div>
 
 

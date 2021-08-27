@@ -1,13 +1,13 @@
 .pre-page-tile {
     text-align: center !important;
-    font-size: 24;
+    font-size: 16px;
     font-family: Nunito;
     font-weight: 200;
 }
 
 .page-title {
     text-align: center !important;
-    font-size: 48px;
+    font-size: 26px;
 }
 
 .page-header {

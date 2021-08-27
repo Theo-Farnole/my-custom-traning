@@ -3,7 +3,7 @@
     align-items: baseline;
     display: grid;
     grid-template-columns: 0.8fr 1fr 1.6fr 1fr 0.6fr;
-    grid-template-rows: 0.4fr 1.6fr 0.6fr 1.4fr;
+    grid-template-rows: 0.4fr 0.6fr 0.6fr 1.4fr;
     gap: 5px 0px;
     grid-template-areas: ". . . . ." ". repLabel repCount . ." ". setLabel setCount . ." ". . . . .";
     gap: 10px 10px;
@@ -21,8 +21,13 @@
     bottom: 20px;
     transform: translate(-50%);
     margin: 0 auto;
-    height: 60px;
-    font-size: 20px;
+    /* height: 60px; */
+    font-size: 14px;
+}
+
+.exercise-name {
+    font-size: 36px;
+    text-align: center !important;
 }
 
 .setLabel, .repLabel {
@@ -31,7 +36,7 @@
 }
 
 .setLabel, .repLabel, .setCount {
-    font-size: 32px;
+    font-size: 16px;
 }
 
 .setCount, .repCount {
@@ -44,12 +49,15 @@
 
 .setCount {
     grid-area: setCount;
+    font-size: 20px;
 }
 
 .repCount {
     grid-area: repCount;
     color: var(--ion-color-primary);
-    font-size: min(10vw, 128px);
+    font-size: 10vw;
+    width: 100vw;
+    margin-bottom: 20px;
 }
 
 .repLabel {
