@@ -4,6 +4,7 @@ import {
   IonIcon,
   IonLabel,
   IonRouterOutlet,
+  IonSplitPane,
   IonTabBar,
   IonTabButton,
   IonTabs,
@@ -37,28 +38,33 @@ import Settings from './pages/Settings';
 import EditWorkout from './pages/EditWorkout';
 import PlayWorkout from './pages/PlayWorkout';
 import WorkoutFinished from './components/exercices/WorkoutFinished';
+import Menu from './components/Menu';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
 
-      <IonRouterOutlet>
-        <Switch>
-          <Route exact path="/home">
-            <Home />
-          </Route>
-          <Route path="/settings">
-            <Settings />
-          </Route>
+      <IonSplitPane contentId="main">
+        <Menu />
 
-          <Route path="/edit-workout/:id" component={EditWorkout} />
-          <Route path="/play-workout/:id" component={PlayWorkout} />
+        <IonRouterOutlet id="main">
+          <Switch>
+            <Route exact path="/home">
+              <Home />
+            </Route>
+            <Route path="/settings">
+              <Settings />
+            </Route>
 
-          <Route exact path="/">
-            <Redirect to="/home" />
-          </Route>
-        </Switch>
-      </IonRouterOutlet>
+            <Route path="/edit-workout/:id" component={EditWorkout} />
+            <Route path="/play-workout/:id" component={PlayWorkout} />
+
+            <Route exact path="/">
+              <Redirect to="/home" />
+            </Route>
+          </Switch>
+        </IonRouterOutlet>
+      </IonSplitPane>
     </IonReactRouter>
   </IonApp>
 );

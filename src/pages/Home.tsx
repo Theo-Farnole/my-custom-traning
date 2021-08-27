@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonTabButton, IonButton, IonIcon, IonLabel, IonItem, IonSelect, IonSelectOption, IonText, IonImg } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonTabButton, IonButton, IonIcon, IonLabel, IonItem, IonSelect, IonSelectOption, IonText, IonImg, IonButtons, IonMenuButton } from '@ionic/react';
 import './Home.css';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import { Workout } from '../services/Workout';
@@ -68,10 +68,12 @@ class Home extends React.Component {
       <IonPage>
 
         <IonHeader>
-
-          <h1 className="ion-text-center">
-            Custom Workouts
-          </h1>
+          <IonToolbar>
+            <IonButtons slot="start">
+              <IonMenuButton />
+            </IonButtons>
+            <IonTitle>Custom Workouts</IonTitle>
+          </IonToolbar>
         </IonHeader>
 
         <IonContent fullscreen>

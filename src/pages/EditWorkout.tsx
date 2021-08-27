@@ -1,4 +1,4 @@
-import { IonButton, IonContent, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonPage, IonReorder, IonReorderGroup } from '@ionic/react';
+import { IonBackButton, IonButton, IonButtons, IonContent, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonMenuButton, IonPage, IonReorder, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
@@ -127,26 +127,17 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
             return (
                 <IonPage>
+                    <IonHeader>
+                        <IonToolbar>
+                            <IonButtons slot="start">
+                                <IonBackButton />
+                            </IonButtons>
+                            <IonTitle>{workout.name}</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
+
+
                     <IonContent fullscreen>
-                        <header className="page-header">
-                            <p className="pre-page-title">editing</p>
-
-                            <h1 className="page-title" >
-                                <div className="btn-container">
-                                    <IonInput disabled={!this.state.isRenamingWorkout} id="rename-input" value={workout.name}
-                                        onBlur={(e) => {
-                                            this.state.workout.name = e.target.value?.toString() ?? this.state.workout.name;
-                                        }}
-                                    // onClick={() => {
-                                    //     this.startRenaming();
-                                    //     console.log("on click");
-                                    // }} 
-                                    />
-                                    {rename_button}
-                                </div>
-                            </h1>
-
-                        </header>
 
                         <IonReorderGroup disabled={false} onIonItemReorder={(e) => this.doReorder(e, workout)}>
                             <IonListHeader className="set-list-header">

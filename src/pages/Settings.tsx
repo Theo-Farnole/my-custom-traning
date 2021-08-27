@@ -1,4 +1,4 @@
-import { IonAvatar, IonButton, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonLabel, IonList, IonPage, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonButton, IonButtons, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
 import { pin, heart, closeCircle } from 'ionicons/icons';
 import { useState } from 'react';
 import EraseAllWorkoutsPrompt from '../components/prompt/EraseAllWorkoutsPrompt';
@@ -10,11 +10,16 @@ const Settings: React.FC = () => {
 
   return (
     <IonPage>
-      <IonContent fullscreen>
-        <h1 className="ion-text-center">
-          Settings
-        </h1>
+      <IonHeader>
+        <IonToolbar>
+          <IonButtons slot="start">
+            <IonMenuButton />
+          </IonButtons>
+          <IonTitle>Settings</IonTitle>
+        </IonToolbar>
+      </IonHeader>
 
+      <IonContent fullscreen>
         <IonList>
           <IonItem>
             <IonLabel>Dark mode</IonLabel>
@@ -32,7 +37,7 @@ const Settings: React.FC = () => {
           </IonItem>
         </IonList>
 
-        <EraseAllWorkoutsPrompt isOpen={isErasePromptOpen} onDismiss={() => setIsErasePromptOpen(false)}/>
+        <EraseAllWorkoutsPrompt isOpen={isErasePromptOpen} onDismiss={() => setIsErasePromptOpen(false)} />
       </IonContent>
     </IonPage>
   );
