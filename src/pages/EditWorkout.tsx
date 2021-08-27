@@ -119,8 +119,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         const sets_list = this.generateWorkoutList();
         const workout = this.state.workout;
 
-        const rename_button = this.buildRenameButton();
-
         try {
             if (workout == undefined)
                 throw "Workout in array is undefined.";
