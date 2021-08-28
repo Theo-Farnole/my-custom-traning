@@ -38,8 +38,8 @@ import Home from './pages/Home';
 import Settings from './pages/Settings';
 import EditWorkout from './pages/EditWorkout';
 import PlayWorkout from './pages/PlayWorkout';
-import WorkoutFinished from './components/exercices/WorkoutFinished';
-import Menu from './components/Menu';
+import WorkoutFinished from './components/play-exercice/WorkoutFinished';
+import Menu from './components/home/Menu';
 
 const App: React.FC = () => (
   <IonApp>

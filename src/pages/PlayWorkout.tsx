@@ -2,9 +2,9 @@ import { IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from
 import React from "react";
 import { RouteComponentProps } from "react-router";
 import ErrorPage from "../components/ErrorPage";
-import RepExercise from "../components/exercices/RepExercise";
-import Rest from "../components/exercices/Rest";
-import WorkoutFinished from "../components/exercices/WorkoutFinished";
+import RepExercise from "../components/play-exercice/RepExercise";
+import Rest from "../components/play-exercice/Rest";
+import WorkoutFinished from "../components/play-exercice/WorkoutFinished";
 import HomeButton from "../components/HomeButton";
 import { Workout } from "../services/Workout";
 import { WorkoutsSave } from "../services/WorkoutsSave";

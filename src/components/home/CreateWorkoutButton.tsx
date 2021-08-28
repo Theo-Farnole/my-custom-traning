@@ -1,7 +1,7 @@
 import { IonFab, IonFabButton, IonIcon } from "@ionic/react";
 import { add } from "ionicons/icons";
 import { useState } from "react";
-import CreateWorkoutPrompt from "./prompt/CreateWorkoutPrompt";
+import CreateWorkoutPrompt from "../prompt/CreateWorkoutPrompt";
 
 
 const CreateWorkoutButton: React.FC = () => {

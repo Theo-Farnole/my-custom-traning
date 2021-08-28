@@ -3,9 +3,9 @@ import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonTabButton, Ion
 import './Home.css';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import { Workout } from '../services/Workout';
-import WorkoutsList from '../components/WorkoutsList';
+import WorkoutsList from '../components/home/WorkoutsList';
 import CreateWorkoutPrompt from '../components/prompt/CreateWorkoutPrompt';
-import CreateWorkoutButton from '../components/CreateWorkoutButton';
+import CreateWorkoutButton from '../components/home/CreateWorkoutButton';
 
 class Home extends React.Component {
 

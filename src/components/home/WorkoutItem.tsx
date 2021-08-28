@@ -1,10 +1,10 @@
 import { IonItem, IonLabel, IonButton, IonIcon, useIonPopover, IonList, IonListHeader, IonHeader } from "@ionic/react";
 import { useState } from "react";
-import { Workout } from "../services/Workout";
-import DeleteWorkoutPrompt from "./prompt/DeleteWorkoutPrompt";
+import { Workout } from "../../services/Workout";
+import DeleteWorkoutPrompt from "../prompt/DeleteWorkoutPrompt";
 import { ellipsisVertical } from "ionicons/icons"
-import RenameWorkoutPrompt from "./prompt/RenameWorkoutPrompt";
-import DuplicateWorkoutPrompt from "./prompt/DuplicateWorkoutPrompt";
+import RenameWorkoutPrompt from "../prompt/RenameWorkoutPrompt";
+import DuplicateWorkoutPrompt from "../prompt/DuplicateWorkoutPrompt";
 
 interface WorkoutItemProps {
     workout: Workout;

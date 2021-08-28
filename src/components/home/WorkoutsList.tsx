@@ -1,6 +1,6 @@
 import { IonLabel, IonList, IonListHeader } from '@ionic/react';
-import { WorkoutsSave } from '../services/WorkoutsSave';
-import { Workout } from "../services/Workout";
+import { WorkoutsSave } from '../../services/WorkoutsSave';
+import { Workout } from "../../services/Workout";
 import './WorkoutsList.css';
 import React from 'react';
 import WorkoutItem from './WorkoutItem';
