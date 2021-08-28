@@ -19,7 +19,7 @@ interface EditWorkoutProps extends RouteComponentProps<{
 
 class EditWorkout extends React.Component<EditWorkoutProps>{
 
-    private id: number;
+    private id: number = 0;
 
     state = {
         ignored: 0,
@@ -29,7 +29,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     constructor(props: EditWorkoutProps | Readonly<EditWorkoutProps>) {
         super(props);
 
-        this.id = parseInt(props.match.params.id);
+        this.setIDFromProps();
         this.forceUpdate = this.forceUpdate.bind(this);
         this.onWorkoutModified = this.onWorkoutModified.bind(this);
     }
@@ -38,8 +38,12 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         WorkoutsSave.Instance.attachOnWorkoutsModified(this.onWorkoutModified);
 
         if (WorkoutsSave.Instance.areWorkoutsLoaded == true && WorkoutsSave.Instance.workouts[this.id] != this.state.workout) {
-            this.setWorkout(WorkoutsSave.Instance.workouts[this.id]);
+            this.setWorkoutFromID();
         }
+    }
+
+    componentDidUpdate() {
+        this.setIDFromProps();
     }
 
     componentWillUnmount() {
@@ -47,13 +51,25 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     }
 
     onWorkoutModified() {
-        this.setWorkout(WorkoutsSave.Instance.workouts[this.id]);
+        this.setWorkoutFromID();
     }
 
-    setWorkout(workout: Workout) {
+    setWorkoutFromID() {
+        const newWorkout = WorkoutsSave.Instance.workouts[this.id];
+
+        if (newWorkout == this.state.workout) return;
+
         this.setState({
-            workout: workout
+            workout: newWorkout
         });
+    }
+
+    setIDFromProps() {
+        this.id = parseInt(this.props.match.params.id);
+
+        if (WorkoutsSave.Instance.areWorkoutsLoaded) {
+            this.setWorkoutFromID();
+        }
     }
 
     onAddSetClick(w: Workout) {
