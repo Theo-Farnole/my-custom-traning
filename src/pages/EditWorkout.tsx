@@ -1,15 +1,15 @@
-import { IonBackButton, IonButton, IonButtons, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonMenuButton, IonPage, IonReorder, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonLabel, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
 import { ItemReorderEventDetail } from '@ionic/core';
 import { add, checkmark } from 'ionicons/icons';
-import { Set } from '../services/Set';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import { pencil } from 'ionicons/icons'
 import HomeButton from '../components/HomeButton';
+import SetItem from '../components/edit-workout/SetItem';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -30,7 +30,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         super(props);
 
         this.id = parseInt(props.match.params.id);
-        this.onDeleteSetClick = this.onDeleteSetClick.bind(this);
         this.forceUpdate = this.forceUpdate.bind(this);
         this.onWorkoutModified = this.onWorkoutModified.bind(this);
     }
@@ -77,32 +76,11 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
         this.state.workout?.sets.forEach((set) => {
             components.push(
-                <IonItem key={set.uid} className="set-input">
-                    <IonButton onClick={() => { this.onDeleteSetClick(set); this.forceUpdate(); }} color="danger">delete</IonButton>
-
-                    <div className="exercice-input ion-input">
-                        <IonInput placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
-                    </div>
-
-                    <div className="rep-input ion-input">
-                        <IonInput placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
-                    </div>
-
-                    <div className="set-count-input ion-input">
-                        <IonInput placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
-                    </div>
-
-                    <IonReorder slot="end" />
-                </IonItem >
+                <SetItem key={set.uid} set={set} workout={this.state.workout} />
             );
         });
 
         return components;
-    }
-
-    onDeleteSetClick(s: Set) {
-        this.state.workout.removeSet(s);
-        WorkoutsSave.Instance.saveCurrentWorkouts();
     }
 
     startRenaming() {
