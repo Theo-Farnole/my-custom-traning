@@ -22,8 +22,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
     state = {
         ignored: 0,
-        workout: Workout.Empty,
-        isRenamingWorkout: false
+        workout: Workout.Empty
     }
 
     constructor(props: EditWorkoutProps | Readonly<EditWorkoutProps>) {
@@ -110,27 +109,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         }
         catch (err) {
             return <ErrorPage err={err} />
-        }
-    }
-
-    private buildRenameButton() {
-        if (this.state.isRenamingWorkout == true) {
-            return (
-                <IonButton color="light" className="validate-rename-button" onClick={(e) => this.validateRenaming(this.state.workout.name)}>
-                    <IonIcon icon={checkmark}></IonIcon>
-                </IonButton>
-            );
-        }
-        else {
-            return (
-                <IonButton color="light" className="rename-button" onClick={() => {
-                    console.log("click on rename button");
-                    this.startRenaming()
-                }} >
-                    rename
-                    <IonIcon icon={pencil}></IonIcon>
-                </IonButton>
-            );
         }
     }
 }
