@@ -29,7 +29,8 @@ import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
 /* Theme variables */
-import './theme/variables.css';
+import './theme/variables-light-theme.css';
+// import './theme/variables-dark-theme.css'; // DARK THEME IS DISABLED
 import './theme/global-rules.css'
 
 /* My imports*/
