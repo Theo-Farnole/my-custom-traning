@@ -10,6 +10,7 @@ import { pencil } from 'ionicons/icons'
 import HomeButton from '../components/HomeButton';
 import SetItem from '../components/edit-workout/SetItem';
 import SetsList from '../components/edit-workout/SetsList';
+import WorkoutOptionsButton from '../components/edit-workout/WorkoutOptionsButton';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -89,6 +90,10 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                                 <HomeButton />
                             </IonButtons>
                             <IonTitle>{workout.name}</IonTitle>
+
+                            <IonButtons slot="end">
+                                <WorkoutOptionsButton workout={workout} />
+                            </IonButtons>
                         </IonToolbar>
                     </IonHeader>
 
