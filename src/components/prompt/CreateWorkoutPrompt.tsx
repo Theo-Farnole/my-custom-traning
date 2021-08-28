@@ -46,6 +46,11 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
 
                         const workoutIndex = saveInstance.workouts.indexOf(workout);
 
+                        // we must call onDismiss before changing URL
+                        // so we call it, then disable it
+                        onDismiss();
+                        onDismiss = () => {};
+
                         var url = "/edit-workout/" + workoutIndex;
                         history.push(url);
                     }
