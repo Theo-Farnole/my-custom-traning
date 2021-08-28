@@ -1,2 +1,2 @@
-ionic capacitor run android --prod --release
+call ionic capacitor build android
 pause
