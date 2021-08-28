@@ -16,7 +16,6 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout, editID }) => {
 
             <IonButton routerLink={"/play-workout/" + editID}>start routine</IonButton>
             <IonButton routerLink={"/edit-workout/" + editID} color="light">edit</IonButton>
-            <WorkoutOptionsButton workout={workout}/>
         </IonItem>
     );
 };
