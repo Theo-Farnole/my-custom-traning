@@ -96,7 +96,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
                         <SetsList workout={workout} />
 
-                        <IonFab vertical="bottom" horizontal="end" slot="fixed">
+                        <IonFab vertical="bottom" horizontal="center" slot="fixed">
                             <IonFabButton onClick={() => { this.onAddSetClick(workout); this.forceUpdate(); }}>
                                 <IonIcon icon={add} />
                             </IonFabButton>

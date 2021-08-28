@@ -9,7 +9,7 @@ const CreateWorkoutButton: React.FC = () => {
 
     return (
         <>
-            <IonFab vertical="bottom" horizontal="end" slot="fixed">
+            <IonFab vertical="bottom" horizontal="center" slot="fixed">
                 <IonFabButton onClick={() => openCreatePrompt(true)}>
                     <IonIcon icon={add} />
                 </IonFabButton>
