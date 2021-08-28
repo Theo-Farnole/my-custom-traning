@@ -29,32 +29,42 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     constructor(props: EditWorkoutProps | Readonly<EditWorkoutProps>) {
         super(props);
 
-        this.setIDFromProps();
+        this.setIDFromURL();
         this.forceUpdate = this.forceUpdate.bind(this);
         this.onWorkoutModified = this.onWorkoutModified.bind(this);
     }
 
     componentDidMount() {
         WorkoutsSave.Instance.attachOnWorkoutsModified(this.onWorkoutModified);
-
-        if (WorkoutsSave.Instance.areWorkoutsLoaded == true && WorkoutsSave.Instance.workouts[this.id] != this.state.workout) {
-            this.setWorkoutFromID();
-        }
+        this.setWorkoutFromID();
     }
 
     componentDidUpdate() {
-        this.setIDFromProps();
+        this.setIDFromURL();
     }
 
     componentWillUnmount() {
         WorkoutsSave.Instance.dettachOnWorkoutsModified(this.onWorkoutModified);
     }
 
-    onWorkoutModified() {
+    onWorkoutModified() {    
         this.setWorkoutFromID();
+        this.forceUpdate();
+    }
+
+    onAddSetClick() {
+        const w = this.state.workout;
+
+        if (w == undefined) throw "Add set to an undefined workout";
+        if (w == null) throw "Add set to a null workout"
+
+        w.addEmptySet();        
+        WorkoutsSave.Instance.saveCurrentWorkouts();
     }
 
     setWorkoutFromID() {
+        if (WorkoutsSave.Instance.areWorkoutsLoaded == false) return;
+
         const newWorkout = WorkoutsSave.Instance.workouts[this.id];
 
         if (newWorkout == this.state.workout) return;
@@ -64,20 +74,9 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         });
     }
 
-    setIDFromProps() {
+    setIDFromURL() {
         this.id = parseInt(this.props.match.params.id);
-
-        if (WorkoutsSave.Instance.areWorkoutsLoaded) {
-            this.setWorkoutFromID();
-        }
-    }
-
-    onAddSetClick(w: Workout) {
-        if (w == undefined) throw "Add set to an undefined workout";
-        if (w == null) throw "Add set to a null workout"
-
-        w.addEmptySet();
-        WorkoutsSave.Instance.saveCurrentWorkouts();
+        this.setWorkoutFromID();
     }
 
     startRenaming() {
@@ -118,7 +117,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                         <SetsList workout={workout} />
 
                         <IonFab vertical="bottom" horizontal="center" slot="fixed">
-                            <IonFabButton onClick={() => { this.onAddSetClick(workout); this.forceUpdate(); }}>
+                            <IonFabButton onClick={() => { this.onAddSetClick(); this.forceUpdate(); }}>
                                 <IonIcon icon={add} />
                             </IonFabButton>
                         </IonFab>

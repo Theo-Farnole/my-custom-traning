@@ -46,7 +46,7 @@ export class Workout {
         if (index > -1) {
             this.sets.splice(index, 1);
 
-            console.log("Set \"" + set + "\" at index " + index + "deleted in workout " + this.name + ".");
+            console.log("Set \"" + set.exercise + "\" at index " + index + " deleted in workout " + this.name + ".");
         }
         else {
             console.error("Cannot delete set in workout " + this.name + ": the set you are trying to delete doesn't exist.")
