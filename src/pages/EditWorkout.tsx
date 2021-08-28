@@ -3,13 +3,13 @@ import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
-import { ItemReorderEventDetail } from '@ionic/core';
 import { add, checkmark } from 'ionicons/icons';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import { pencil } from 'ionicons/icons'
 import HomeButton from '../components/HomeButton';
 import SetItem from '../components/edit-workout/SetItem';
+import SetsList from '../components/edit-workout/SetsList';
 
 
 interface EditWorkoutProps extends RouteComponentProps<{
@@ -56,31 +56,12 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         });
     }
 
-    doReorder(event: CustomEvent<ItemReorderEventDetail>, workout: Workout) {
-        event.detail.complete();
-
-        workout.moveSet(event.detail.from - 1, event.detail.to - 1);
-        WorkoutsSave.Instance.saveCurrentWorkouts();
-    }
-
-    addSetClicked(w: Workout) {
+    onAddSetClick(w: Workout) {
         if (w == undefined) throw "Add set to an undefined workout";
         if (w == null) throw "Add set to a null workout"
 
         w.addEmptySet();
         WorkoutsSave.Instance.saveCurrentWorkouts();
-    }
-
-    generateWorkoutList() {
-        var components: JSX.Element[] = [];
-
-        this.state.workout?.sets.forEach((set) => {
-            components.push(
-                <SetItem key={set.uid} set={set} workout={this.state.workout} />
-            );
-        });
-
-        return components;
     }
 
     startRenaming() {
@@ -95,7 +76,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     }
 
     render() {
-        const sets_list = this.generateWorkoutList();
         const workout = this.state.workout;
 
         try {
@@ -115,18 +95,10 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
                     <IonContent fullscreen>
 
-                        <IonReorderGroup disabled={false} onIonItemReorder={(e) => this.doReorder(e, workout)}>
-                            <IonListHeader className="set-list-header">
-                                <IonLabel className="exercice-header"><b>Exercice</b></IonLabel>
-                                <IonLabel className="rep-header"><b>Rep count</b></IonLabel>
-                                <IonLabel className="set-header"><b>Set count</b></IonLabel>
-                            </IonListHeader>
-
-                            {sets_list}
-                        </IonReorderGroup>
+                        <SetsList workout={workout} />
 
                         <IonFab vertical="bottom" horizontal="end" slot="fixed">
-                            <IonFabButton onClick={() => { this.addSetClicked(workout); this.forceUpdate(); }}>
+                            <IonFabButton onClick={() => { this.onAddSetClick(workout); this.forceUpdate(); }}>
                                 <IonIcon icon={add} />
                             </IonFabButton>
                         </IonFab>

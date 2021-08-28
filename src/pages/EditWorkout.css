@@ -1,24 +1,3 @@
-.set-input .ion-input {
-    background: #323232;
-    border-radius: 3px;
-    padding-left: 10px;
-    /* text-align: center; */
-}
-
-.ion-input {
-    margin: 0 0 0 15px;
-    width: 100%;
-}
-
-.ion-input * {
-    width: 100%;
-}
-
-.set-list-header .exercice-header {
-    margin-left: 80px;
-    width: calc(100%-80px);
-}
-
 .rename-button, .rename-input {
     display: inline-block;
 }
