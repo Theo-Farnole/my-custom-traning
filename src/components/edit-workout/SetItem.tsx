@@ -1,8 +1,10 @@
-import { IonItem, IonButton, IonInput, IonReorder } from "@ionic/react";
+import { IonItem, IonButton, IonInput, IonReorder, IonIcon, IonLabel } from "@ionic/react";
 import { Workout } from "../../services/Workout";
 import { WorkoutsSave } from "../../services/WorkoutsSave";
 import { Set } from "../../services/Set";
 import React from 'react';
+import { trashOutline as deleteIcon, reorderThreeOutline } from "ionicons/icons"
+import "./SetItem.css"
 
 interface SetItemProps {
     set: Set,
@@ -19,22 +21,17 @@ class SetItem extends React.Component<SetItemProps> {
     render() {
         const set = this.props.set;
 
-        return (<IonItem key={set.uid} className="set-input" >
-            <IonButton onClick={() => { this.onDeleteClick(); this.forceUpdate(); }} color="danger">delete</IonButton>
+        return (<IonItem key={set.uid} className="setContainer" >
+            {/* <IonButton onClick={() => { this.onDeleteClick(); this.forceUpdate(); }} color="danger">
+                <IonIcon icon={deleteIcon} />
+            </IonButton> */}
 
-            <div className="exercice-input ion-input">
-                <IonInput placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
-            </div>
+            <IonInput className="input text" placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
+            <IonInput className="input number" placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
 
-            <div className="rep-input ion-input">
-                <IonInput placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
-            </div>
+            <IonInput className="input number" placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
 
-            <div className="set-count-input ion-input">
-                <IonInput placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
-            </div>
-
-            <IonReorder slot="end" />
+            <IonReorder slot="start" />
         </IonItem >);
     }
 }

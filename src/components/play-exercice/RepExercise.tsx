@@ -25,7 +25,7 @@ class RepExercise extends React.Component<RepExerciceProps> {
                     </header>
 
                     <div className="center">
-                        <div className="repCount">{this.props.repCount}</div>
+                        <div className="repCount">{this.props.repCount}x reps</div>
                         <div className="setCount">set <b>{this.props.currentSet}/{this.props.totalSet}</b></div>
                     </div>
                 </div>

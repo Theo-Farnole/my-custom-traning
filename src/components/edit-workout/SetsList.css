@@ -1,19 +1,15 @@
-.set-list-header .exercice-header {
+.exerciceHeader {
     margin-left: 80px;
     width: calc(100%-80px);
+    width: auto;
 }
 
-.set-input .ion-input {
-    border-radius: 3px;
-    padding-left: 10px;
-    /* text-align: center; */
+.repHeader, .setHeader {
+    margin: 0 10px 0 10px !important;
+    max-width: 40px;    
+    text-align: center;
 }
 
-.ion-input {
-    margin: 0 0 0 15px;
-    width: 100%;
-}
-
-.ion-input * {
-    width: 100%;
+.headerContainer {
+    padding-right: 16px;
 }
