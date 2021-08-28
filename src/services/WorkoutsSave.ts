@@ -19,8 +19,9 @@ export class WorkoutsSave {
     private _workoutsModifiedDispatcher = new EventDispatcher<WorkoutsModifiedEvent>();
 
     public get workouts(): Workout[] {
-        if (this._areWorkoutsLoaded == false)
-            throw "Cannot get workout: Workout not loaded.";
+        if (this._areWorkoutsLoaded == false) {
+            throw "Workouts are not loaded. Please load them before calling the property workout.";
+        }
 
         return this._workouts;
     }
@@ -142,8 +143,8 @@ export class WorkoutsSave {
             console.log("File " + filename + " succesfuly deleted.")
             this.createDefaultConfiguration();
         })
-        .catch((err) => {
-            console.log("Deleting " + filename + " failed: " + err);
-        });
+            .catch((err) => {
+                console.log("Deleting " + filename + " failed: " + err);
+            });
     }
 }

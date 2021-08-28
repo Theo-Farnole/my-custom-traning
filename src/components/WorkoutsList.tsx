@@ -24,7 +24,7 @@ class WorkoutsList extends React.Component {
   }
 
   setWorkoutsFromSave() {
-    if (this.isComponentedMounted == true) {
+    if (this.isComponentedMounted == true && WorkoutsSave.Instance.areWorkoutsLoaded) {
       this.setState(
         {
           workouts: WorkoutsSave.Instance.workouts
@@ -67,15 +67,15 @@ class WorkoutsList extends React.Component {
   render() {
     const workoutsList: JSX.Element[] = this.buildWorkoutsList(this.state.workouts);
 
-    return (      
-        <IonList>
-          <IonListHeader class="list-header">
-            <IonLabel><b>Name</b></IonLabel>
-            <IonLabel class="ion-text-right"><b>Actions</b></IonLabel>
-          </IonListHeader>
+    return (
+      <IonList>
+        <IonListHeader class="list-header">
+          <IonLabel><b>Name</b></IonLabel>
+          <IonLabel class="ion-text-right"><b>Actions</b></IonLabel>
+        </IonListHeader>
 
-          {workoutsList}
-        </IonList>      
+        {workoutsList}
+      </IonList>
     );
   }
 }
