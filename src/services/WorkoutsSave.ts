@@ -80,16 +80,11 @@ export class WorkoutsSave {
 
                 console.log("Successfully loaded " + this.workouts.length + " workouts.");
             }).catch((error) => {
-                if (error == "Error: File does not exist.") {
-                    console.log("Cannot find workouts file. Creating default file...");
-                    this.createDefaultConfiguration();
+                console.log("Cannot find workouts file. Creating default file... Error catch is " + error);
+                this.createDefaultConfiguration();
 
-                    this._areWorkoutsLoaded = true;
-                    this.fireWorkoutsModifiedEvent({});
-                }
-                else {
-                    console.log("Failed to load workouts. The following error is " + error + ". For more details, file is located at " + completePath + ".");
-                }
+                this._areWorkoutsLoaded = true;
+                this.fireWorkoutsModifiedEvent({});
             });
     }
 
