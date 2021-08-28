@@ -41,7 +41,7 @@ class WorkoutsList extends React.Component {
     for (var i = 0; i < workouts.length; i++) {
       const workout = workouts[i];
 
-      output.push(<WorkoutItem editID={i} workout={workout} />)
+      output.push(<WorkoutItem editID={i} key={workout.uid} workout={workout} />)
     }
 
     return output;
