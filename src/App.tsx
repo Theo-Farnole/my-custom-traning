@@ -1,16 +1,10 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 import {
   IonApp,
-  IonIcon,
-  IonLabel,
   IonRouterOutlet,
   IonSplitPane,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle, settings, settingsOutline, home, create } from 'ionicons/icons';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -38,7 +32,6 @@ import Home from './pages/Home';
 import Settings from './pages/Settings';
 import EditWorkout from './pages/EditWorkout';
 import PlayWorkout from './pages/PlayWorkout';
-import WorkoutFinished from './components/play-exercice/WorkoutFinished';
 import Menu from './components/home/Menu';
 
 const App: React.FC = () => (

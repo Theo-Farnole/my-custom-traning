@@ -11,7 +11,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { archiveOutline, archiveSharp, bookmarkOutline, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, settingsOutline, settingsSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { settingsOutline, settingsSharp, barbellOutline, barbellSharp } from 'ionicons/icons';
 import './Menu.css';
 
 interface AppPage {
@@ -25,8 +25,8 @@ const appPages: AppPage[] = [
   {
     title: 'Workout',
     url: '/home',
-    iosIcon: mailOutline,
-    mdIcon: mailSharp
+    iosIcon: barbellOutline,
+    mdIcon: barbellSharp
   },
   {
     title: 'Settings',
