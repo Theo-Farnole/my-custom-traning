@@ -11,7 +11,7 @@ interface WorkoutItemProps {
 const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout, editID }) => {
 
     return (
-        <IonItem routerLink={"/edit-workout/" + editID} key={workout.uid}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
+        <IonItem class="workout-item" routerLink={"/edit-workout/" + editID} key={workout.uid}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
             <IonLabel>{workout.name}</IonLabel>
             {/* IonLabel containing buttons is a hack to get the right order corresponding to list header */}
 

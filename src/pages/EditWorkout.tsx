@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
@@ -122,30 +122,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
                     <IonContent fullscreen>
 
-                        <IonItem>
-                            <IonLabel>
-                                Pause between sets
-                            </IonLabel>
-
-                            <IonDatetime
-                                display-format="mm:ss"
-                                picker-format="mm:ss"
-                                value={"2000-01-01T00:" + workout.secondsBetweenSetsTimeFormat + ".789"}
-                                onIonChange={(e) => {
-                                    if (e.detail.value != null) {
-
-                                        var mm = e.detail.value.split(":")[1];
-                                        var ss = e.detail.value.split(":")[2].split(".")[0];
-
-                                        workout.secondsBetweenSetsTimeFormat = mm + ":" + ss;
-                                        WorkoutsSave.Instance.saveCurrentWorkouts();
-                                    }
-                                }}
-                                onChange={(e) => {
-                                }}>
-                            </IonDatetime>
-                        </IonItem>
-
                         <SetsList isEditing={this.state.isEditing} workout={workout} />
 
                         <IonFab hidden={!this.state.isEditing} vertical="bottom" horizontal="center" slot="fixed">
@@ -155,8 +131,38 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                         </IonFab>
                     </IonContent>
 
-                    <IonFooter hidden={this.state.isEditing} >
-                        <IonButton routerLink={"/play-exercise/" + this.props.match.params.id} expand="full">start workout</IonButton>
+                    <IonFooter>
+                        <IonList hidden={!this.state.isEditing} lines="none" >
+                            <IonListHeader>
+                                <IonLabel>Settings</IonLabel>
+                            </IonListHeader>
+
+                            <IonItem class="input-pause-seconds" lines="none">
+                                <IonLabel>
+                                    Pause between sets
+                                </IonLabel>
+
+                                <IonDatetime
+                                    display-format="mm:ss"
+                                    picker-format="mm:ss"
+                                    value={"2000-01-01T00:" + workout.secondsBetweenSetsTimeFormat + ".789"}
+                                    onIonChange={(e) => {
+                                        if (e.detail.value != null) {
+
+                                            var mm = e.detail.value.split(":")[1];
+                                            var ss = e.detail.value.split(":")[2].split(".")[0];
+
+                                            workout.secondsBetweenSetsTimeFormat = mm + ":" + ss;
+                                            WorkoutsSave.Instance.saveCurrentWorkouts();
+                                        }
+                                    }}
+                                    onChange={(e) => {
+                                    }}>
+                                </IonDatetime>
+                            </IonItem>
+                        </IonList>
+
+                        <IonButton hidden={this.state.isEditing} routerLink={"/play-exercise/" + this.props.match.params.id} expand="full">start workout</IonButton>
                     </IonFooter>
                 </IonPage >
 
