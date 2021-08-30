@@ -52,4 +52,13 @@ export class Utilities {
 
         return parseInt(rawMinutes) * 60 + parseInt(rawSeconds);
     }
+
+    public static SecondsToMMSS(totalSeconds: number) {
+        if (totalSeconds >= 3600) throw "Format doesn't support total seconds greater or equals to 3600."
+
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
+
+        return minutes.pad(2) + ":" + seconds.pad(2);
+    }
 }

@@ -4,6 +4,7 @@ import App from './App';
 import { EventDispatcher } from './utilities/EventDispatcher';
 import './utilities/typings.d.ts'
 import './utilities/array.extensions'
+import './utilities/number.extensions'
 import { Workout } from './services/Workout';
 import { Set } from './services/Set';
 import { Utilities } from './utilities/utilities';
@@ -106,6 +107,19 @@ test('format MMSS should convert to seconds', () => {
   expect(Utilities.MMSSToSeconds("00:00")).toBe(0);
   expect(Utilities.MMSSToSeconds("01:00")).toBe(60);
 
+});
+
+test('seconds to MMSS', () => {
+  expect(Utilities.SecondsToMMSS(30)).toBe("00:30");
+  expect(Utilities.SecondsToMMSS(60)).toBe("01:00");
+  expect(Utilities.SecondsToMMSS(120)).toBe("02:00");
+  expect(Utilities.SecondsToMMSS(600)).toBe("10:00");
+});
+
+test('seconds to MMSS to handle edge cages', () => {
+  
+  expect(() => Utilities.SecondsToMMSS(3600)).toThrow();
+  expect(() => Utilities.SecondsToMMSS(9000)).toThrow();
 });
 
 test('format MMSS should handle bad inputs', () => {
