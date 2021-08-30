@@ -3,10 +3,9 @@ import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
-import { add, checkmark } from 'ionicons/icons';
+import { add, checkmark, saveOutline, pencilOutline } from 'ionicons/icons';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
-import { pencil } from 'ionicons/icons'
 import HomeButton from '../components/HomeButton';
 import SetItem from '../components/edit-workout/SetItem';
 import SetsList from '../components/edit-workout/SetsList';
@@ -23,7 +22,8 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
 
     state = {
         ignored: 0,
-        workout: Workout.Empty
+        workout: Workout.Empty,
+        isEditing: false
     }
 
     constructor(props: EditWorkoutProps | Readonly<EditWorkoutProps>) {
@@ -90,6 +90,12 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         WorkoutsSave.Instance.saveCurrentWorkouts();
     }
 
+    toggleIsEditing() {
+        this.setState({
+            isEditing: !this.state.isEditing
+        });
+    }
+
     render() {
         const workout = this.state.workout;
 
@@ -107,6 +113,8 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             <IonTitle>{workout.name}</IonTitle>
 
                             <IonButtons slot="end">
+                                <IonButton color="primary" onClick={() => this.toggleIsEditing()}>
+                                    {this.state.isEditing ? "Save" : "Edit"}</IonButton>
                                 <WorkoutOptionsButton workout={workout} />
                             </IonButtons>
                         </IonToolbar>
@@ -138,9 +146,9 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             </IonDatetime>
                         </IonItem>
 
-                        <SetsList workout={workout} />
+                        <SetsList isEditing={this.state.isEditing} workout={workout} />
 
-                        <IonFab vertical="bottom" horizontal="center" slot="fixed">
+                        <IonFab hidden={!this.state.isEditing} vertical="bottom" horizontal="center" slot="fixed">
                             <IonFabButton onClick={() => { this.onAddSetClick(); this.forceUpdate(); }}>
                                 <IonIcon icon={add} />
                             </IonFabButton>

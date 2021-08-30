@@ -7,7 +7,8 @@ import { ItemReorderEventDetail } from '@ionic/core';
 import "./SetsList.css"
 
 interface SetsListProps {
-    workout: Workout
+    workout: Workout,
+    isEditing: boolean
 }
 
 class SetsList extends React.Component<SetsListProps> {
@@ -18,7 +19,7 @@ class SetsList extends React.Component<SetsListProps> {
 
         workout?.sets.forEach((set) => {
             components.push(
-                <SetItem key={set.uid} set={set} workout={workout} />
+                <SetItem isEditing={this.props.isEditing} key={set.uid} set={set} workout={workout} />
             );
         });
 

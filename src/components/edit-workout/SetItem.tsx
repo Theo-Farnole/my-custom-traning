@@ -8,7 +8,8 @@ import "./SetItem.css"
 
 interface SetItemProps {
     set: Set,
-    workout: Workout
+    workout: Workout,
+    isEditing: boolean
 }
 
 class SetItem extends React.Component<SetItemProps> {
@@ -21,18 +22,15 @@ class SetItem extends React.Component<SetItemProps> {
     render() {
         const set = this.props.set;
 
-        return (<IonItem key={set.uid} className="setContainer" >
-            {/* <IonButton onClick={() => { this.onDeleteClick(); this.forceUpdate(); }} color="danger">
-                <IonIcon icon={deleteIcon} />
-            </IonButton> */}
+        return (
+            <IonItem key={set.uid} className="setContainer" >
+                <IonReorder hidden={!this.props.isEditing} slot="start" />
 
-            <IonInput className="input text" placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
-            <IonInput className="input number" placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
+                <IonInput disabled={!this.props.isEditing} className="input text" placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
 
-            <IonInput className="input number" placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
-
-            <IonReorder slot="start" />
-        </IonItem >);
+                <IonInput disabled={!this.props.isEditing} className="input number" placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
+                <IonInput disabled={!this.props.isEditing} className="input number" placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
+            </IonItem >);
     }
 }
 

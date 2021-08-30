@@ -1,20 +1,28 @@
-ion-input.input {
-    --background: var(--ion-color-light);
+.setContainer ion-input.input {
     text-align: center;
     margin: 0 10px;
     border-radius: 3px;
     width: 100%;
 }
 
-ion-input.input.number>span {
+.setContainer ion-input.input.number>span {
     width: auto;
 }
 
-.input.number, .input.number>input {
+.setContainer .input.number, .input.number>input {
     max-width: 40px !important;
 }
 
-.input.text>input {
+.setContainer .input.text>input {
     text-align: left;
     padding: 10px;
+}
+
+.setContainer ion-input.input[disabled=false] {
+    --background: var(--ion-color-light);
+}
+
+.native-input[disabled].sc-ion-input-md {
+    opacity: 1;
+    --background: var(--ion-background-color);
 }
