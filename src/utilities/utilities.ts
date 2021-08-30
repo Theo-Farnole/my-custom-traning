@@ -20,4 +20,36 @@ export class Utilities {
     public static isBlank(str: string) {
         return (!str || /^\s*$/.test(str));
     }
+
+    public static isNumeric(str: string) {
+        return isNaN(Number(str)) == false;
+    }
+
+    public static isNumericInteger(str: string) {
+        const number = Number(str);
+        return isNaN(number) == false && this.isInt(number);
+    }
+
+    public static isInt(n: number) {
+        return n % 1 === 0;
+    }
+
+    public static readonly ExceptionMMSS_NotRightLength = "The format must be 5 characters long. (ex: 20:30)";
+    public static readonly ExceptionMMSS_MissingSeparator = "The format must contains : as a separator between MM:SS";
+
+    public static readonly ExceptionMMSS_MinutesNotNumeric = "The provided minutes are not integer. (ex: ab:50)";
+    public static readonly ExceptionMMSS_SecondsNotNumeric = "The provided seconds are not integer. (ex: 30:ab)";
+
+    public static MMSSToSeconds(mmss: string) {
+        if (mmss.length != 5) throw Utilities.ExceptionMMSS_NotRightLength;
+        if (mmss[2] != ':') throw Utilities.ExceptionMMSS_MissingSeparator;
+
+        var rawMinutes = mmss.substr(0, 2);
+        var rawSeconds = mmss.substr(3, 2);
+
+        if (this.isNumericInteger(rawMinutes) == false) throw Utilities.ExceptionMMSS_MinutesNotNumeric;
+        if (this.isNumericInteger(rawSeconds) == false) throw Utilities.ExceptionMMSS_SecondsNotNumeric;
+
+        return parseInt(rawMinutes) * 60 + parseInt(rawSeconds);
+    }
 }

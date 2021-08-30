@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
-import Workouts from './pages/Workouts';
 import { EventDispatcher } from './utilities/EventDispatcher';
 import './utilities/typings.d.ts'
 import './utilities/array.extensions'
@@ -92,7 +91,6 @@ test('workout duplicate should duplicate', () => {
   expect(typeof copy).toBe(typeof source);
 
   expect(copy.name).toBe(source.name);
-  expect(copy.duration).toBe(source.duration);
   expect(copy.secondsBetweenSets).toBe(source.secondsBetweenSets);
   expect(copy.sets.length).toBe(source.sets.length);
 
@@ -101,3 +99,40 @@ test('workout duplicate should duplicate', () => {
   expect(copy.sets[0].repetitionsPerSet).toBe(source.sets[0].repetitionsPerSet);
   expect(copy.sets[0].setCount).toBe(source.sets[0].setCount);
 });
+
+test('format MMSS should convert to seconds', () => {
+
+  expect(Utilities.MMSSToSeconds("01:50")).toBe(110);
+  expect(Utilities.MMSSToSeconds("00:00")).toBe(0);
+  expect(Utilities.MMSSToSeconds("01:00")).toBe(60);
+
+});
+
+test('format MMSS should handle bad inputs', () => {
+
+  expect(() => Utilities.MMSSToSeconds("60:00:50")).toThrow(Utilities.ExceptionMMSS_NotRightLength);
+  expect(() => Utilities.MMSSToSeconds("0:50")).toThrow();
+  expect(() => Utilities.MMSSToSeconds("0050")).toThrow();
+  expect(() => Utilities.MMSSToSeconds("00150")).toThrow();
+  expect(() => Utilities.MMSSToSeconds("0a:50")).toThrow();
+  expect(() => Utilities.MMSSToSeconds("01:a0")).toThrow();
+
+  expect(() => Utilities.MMSSToSeconds("0.:50")).not.toThrow(); // 0. equals to zero
+
+});
+
+test('is numeric should work', () => {
+  expect(Utilities.isNumeric("qdsf")).toBe(false);
+  expect(Utilities.isNumeric("100")).toBe(true);
+  expect(Utilities.isNumeric("100.10")).toBe(true);
+  expect(Utilities.isNumeric("100,10")).toBe(false);
+})
+
+test('is numeric integer ', () => {
+  expect(Utilities.isNumericInteger("qdsf")).toBe(false);
+  expect(Utilities.isNumericInteger("100")).toBe(true);
+  expect(Utilities.isNumericInteger("-100")).toBe(true);
+  expect(Utilities.isNumericInteger("100.")).toBe(true);
+  expect(Utilities.isNumericInteger("100.10")).toBe(false);
+  expect(Utilities.isNumericInteger("100,10")).toBe(false);
+})
