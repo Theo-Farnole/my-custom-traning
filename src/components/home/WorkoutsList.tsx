@@ -12,26 +12,35 @@ class WorkoutsList extends React.Component {
     workouts: [] as Workout[]
   }
 
-  isComponentedMounted: boolean = false;
-  reloadWorkoutOnMounted: boolean = false;
-
   constructor(props: {} | Readonly<{}>) {
     super(props);
 
-    WorkoutsSave.Instance.attachOnWorkoutsModified(event => {
-      this.setWorkoutsFromSave();
-    });
+    this.onWorkoutsModified = this.onWorkoutsModified.bind(this);
+    this.setWorkoutsFromSave = this.setWorkoutsFromSave.bind(this);
+
+    this.setWorkoutsFromSave();
+  }
+
+
+  componentDidMount() {
+    this.setWorkoutsFromSave();
+    WorkoutsSave.Instance.attachOnWorkoutsModified(this.onWorkoutsModified);
+  }
+
+  componentWillUnmount() {
+    WorkoutsSave.Instance.dettachOnWorkoutsModified(this.onWorkoutsModified);
+  }
+
+  onWorkoutsModified() {
+    this.setWorkoutsFromSave();
   }
 
   setWorkoutsFromSave() {
-    if (this.isComponentedMounted == true && WorkoutsSave.Instance.areWorkoutsLoaded) {
+    if (WorkoutsSave.Instance.areWorkoutsLoaded) {
       this.setState(
         {
           workouts: WorkoutsSave.Instance.workouts
         });
-    }
-    else {
-      this.reloadWorkoutOnMounted = true;
     }
   }
 
@@ -45,23 +54,6 @@ class WorkoutsList extends React.Component {
     }
 
     return output;
-  }
-
-  componentDidMount() {
-    this.isComponentedMounted = true;
-
-    if (this.reloadWorkoutOnMounted == true) {
-      this.reloadWorkoutOnMounted = false;
-      this.setWorkoutsFromSave();
-    }
-
-    if (WorkoutsSave.Instance.areWorkoutsLoaded) {
-      this.setWorkoutsFromSave();
-    }
-  }
-
-  componentWillUnmount() {
-    this.isComponentedMounted = false;
   }
 
   render() {
