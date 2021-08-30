@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonLabel, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
@@ -47,7 +47,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         WorkoutsSave.Instance.dettachOnWorkoutsModified(this.onWorkoutModified);
     }
 
-    onWorkoutModified() {    
+    onWorkoutModified() {
         this.setWorkoutFromID();
         this.forceUpdate();
     }
@@ -58,7 +58,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         if (w == undefined) throw "Add set to an undefined workout";
         if (w == null) throw "Add set to a null workout"
 
-        w.addEmptySet();        
+        w.addEmptySet();
         WorkoutsSave.Instance.saveCurrentWorkouts();
     }
 
@@ -113,6 +113,30 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     </IonHeader>
 
                     <IonContent fullscreen>
+
+                        <IonItem>
+                            <IonLabel>
+                                Pause between sets
+                            </IonLabel>
+
+                            <IonDatetime
+                                display-format="mm:ss"
+                                picker-format="mm:ss"
+                                value={"2000-01-01T00:" + workout.secondsBetweenSetsTimeFormat + ".789"}
+                                onIonChange={(e) => {
+                                    if (e.detail.value != null) {
+
+                                        var mm = e.detail.value.split(":")[1];
+                                        var ss = e.detail.value.split(":")[2].split(".")[0];
+
+                                        workout.secondsBetweenSetsTimeFormat = mm + ":" + ss;
+                                        WorkoutsSave.Instance.saveCurrentWorkouts();
+                                    }
+                                }}
+                                onChange={(e) => {
+                                }}>
+                            </IonDatetime>
+                        </IonItem>
 
                         <SetsList workout={workout} />
 

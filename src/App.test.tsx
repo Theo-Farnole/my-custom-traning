@@ -4,7 +4,6 @@ import App from './App';
 import { EventDispatcher } from './utilities/EventDispatcher';
 import './utilities/typings.d.ts'
 import './utilities/array.extensions'
-import './utilities/number.extensions'
 import { Workout } from './services/Workout';
 import { Set } from './services/Set';
 import { Utilities } from './utilities/utilities';

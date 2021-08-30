@@ -5,12 +5,24 @@ export class Workout {
     sets: Set[] = [];
     secondsBetweenSets: number = 0;
     name: string = "";
-    duration: string = "DURATION NOT IMPLEMENTED";
 
     private _uid: string;
 
     public get uid(): string {
         return this._uid;
+    }
+
+    public get secondsBetweenSetsTimeFormat(): string {
+        return Utilities.SecondsToMMSS(this.secondsBetweenSets);
+    }
+
+    public set secondsBetweenSetsTimeFormat(mmss: string) {
+        try {
+            this.secondsBetweenSets = Utilities.MMSSToSeconds(mmss);
+        }
+        catch (err) {
+            console.error("The format " + mmss + " has an error: " + err + ". It has been handled while setting seconds between set in workout.")
+        }
     }
 
     constructor(name: string, sets: Set[], secondsBetweenSets: number) {
