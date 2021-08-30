@@ -13,3 +13,8 @@
 .headerContainer {
     padding-right: 16px;
 }
+
+
+.list-header-lines-inset {
+    --inner-border-width: 0;
+}

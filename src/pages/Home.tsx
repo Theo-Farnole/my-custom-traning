@@ -78,6 +78,14 @@ class Home extends React.Component {
 
         <IonContent fullscreen>
 
+          {/* <IonItem lines="none">
+            <IonText >
+              <h1>
+                Hello there! <br />
+                Launch or edit workout by clicking on it.
+              </h1>
+            </IonText>
+          </IonItem> */}
 
           <WorkoutsList />
           <CreateWorkoutButton />

@@ -60,11 +60,10 @@ class WorkoutsList extends React.Component {
     const workoutsList: JSX.Element[] = this.buildWorkoutsList(this.state.workouts);
 
     return (
-      <IonList>
-        <IonListHeader class="list-header">
-          <IonLabel><b>Name</b></IonLabel>
-          <IonLabel class="ion-text-right"><b>Actions</b></IonLabel>
-        </IonListHeader>
+      <IonList lines="none">
+        {/* <IonListHeader class="list-header">
+          <IonLabel>My workouts</IonLabel>
+        </IonListHeader> */}
 
         {workoutsList}
       </IonList>

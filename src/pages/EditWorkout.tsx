@@ -1,9 +1,9 @@
-import { IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
-import { add, checkmark, saveOutline, pencilOutline } from 'ionicons/icons';
+import { add, checkmark, saveOutline, pencilOutline, play } from 'ionicons/icons';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import HomeButton from '../components/HomeButton';
@@ -153,8 +153,11 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                                 <IonIcon icon={add} />
                             </IonFabButton>
                         </IonFab>
-
                     </IonContent>
+
+                    <IonFooter hidden={this.state.isEditing} >
+                        <IonButton routerLink={"/play-exercise/" + this.props.match.params.id} expand="full">start workout</IonButton>
+                    </IonFooter>
                 </IonPage >
 
             );

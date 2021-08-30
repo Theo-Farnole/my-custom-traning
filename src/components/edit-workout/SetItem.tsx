@@ -23,7 +23,7 @@ class SetItem extends React.Component<SetItemProps> {
         const set = this.props.set;
 
         return (
-            <IonItem key={set.uid} className="setContainer" >
+            <IonItem lines="none" key={set.uid} className="setContainer" >
                 <IonReorder hidden={!this.props.isEditing} slot="start" />
 
                 <IonInput disabled={!this.props.isEditing} className="input text" placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
