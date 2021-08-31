@@ -57,9 +57,6 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
                 workout: newWorkout,
                 componentsIndex: 0
             });
-
-        console.log("new workout is ");
-        console.log(newWorkout);
     }
 
     private generateComponentsStack(workout: Workout): JSX.Element[] {

@@ -1,4 +1,4 @@
-import { IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar } from '@ionic/react';
+import { IonAlert, IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
@@ -23,7 +23,8 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     state = {
         ignored: 0,
         workout: Workout.Empty,
-        isEditing: false
+        isEditing: false,
+        isCannotPlayWorkoutOpen: false
     }
 
     constructor(props: EditWorkoutProps | Readonly<EditWorkoutProps>) {
@@ -96,6 +97,23 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         });
     }
 
+    openCannotPlayWorkout(open: boolean) {
+        this.setState({
+            isCannotPlayWorkoutOpen: open
+        });
+    }
+
+    private tryStartWorkout() {
+        if (this.state.workout.sets.length == 0) {
+            this.openCannotPlayWorkout(true);
+        }
+        else {
+
+            var url = "/play-workout/" + this.id;
+            this.props.history.push(url);
+        }
+    }
+
     render() {
         const workout = this.state.workout;
 
@@ -121,6 +139,14 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     </IonHeader>
 
                     <IonContent fullscreen>
+
+                        <IonAlert
+                            isOpen={this.state.isCannotPlayWorkoutOpen}
+                            onDidDismiss={() => this.openCannotPlayWorkout(false)}
+                            header={'Cannot start this workout'}
+                            message={'Cannot start this workout because it has no sets to play. Please add one by click on Edit, then the + button.'}
+                            buttons={['OK']}
+                        />
 
                         <SetsList isEditing={this.state.isEditing} workout={workout} />
 
@@ -162,7 +188,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             </IonItem>
                         </IonList>
 
-                        <IonButton hidden={this.state.isEditing} routerLink={"/play-workout/" + this.props.match.params.id} expand="full">start workout</IonButton>
+                        <IonButton hidden={this.state.isEditing} onClick={() => this.tryStartWorkout()} expand="full">start workout</IonButton>
                     </IonFooter>
                 </IonPage >
 
