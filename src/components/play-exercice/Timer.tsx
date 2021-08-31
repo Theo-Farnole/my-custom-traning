@@ -76,9 +76,6 @@ class Timer extends React.Component<TimerProps> {
             {
                 dash: this.calculateCircleDashArray()
             });
-
-        console.log(this.state.dash);
-
     }
 
     calculateTimeFraction() {

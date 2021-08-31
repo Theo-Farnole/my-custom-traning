@@ -15,7 +15,10 @@ interface PlayWorkoutProps extends RouteComponentProps<{
 
 class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
-    id: number;
+    public get id(): number {
+        return parseInt(this.props.match.params.id);
+    }
+
     state = {
         workout: Workout.Empty, // not sure if it a good idea
         showComponentIndex: 0
@@ -24,21 +27,28 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
     constructor(props: PlayWorkoutProps | Readonly<PlayWorkoutProps>) {
         super(props);
-        this.id = parseInt(props.match.params.id);
 
         this.showNextComponent = this.showNextComponent.bind(this);
+        this.onWorkoutsModified = this.onWorkoutsModified.bind(this);
         this.setState = this.setState.bind(this);
+    }
 
-        WorkoutsSave.Instance.attachOnWorkoutsModified(e => {
-            this.setWorkoutFromID();
-        });
+    componentDidMount() {
+        this.setWorkoutFromID();
+        WorkoutsSave.Instance.attachOnWorkoutsModified(this.onWorkoutsModified);
+    }
 
-        if (WorkoutsSave.Instance.areWorkoutsLoaded == true && WorkoutsSave.Instance.workouts[this.id] != this.state.workout) {
-            this.setWorkoutFromID();
-        }
+    componentWillUnmount() {
+        WorkoutsSave.Instance.dettachOnWorkoutsModified(this.onWorkoutsModified);
+    }
+
+    private onWorkoutsModified() {
+        this.setWorkoutFromID();
     }
 
     private setWorkoutFromID() {
+        if (WorkoutsSave.Instance.areWorkoutsLoaded == false) return;
+
         const newWorkout = WorkoutsSave.Instance.workouts[this.id];
 
         this.componentsStack = this.generateComponentsStack(newWorkout);
@@ -47,6 +57,9 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
                 workout: newWorkout,
                 componentsIndex: 0
             });
+
+        console.log("new workout is ");
+        console.log(newWorkout);
     }
 
     private generateComponentsStack(workout: Workout): JSX.Element[] {
@@ -91,7 +104,8 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
                             <IonButtons slot="start">
                                 <HomeButton />
                             </IonButtons>
-                            <IonTitle>{this.state.workout.name ?? "Exercise name"}</IonTitle>
+
+                            <IonTitle>Playing {this.state.workout.name ?? "Exercise name"}</IonTitle>
                         </IonToolbar>
                     </IonHeader>
 

@@ -162,7 +162,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             </IonItem>
                         </IonList>
 
-                        <IonButton hidden={this.state.isEditing} routerLink={"/play-exercise/" + this.props.match.params.id} expand="full">start workout</IonButton>
+                        <IonButton hidden={this.state.isEditing} routerLink={"/play-workout/" + this.props.match.params.id} expand="full">start workout</IonButton>
                     </IonFooter>
                 </IonPage >
 
