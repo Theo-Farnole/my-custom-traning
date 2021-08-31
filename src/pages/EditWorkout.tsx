@@ -155,10 +155,8 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                                 <IonIcon icon={add} />
                             </IonFabButton>
                         </IonFab>
-                    </IonContent>
 
-                    <IonFooter>
-                        <IonList hidden={!this.state.isEditing} lines="none" >
+                        <IonList class="settings-list" hidden={!this.state.isEditing} lines="none" >
                             <IonListHeader>
                                 <IonLabel>Settings</IonLabel>
                             </IonListHeader>
@@ -189,6 +187,10 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                         </IonList>
 
                         <IonButton hidden={this.state.isEditing} onClick={() => this.tryStartWorkout()} expand="full">start workout</IonButton>
+                    </IonContent>
+
+                    <IonFooter>
+
                     </IonFooter>
                 </IonPage >
 
