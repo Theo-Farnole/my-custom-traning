@@ -33,15 +33,3 @@ ion-input#rename-input {
 ion-input#rename-input .native-input[disabled].sc-ion-input-md {
     opacity: 1;
 }
-
-ion-content {
-    min-height: 100%;
-}
-
-ion-footer {
-    position: relative;
-}
-
-.settings-list {
-    position: relative;
-}
