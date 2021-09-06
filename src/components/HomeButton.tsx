@@ -1,5 +1,5 @@
 import { IonButton, IonIcon } from "@ionic/react"
-import { chevronBack } from "ionicons/icons";
+import { chevronBack, home } from "ionicons/icons";
 
 const HomeButton: React.FC = () => {
     return <IonButton routerLink="/home" fill="clear" color="dark">

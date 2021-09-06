@@ -37,29 +37,25 @@ import Menu from './components/home/Menu';
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
-
-      <IonSplitPane contentId="main">
-        <Menu />
-
-        <IonRouterOutlet id="main">
-          <Switch>
-            <Route exact path="/home">
-              <Home />
-            </Route>
-            <Route path="/settings">
-              <Settings />
-            </Route>
-
-            <Route exact path="/">
-              <Redirect to="/home" />
-            </Route>
-          </Switch>
-        </IonRouterOutlet>
-      </IonSplitPane>
+      <IonRouterOutlet>
+        <Switch>
 
 
-      <Route path="/edit-workout/:id" component={EditWorkout} />
-      <Route path="/play-workout/:id" component={PlayWorkout} />
+          <Route exact path="/home">
+            <Home />
+          </Route>
+          <Route path="/settings">
+            <Settings />
+          </Route>
+
+          <Route exact path="/">
+            <Redirect to="/home" />
+          </Route>
+
+          <Route path="/edit-workout/:id" component={EditWorkout} />
+          <Route path="/play-workout/:id" component={PlayWorkout} />
+        </Switch>
+      </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>
 );

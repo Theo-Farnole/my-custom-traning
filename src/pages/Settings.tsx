@@ -1,6 +1,7 @@
-import { IonAvatar, IonButton, IonButtons, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
+import { IonAvatar, IonBackButton, IonButton, IonButtons, IonChip, IonContent, IonHeader, IonIcon, IonItem, IonItemDivider, IonLabel, IonList, IonMenuButton, IonPage, IonTitle, IonToggle, IonToolbar } from '@ionic/react';
 import { pin, heart, closeCircle } from 'ionicons/icons';
 import { useState } from 'react';
+import HomeButton from '../components/HomeButton';
 import EraseAllWorkoutsPrompt from '../components/prompt/EraseAllWorkoutsPrompt';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './Settings.css';
@@ -13,7 +14,7 @@ const Settings: React.FC = () => {
       <IonHeader>
         <IonToolbar>
           <IonButtons slot="start">
-            <IonMenuButton />
+            <IonBackButton />
           </IonButtons>
           <IonTitle>Settings</IonTitle>
         </IonToolbar>

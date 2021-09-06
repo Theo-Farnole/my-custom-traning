@@ -1,4 +1,4 @@
-import { IonAlert, IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
+import { IonAlert, IonBackButton, IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
@@ -126,7 +126,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     <IonHeader>
                         <IonToolbar>
                             <IonButtons slot="start">
-                                <HomeButton />
+                                <IonBackButton />
                             </IonButtons>
                             <IonTitle>{workout.name}</IonTitle>
 
