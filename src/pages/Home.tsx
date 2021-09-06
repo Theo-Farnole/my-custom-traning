@@ -81,8 +81,6 @@ class Home extends React.Component {
         </IonHeader>
 
         <IonContent fullscreen>
-          <IonButton expand="full" onClick={() => AudioPlayer.PlayTimerEnded()}>Play sound</IonButton>
-
           <WorkoutsList />
           <CreateWorkoutButton />
         </IonContent>
