@@ -104,7 +104,7 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
                     <IonHeader>
                         <IonToolbar>
                             <IonButtons slot="start">
-                                <IonBackButton />
+                                <HomeButton />
                             </IonButtons>
 
                             <IonTitle>Playing {this.state.workout.name ?? "Exercise name"}</IonTitle>

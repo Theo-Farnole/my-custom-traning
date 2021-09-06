@@ -6,6 +6,7 @@ import WorkoutsList from '../components/home/WorkoutsList';
 import { AdsPlayer } from '../services/AdsPlayer';
 import CreateWorkoutButton from '../components/home/CreateWorkoutButton';
 import { settingsOutline, settingsSharp, barbellOutline, barbellSharp } from 'ionicons/icons';
+import { AudioPlayer } from '../services/AudioPlayer';
 
 class Home extends React.Component {
 
@@ -80,6 +81,8 @@ class Home extends React.Component {
         </IonHeader>
 
         <IonContent fullscreen>
+          <IonButton expand="full" onClick={() => AudioPlayer.PlayTimerEnded()}>Play sound</IonButton>
+
           <WorkoutsList />
           <CreateWorkoutButton />
         </IonContent>

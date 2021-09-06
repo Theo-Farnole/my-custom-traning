@@ -16,7 +16,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout, editID }) => {
             {/* IonLabel containing buttons is a hack to get the right order corresponding to list header */}
 
             {/* <IonButton routerLink={"/play-workout/" + editID}>start routine</IonButton> */}
-            <IonButton routerLink={"/edit-workout/" + editID} color="light">edit</IonButton> 
+            <IonButton routerLink={"/edit-workout/" + editID} color="light">details</IonButton> 
         </IonItem>
     );
 };

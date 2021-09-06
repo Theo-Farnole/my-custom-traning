@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { WorkoutsSave } from './services/WorkoutsSave';
 import './utilities/array.extensions'
 import { AdsPlayer } from './services/AdsPlayer';
+import { AudioPlayer } from './services/AudioPlayer';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -26,3 +27,4 @@ reportWebVitals();
 
 WorkoutsSave.Instance.loadWorkouts();
 AdsPlayer.Initialize();
+AudioPlayer.Initialize();

@@ -126,7 +126,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     <IonHeader>
                         <IonToolbar>
                             <IonButtons slot="start">
-                                <IonBackButton />
+                                <HomeButton />
                             </IonButtons>
                             <IonTitle>{workout.name}</IonTitle>
 
