@@ -31,7 +31,7 @@ class Rest extends React.Component {
                             You have completed your workout.<br />
                             Keep it up!
                         </p>
-                        <IonButton onClick={() => AdsPlayer.interstitial()} className="action continue" expand="block">Continue</IonButton>
+                        <IonButton routerLink="/home/" onClick={() => AdsPlayer.interstitial()} className="action continue" expand="block">Continue</IonButton>
                     </div>
 
 
