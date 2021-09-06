@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import { WorkoutsSave } from './services/WorkoutsSave';
 import './utilities/array.extensions'
+import { AdsPlayer } from './services/AdsPlayer';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -24,3 +25,4 @@ serviceWorkerRegistration.unregister();
 reportWebVitals();
 
 WorkoutsSave.Instance.loadWorkouts();
+AdsPlayer.Initialize();

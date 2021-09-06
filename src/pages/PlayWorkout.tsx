@@ -8,6 +8,7 @@ import WorkoutFinished from "../components/play-exercice/WorkoutFinished";
 import HomeButton from "../components/HomeButton";
 import { Workout } from "../services/Workout";
 import { WorkoutsSave } from "../services/WorkoutsSave";
+import { AdsPlayer } from "../services/AdsPlayer";
 
 interface PlayWorkoutProps extends RouteComponentProps<{
     id: string;
@@ -36,10 +37,14 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
     componentDidMount() {
         this.setWorkoutFromID();
         WorkoutsSave.Instance.attachOnWorkoutsModified(this.onWorkoutsModified);
+
+        AdsPlayer.showBanner_WorkoutPlaying();
     }
 
     componentWillUnmount() {
         WorkoutsSave.Instance.dettachOnWorkoutsModified(this.onWorkoutsModified);
+
+        AdsPlayer.hideBanner();
     }
 
     private onWorkoutsModified() {

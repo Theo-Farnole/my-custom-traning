@@ -4,4 +4,5 @@
     <string name="title_activity_main">Workout Creator</string>
     <string name="package_name">io.ionic.starter</string>
     <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="admob_app_id">ca-app-pub-9484689619220641~7865217112</string>
 </resources>

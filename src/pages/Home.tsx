@@ -1,10 +1,9 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonTabButton, IonButton, IonIcon, IonLabel, IonItem, IonSelect, IonSelectOption, IonText, IonImg, IonButtons, IonMenuButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButtons, IonMenuButton, IonButton } from '@ionic/react';
 import './Home.css';
 import { WorkoutsSave } from '../services/WorkoutsSave';
-import { Workout } from '../services/Workout';
 import WorkoutsList from '../components/home/WorkoutsList';
-import CreateWorkoutPrompt from '../components/prompt/CreateWorkoutPrompt';
+import { AdsPlayer } from '../services/AdsPlayer';
 import CreateWorkoutButton from '../components/home/CreateWorkoutButton';
 
 class Home extends React.Component {
@@ -21,7 +20,6 @@ class Home extends React.Component {
     this.setSelectOptions = this.setSelectOptions.bind(this);
 
     this.setSelectOptions();
-
   }
 
   componentDidMount() {
@@ -64,6 +62,8 @@ class Home extends React.Component {
   }
 
   render() {
+
+
     return (
       <IonPage>
 
@@ -77,16 +77,6 @@ class Home extends React.Component {
         </IonHeader>
 
         <IonContent fullscreen>
-
-          {/* <IonItem lines="none">
-            <IonText >
-              <h1>
-                Hello there! <br />
-                Launch or edit workout by clicking on it.
-              </h1>
-            </IonText>
-          </IonItem> */}
-
           <WorkoutsList />
           <CreateWorkoutButton />
         </IonContent>

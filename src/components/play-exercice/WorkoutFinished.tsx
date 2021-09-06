@@ -1,11 +1,14 @@
 import { IonButton, IonCol, IonContent, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonToolbar } from "@ionic/react"
 import React from "react";
+import { AdsPlayer } from "../../services/AdsPlayer";
 import Timer from "./Timer";
 import "./WorkoutFinished.css"
 
 class Rest extends React.Component {
 
     render() {
+        AdsPlayer.prepareInterstitial_WorkoutEnded();
+
         return (
             <IonPage>
                 <IonContent>
@@ -28,7 +31,7 @@ class Rest extends React.Component {
                             You have completed your workout.<br />
                             Keep it up!
                         </p>
-                        <IonButton routerLink="/home" className="action continue" expand="block">Continue</IonButton>
+                        <IonButton onClick={() => AdsPlayer.interstitial()} className="action continue" expand="block">Continue</IonButton>
                     </div>
 
 
