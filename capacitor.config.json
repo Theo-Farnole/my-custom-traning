@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "Workout Creator",
+	"appId": "com.tfarnole.workoutbuilder",
+	"appName": "Workout Builder",
 	"webDir": "build",
 	"bundledWebRuntime": false
 }

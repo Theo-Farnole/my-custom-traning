@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">Workout Creator</string>
-    <string name="title_activity_main">Workout Creator</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Workout Builder</string>
+    <string name="title_activity_main">Workout Builder</string>
+    <string name="package_name">com.tfarnole.workoutbuilder</string>
+    <string name="custom_url_scheme">com.tfarnole.workoutbuilder</string>
     <string name="admob_app_id">ca-app-pub-9484689619220641~7865217112</string>
 </resources>
