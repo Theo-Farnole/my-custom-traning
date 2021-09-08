@@ -46,6 +46,11 @@ class Timer extends React.Component<TimerProps> {
 
         this.timerIntervalID = window.setInterval(() => this.updateInterval(), VISUAL_INTERVAL_MS);
         this.updateInterval();
+
+        if (this.duration <= 0) {
+            this.props.onTimerOver();
+            clearInterval(this.timerIntervalID);
+        }
     }
 
     componentWillUnmount() {
@@ -68,12 +73,12 @@ class Timer extends React.Component<TimerProps> {
             AudioPlayer.PlayTimerDecount();
         }
 
-        if (this.state.timeLeft == 0){        
+        if (this.state.timeLeft == 0) {
             AudioPlayer.PlayTimerEnded();
         }
 
         // let the label go to zero by waiting a tick before disappear
-        if (this.state.timeLeft == -VISUAL_INTERVAL_MS/1000) {
+        if (this.state.timeLeft <= -VISUAL_INTERVAL_MS / 1000) {
             this.props.onTimerOver();
             clearInterval(this.timerIntervalID);
         }
