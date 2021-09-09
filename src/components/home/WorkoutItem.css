@@ -3,7 +3,7 @@
     margin-top: 20px;
 }
 .workout-item hr {
-    border-top: 2px solid rgba(var(--ion-color-primary-rgb), 1);
+    border-top: 2px solid rgba(var(--ion-color-primary-rgb), 1);    
 }
 
 .workout-name {

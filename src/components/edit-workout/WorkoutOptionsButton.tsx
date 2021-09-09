@@ -64,7 +64,7 @@ const WorkoutOptionsButton: React.FC<WorkoutOptionsButtonProps> = ({ workout }) 
                 (e: any) => {
                     e.persist();
                     setShowPopover({ showPopover: true, event: e })
-                }} icon-only fill="clear" color="dark">
+                }} icon-only fill="clear" color="light">
                 <IonIcon slot="icon-only" icon={ellipsisVertical} />
             </IonButton>
 

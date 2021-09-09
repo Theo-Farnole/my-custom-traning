@@ -131,7 +131,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             <IonTitle>{workout.name}</IonTitle>
 
                             <IonButtons slot="end">
-                                <IonButton color="primary" onClick={() => this.toggleIsEditing()}>
+                                <IonButton color="light" onClick={() => this.toggleIsEditing()}>
                                     {this.state.isEditing ? "Save" : "Edit"}</IonButton>
                                 <WorkoutOptionsButton workout={workout} />
                             </IonButtons>

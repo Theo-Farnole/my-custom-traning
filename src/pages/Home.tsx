@@ -1,11 +1,11 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButtons, IonMenuButton, IonButton, IonIcon } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButtons, IonMenuButton, IonButton, IonIcon, IonFab, IonFabButton } from '@ionic/react';
 import './Home.css';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import WorkoutsList from '../components/home/WorkoutsList';
 import { AdsPlayer } from '../services/AdsPlayer';
 import CreateWorkoutButton from '../components/home/CreateWorkoutButton';
-import { settingsOutline, settingsSharp, barbellOutline, barbellSharp } from 'ionicons/icons';
+import { settingsOutline, settingsSharp, barbellOutline, barbellSharp, add } from 'ionicons/icons';
 import { AudioPlayer } from '../services/AudioPlayer';
 
 class Home extends React.Component {
@@ -81,7 +81,10 @@ class Home extends React.Component {
         </IonHeader>
 
         <IonContent fullscreen>
-          <WorkoutsList />
+          <div className="home-content">
+            <WorkoutsList />
+          </div>
+
           <CreateWorkoutButton />
         </IonContent>
       </IonPage>
