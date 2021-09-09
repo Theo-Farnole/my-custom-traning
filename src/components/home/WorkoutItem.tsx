@@ -12,7 +12,7 @@ const WorkoutItem: React.FC<WorkoutItemProps> = ({ workout, editID }) => {
 
     return (
         <>
-            <IonItem class="workout-item elevationFirstLevel flex-container" routerLink={"/edit-workout/" + editID} lines="none" key={workout.uid}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
+            <IonItem class="workout-item elevationFirstLevel flex-container" routerLink={"/workout/detail/" + editID} lines="none" key={workout.uid}> {/*need key property to avoid this https://sentry.io/answers/unique-key-prop/*/}
 
                 <IonGrid>
                     <IonRow>

@@ -51,7 +51,7 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
                         onDismiss();
                         onDismiss = () => {};
 
-                        var url = "/edit-workout/" + workoutIndex;
+                        var url = "/workout/edit" + workoutIndex;
                         history.push(url);
                     }
                 }

@@ -12,20 +12,21 @@ import SetsList from '../components/edit-workout/SetsList';
 import WorkoutOptionsButton from '../components/edit-workout/WorkoutOptionsButton';
 
 
-interface EditWorkoutProps extends RouteComponentProps<{
+interface WorkoutDetailsProps extends RouteComponentProps<{
     id: string;
 }> { }
 
-class EditWorkout extends React.Component<EditWorkoutProps>{
+class WorkoutDetails extends React.Component<WorkoutDetailsProps>{
 
     private id: number = 0;
 
     state = {
         ignored: 0,
-        workout: Workout.Empty
+        workout: Workout.Empty,
+        isCannotPlayWorkoutOpen: false
     }
 
-    constructor(props: EditWorkoutProps | Readonly<EditWorkoutProps>) {
+    constructor(props: WorkoutDetailsProps | Readonly<WorkoutDetailsProps>) {
         super(props);
 
         this.setIDFromURL();
@@ -50,17 +51,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         this.setWorkoutFromID();
         this.forceUpdate();
     }
-
-    onAddSetClick() {
-        const w = this.state.workout;
-
-        if (w == undefined) throw "Add set to an undefined workout";
-        if (w == null) throw "Add set to a null workout"
-
-        w.addEmptySet();
-        WorkoutsSave.Instance.saveCurrentWorkouts();
-    }
-
     setWorkoutFromID() {
         if (WorkoutsSave.Instance.areWorkoutsLoaded == false) return;
 
@@ -78,15 +68,21 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
         this.setWorkoutFromID();
     }
 
-    startRenaming() {
-        this.setState({ isRenamingWorkout: true });
+    openCannotPlayWorkout(open: boolean) {
+        this.setState({
+            isCannotPlayWorkoutOpen: open
+        });
     }
 
-    validateRenaming(newName: string) {
-        this.setState({ isRenamingWorkout: false });
+    private tryStartWorkout() {
+        if (this.state.workout.sets.length == 0) {
+            this.openCannotPlayWorkout(true);
+        }
+        else {
 
-        this.state.workout.name = newName;
-        WorkoutsSave.Instance.saveCurrentWorkouts();
+            var url = "/workout/play/" + this.id;
+            this.props.history.push(url);
+        }
     }
 
     render() {
@@ -106,8 +102,8 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             <IonTitle>{workout.name}</IonTitle>
 
                             <IonButtons slot="end">
-                                <IonButton color="light" routerLink={"/workout/detail/" + this.props.match.params.id}>
-                                    Save
+                                <IonButton color="light" routerLink={"/workout/edit/" + this.props.match.params.id}>
+                                    Edit
                                 </IonButton>
                                 <WorkoutOptionsButton workout={workout} />
                             </IonButtons>
@@ -115,43 +111,23 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     </IonHeader>
 
                     <IonContent fullscreen>
-                        <SetsList isEditing={true} workout={workout} />
+
+                        <IonAlert
+                            isOpen={this.state.isCannotPlayWorkoutOpen}
+                            onDidDismiss={() => this.openCannotPlayWorkout(false)}
+                            header={'Cannot start this workout'}
+                            message={'Cannot start this workout because it has no sets to play. Please add one by click on Edit, then the + button.'}
+                            buttons={['OK']}
+                        />
+
+                        <SetsList isEditing={false} workout={workout} />
 
                         <IonFab vertical="bottom" horizontal="center" slot="fixed">
-                            <IonFabButton onClick={() => { this.onAddSetClick(); this.forceUpdate(); }}>
-                                <IonIcon icon={add} />
+                            <IonFabButton onClick={() => this.tryStartWorkout()}>
+                                <IonIcon icon={play} />
                             </IonFabButton>
                         </IonFab>
 
-                        <IonList class="settings-list" lines="none" >
-                            <IonListHeader>
-                                <IonLabel>Settings</IonLabel>
-                            </IonListHeader>
-
-                            <IonItem class="input-pause-seconds" lines="none">
-                                <IonLabel>
-                                    Pause between sets
-                                </IonLabel>
-
-                                <IonDatetime
-                                    display-format="mm:ss"
-                                    picker-format="mm:ss"
-                                    value={"2000-01-01T00:" + workout.secondsBetweenSetsTimeFormat + ".789"}
-                                    onIonChange={(e) => {
-                                        if (e.detail.value != null) {
-
-                                            var mm = e.detail.value.split(":")[1];
-                                            var ss = e.detail.value.split(":")[2].split(".")[0];
-
-                                            workout.secondsBetweenSetsTimeFormat = mm + ":" + ss;
-                                            WorkoutsSave.Instance.saveCurrentWorkouts();
-                                        }
-                                    }}
-                                    onChange={(e) => {
-                                    }}>
-                                </IonDatetime>
-                            </IonItem>
-                        </IonList>
                     </IonContent>
                 </IonPage >
 
@@ -163,4 +139,5 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
     }
 }
 
-export default EditWorkout;
+export default WorkoutDetails;
+
