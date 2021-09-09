@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
-import { add, checkmark, saveOutline, pencilOutline, play } from 'ionicons/icons';
+import { add, checkmark, saveOutline, pencilOutline, play, arrowForwardCircle, arrowForward } from 'ionicons/icons';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import HomeButton from '../components/HomeButton';
@@ -186,10 +186,17 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             </IonItem>
                         </IonList>
 
-                        <IonButton hidden={this.state.isEditing} onClick={() => this.tryStartWorkout()} expand="full">start workout</IonButton>
+                        {/*-- fab placed to the bottom end --*/}
+                        <IonFab vertical="bottom" horizontal="center" slot="fixed">
+                            <IonFabButton hidden={this.state.isEditing} onClick={() => this.tryStartWorkout()}>
+                                <IonIcon icon={play} />
+                            </IonFabButton>
+                        </IonFab>
+
                     </IonContent>
 
                     <IonFooter>
+                        {/* <IonButton hidden={this.state.isEditing} onClick={() => this.tryStartWorkout()} expand="full">start workout</IonButton> */}
 
                     </IonFooter>
                 </IonPage >
