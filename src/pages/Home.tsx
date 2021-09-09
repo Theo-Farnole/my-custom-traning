@@ -1,5 +1,5 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButtons, IonMenuButton, IonButton, IonIcon, IonFab, IonFabButton } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButtons, IonMenuButton, IonButton, IonIcon, IonFab, IonFabButton, IonLabel } from '@ionic/react';
 import './Home.css';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import WorkoutsList from '../components/home/WorkoutsList';
@@ -64,8 +64,6 @@ class Home extends React.Component {
   }
 
   render() {
-
-
     return (
       <IonPage>
 
@@ -84,6 +82,10 @@ class Home extends React.Component {
           <div className="home-content">
             <WorkoutsList />
           </div>
+
+          <IonLabel hidden={(WorkoutsSave.Instance.areWorkoutsLoaded && WorkoutsSave.Instance.workouts.length > 0)} className="center">
+            There is no workout routines 😥<br />
+          </IonLabel>
 
           <CreateWorkoutButton />
         </IonContent>
