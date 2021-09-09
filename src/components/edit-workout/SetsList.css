@@ -6,7 +6,7 @@
 
 .repHeader, .setHeader {
     margin: 0 10px 0 10px !important;
-    max-width: 40px;    
+    max-width: 40px;
     text-align: center;
 }
 
@@ -14,7 +14,10 @@
     padding-right: 16px;
 }
 
-
 .list-header-lines-inset {
     --inner-border-width: 0;
+}
+
+.sets-list ion-item:nth-child(even) {
+    --background: rgba(var(--ion-color-primary-rgb), 0.1);
 }

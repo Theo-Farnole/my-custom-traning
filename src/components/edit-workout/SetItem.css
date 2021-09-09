@@ -18,10 +18,6 @@
     padding: 10px;
 }
 
-.setContainer ion-input.input[disabled=false] {
-    --background: var(--ion-color-light);
-}
-
 .native-input[disabled].sc-ion-input-md {
     opacity: 1;
     --background: var(--ion-background-color);
