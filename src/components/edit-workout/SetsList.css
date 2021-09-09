@@ -1,7 +1,13 @@
-.exerciceHeader {
-    margin-left: 80px;
+.sets-list .exerciceHeader {    
+    width: calc(100%-20px);
+    width: auto;
+    margin-left: 20px;
+}
+
+.sets-list.editing .exerciceHeader {
     width: calc(100%-80px);
     width: auto;
+    margin-left: 80px;
 }
 
 .repHeader, .setHeader {
@@ -10,8 +16,12 @@
     text-align: center;
 }
 
-.headerContainer {
+.sets-list .headerContainer {
     padding-right: 16px;
+}
+
+.sets-list.editing .headerContainer {
+    padding-right: 78px;
 }
 
 .list-header-lines-inset {

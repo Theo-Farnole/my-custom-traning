@@ -37,15 +37,20 @@ class SetsList extends React.Component<SetsListProps> {
         const sets_list = this.generateWorkoutList();
         const workout = this.props.workout;
 
-        return (<IonReorderGroup className="sets-list" disabled={false} onIonItemReorder={(e) => this.onReorder(e, workout)}>
-            <IonListHeader lines="none" className="headerContainer">
-                <IonLabel className="exerciceHeader"><b>Exercice</b></IonLabel>
-                <IonLabel className="repHeader"><b>Rep</b></IonLabel>
-                <IonLabel className="setHeader"><b>Set</b></IonLabel>
-            </IonListHeader>
+        return (
+            <IonReorderGroup
+                className={"sets-list" + (this.props.isEditing ? " editing" : "")}
+                onIonItemReorder={(e) => this.onReorder(e, workout)}
+                disabled={false}>
 
-            {sets_list}
-        </IonReorderGroup>);
+                <IonListHeader lines="none" className="headerContainer">
+                    <IonLabel className="exerciceHeader"><b>Exercice</b></IonLabel>
+                    <IonLabel className="repHeader"><b>Rep</b></IonLabel>
+                    <IonLabel className="setHeader"><b>Set</b></IonLabel>
+                </IonListHeader>
+
+                {sets_list}
+            </IonReorderGroup>);
     }
 }
 
