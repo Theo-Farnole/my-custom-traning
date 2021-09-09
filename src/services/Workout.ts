@@ -12,6 +12,16 @@ export class Workout {
         return this._uid;
     }
 
+    public get totalSetCount(): number {
+        var total = 0;
+
+        this.sets.forEach((set) => {
+            total += set.setCount;
+        });
+
+        return total;
+    }
+
     public get secondsBetweenSetsTimeFormat(): string {
         return Utilities.SecondsToMMSS(this.secondsBetweenSets);
     }

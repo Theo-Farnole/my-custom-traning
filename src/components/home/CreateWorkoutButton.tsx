@@ -13,6 +13,8 @@ const CreateWorkoutButton: React.FC = () => {
                 <IonFabButton onClick={() => openCreatePrompt(true)}>
                     <IonIcon icon={add} />
                 </IonFabButton>
+                Add workout
+
             </IonFab>
 
             <CreateWorkoutPrompt isOpen={isCreateOpen} onDismiss={() => openCreatePrompt(false)} />

@@ -15,13 +15,6 @@
     margin-top: 40px;
 }
 
-ion-content {
-    /* --background: url('../../assets/congo.png'); */
-    /* --background: url('../assets/congo.png'); */
-    /* --background: url('/assets/congo.png'); */
-    background-image: url('https://images.unsplash.com/photo-1537770721742-5bee5eaa977b?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=04cbbf16dd1a25147b47a078c3ab8339&auto=format&fit=crop&w=668&q=80');
-}
-
 .center-container {
     position: relative;
     height: 100%;
@@ -47,6 +40,22 @@ ion-button.action {
 }
 
 /* source: Google material design elevation shadow https://gist.github.com/serglo/f9f0be9a66fd6755a0bda85f9c64e85f */
+
 .elevationFirstLevel {
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12), 0 1px 3px 0 rgba(0,0,0,0.20);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.20);
+}
+
+/* source: Google material design elevation shadow https://gist.github.com/serglo/f9f0be9a66fd6755a0bda85f9c64e85f */
+
+.elevationFirstLevelColored {
+    box-shadow: 0 1px 1px 0 rgba(var(--ion-color-primary-rgb), 0.8), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.20);
+}
+
+ion-toolbar {
+    --background: var(--ion-color-primary);
+    color: white;
+}
+
+.hr {
+    border-top: 1px solid black;
 }

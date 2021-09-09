@@ -149,3 +149,7 @@ test('is numeric integer ', () => {
   expect(Utilities.isNumericInteger("100.10")).toBe(false);
   expect(Utilities.isNumericInteger("100,10")).toBe(false);
 })
+
+test("exercice count work", () => {
+
+});
