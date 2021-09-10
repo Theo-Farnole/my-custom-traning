@@ -10,6 +10,7 @@ import HomeButton from '../components/HomeButton';
 import SetItem from '../components/edit-workout/SetItem';
 import SetsList from '../components/edit-workout/SetsList';
 import WorkoutOptionsButton from '../components/edit-workout/WorkoutOptionsButton';
+import { timeStamp } from 'console';
 
 
 interface WorkoutDetailsProps extends RouteComponentProps<{
@@ -85,6 +86,15 @@ class WorkoutDetails extends React.Component<WorkoutDetailsProps>{
         }
     }
 
+    private startEdit() {
+        var url = "/workout/edit/" + this.id;
+        this.props.history.push(url);
+    }
+
+    private isWorkoutEmpty() {
+        return this.state.workout.sets.length == 0
+    }
+
     render() {
         const workout = this.state.workout;
 
@@ -99,7 +109,7 @@ class WorkoutDetails extends React.Component<WorkoutDetailsProps>{
                             <IonButtons slot="start">
                                 <HomeButton />
                             </IonButtons>
-                            <IonTitle>{workout.name}</IonTitle>
+                            <IonTitle>Details of {workout.name}</IonTitle>
 
                             <IonButtons slot="end">
                                 <IonButton color="light" routerLink={"/workout/edit/" + this.props.match.params.id}>
@@ -119,6 +129,13 @@ class WorkoutDetails extends React.Component<WorkoutDetailsProps>{
                             message={'Cannot start this workout because it has no sets to play. Please add one by click on Edit, then the + button.'}
                             buttons={['OK']}
                         />
+
+                        <div className="center ion-text-center" >
+                            <IonLabel onClick={() => this.startEdit()} hidden={!this.isWorkoutEmpty()}>
+                                No exercice created yet.<br />
+                                Enter in <a href={"/workout/edit/" + this.props.match.params.id}>edit mode</a> to add new exercise
+                            </IonLabel>
+                        </div>
 
                         <SetsList isEditing={false} workout={workout} />
 

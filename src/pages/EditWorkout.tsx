@@ -103,7 +103,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             <IonButtons slot="start">
                                 <HomeButton />
                             </IonButtons>
-                            <IonTitle>{workout.name}</IonTitle>
+                            <IonTitle>Editing {workout.name}</IonTitle>
 
                             <IonButtons slot="end">
                                 <IonButton color="light" routerLink={"/workout/detail/" + this.props.match.params.id}>
