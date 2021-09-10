@@ -1,9 +1,5 @@
 ion-content .informations {
-  position: fixed;
-  left: 50%;
-  bottom: 20px;
-  transform: translate(-50%, -50%);
-  margin: 0 auto;
+  height: calc(100% - 90px);
 }
 
 ion-content .informations *:not(:last-child) {
@@ -25,19 +21,35 @@ ion-content .informations *:not(:last-child) {
 :root {
   --main-color: var(--ion-color-primary);
   --main-color-half: rgba(var(--ion-color-primary-rgb), 0.1);
-
-  --width: 160px;
+  --width: 80px;
   --height: calc(--width * 1.4375);
 }
 
-/** * Extracted from: SweetAlert * Modified by: Istiak Tridip */
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: stretch;
+  align-items: stretch;
+}
 
-/* .success-animation {
-  width: 160px;
-  height: 230px;
-  margin: 0 auto;
-  transform: scale(1.5);
-} */
+.flex-item:nth-child(1) {
+  order: 0;
+  flex: 0 1 100%;
+  align-self: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-item:nth-child(2) {
+  order: 0;
+  flex: 0 1 auto;
+  align-self: auto;
+}
+
+/** * Extracted from: SweetAlert * Modified by: Istiak Tridip */
 
 .success-checkmark {
   width: var(--width);
@@ -52,7 +64,6 @@ ion-content .informations *:not(:last-child) {
   border-radius: 50%;
   box-sizing: content-box;
   border: calc(var(--width) * 0.05) solid var(--main-color);
-  display: block;
 }
 
 .success-checkmark .check-icon::before {
@@ -60,7 +71,7 @@ ion-content .informations *:not(:last-child) {
   left: calc(var(--width) * -0.025);
   width: calc(--width * 0.375);
   transform-origin: 100% 50%;
-  border-radius: 100px 0 0 100px;
+  border-radius: calc(var(--width) * 1.25) 0 0 calc(var(--width) * 1.25);
 }
 
 .success-checkmark .check-icon::after {
@@ -68,7 +79,7 @@ ion-content .informations *:not(:last-child) {
   left: calc(--width * 0.375);
   width: calc(--width * 0.75);
   transform-origin: 0 50%;
-  border-radius: 0 100px 100px 0;
+  border-radius: 0 calc(var(--width) * 1.25) calc(var(--width) * 1.25) 0;
   animation: rotate-circle 4.25s ease-in;
 }
 
@@ -184,7 +195,7 @@ ion-content .informations *:not(:last-child) {
   }
   84% {
     width: calc(var(--width) * 0.6875);
-    right: 0px;
+    right: 0;
     top: calc(var(--width) * 0.4375);
   }
   100% {
