@@ -70,11 +70,11 @@ class Home extends React.Component {
         <IonHeader>
           <IonToolbar>
             <IonTitle>My Workouts</IonTitle>
-            <IonButtons slot="end">
+            {/* <IonButtons slot="end">
               <IonButton routerLink="/settings/" >
                 <IonIcon icon={settingsOutline} />
               </IonButton>
-            </IonButtons>
+            </IonButtons> */}
           </IonToolbar>
         </IonHeader>
 
