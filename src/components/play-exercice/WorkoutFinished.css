@@ -1,6 +1,8 @@
 ion-content .informations {
-  margin-top: 30px;
-  height: calc(100% - 90px);
+  padding-top: 30px;
+  padding-bottom: 90px;
+  /* height: calc(100%); */
+  height: 100%;
 }
 
 ion-content .informations *:not(:last-child) {
@@ -22,8 +24,9 @@ ion-content .informations *:not(:last-child) {
 :root {
   --main-color: var(--ion-color-primary);
   --main-color-half: rgba(var(--ion-color-primary-rgb), 0.1);
-  --width: min(50vw, 40vh, 300px);
-  --height: calc(--width * 1.4375);
+  --width: min(50vw, 30vh);
+  --height: var(--width);
+  /* calc(var(--width) * 1.4375); */
 }
 
 .flex-container {
@@ -37,7 +40,7 @@ ion-content .informations *:not(:last-child) {
 
 .flex-item:nth-child(1) {
   order: 0;
-  flex: 0 1 100%;
+  flex: 0 10 auto;
   align-self: auto;
   display: flex;
   align-items: center;
@@ -47,7 +50,7 @@ ion-content .informations *:not(:last-child) {
 
 .flex-item:nth-child(2) {
   order: 0;
-  flex: 0 1 auto;
+  flex: 1 1 auto;
   align-self: auto;
 }
 
@@ -71,15 +74,15 @@ ion-content .informations *:not(:last-child) {
 .success-checkmark .check-icon::before {
   top: calc(var(--width) * 0.0375);
   left: calc(var(--width) * -0.025);
-  width: calc(--width * 0.375);
+  width: calc(var(--width) * 0.375);
   transform-origin: 100% 50%;
   border-radius: calc(var(--width) * 1.25) 0 0 calc(var(--width) * 1.25);
 }
 
 .success-checkmark .check-icon::after {
   top: 0;
-  left: calc(--width * 0.375);
-  width: calc(--width * 0.75);
+  left: calc(var(--width) * 0.375);
+  width: calc(var(--width) * 0.75);
   transform-origin: 0 50%;
   border-radius: 0 calc(var(--width) * 1.25) calc(var(--width) * 1.25) 0;
   animation: rotate-circle 4.25s ease-in;
@@ -87,7 +90,7 @@ ion-content .informations *:not(:last-child) {
 
 .success-checkmark .check-icon::before, .success-checkmark .check-icon::after {
   content: '';
-  height: calc(--width * 1.25);
+  height: calc(var(--width) * 1.25);
   position: absolute;
   background: #fff;
   transform: rotate(-45deg);
