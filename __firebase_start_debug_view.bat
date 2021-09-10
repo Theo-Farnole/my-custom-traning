@@ -1,1 +1,1 @@
-adb shell setprop debug.firebase.analytics.app com.tfarnole.workoutbuilder
+call adb shell setprop debug.firebase.analytics.app com.tfarnole.workoutbuilder

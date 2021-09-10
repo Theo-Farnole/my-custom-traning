@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "410823625464",
+    "project_id": "workout-builder-f024c",
+    "storage_bucket": "workout-builder-f024c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:410823625464:android:d8be7ee3af1c27d451490d",
+        "android_client_info": {
+          "package_name": "com.tfarnole.workoutbuilder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "410823625464-94lbfkas6nnl0fvr6ni5tfbrjno1ob86.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSoNYcX-BGmqVdqP2AlsfEf6QjlvRpTl8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "410823625464-94lbfkas6nnl0fvr6ni5tfbrjno1ob86.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
