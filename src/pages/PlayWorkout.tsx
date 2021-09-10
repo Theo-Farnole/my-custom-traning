@@ -1,6 +1,6 @@
 import { IonBackButton, IonButtons, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import React from "react";
-import { RouteComponentProps } from "react-router";
+import { Prompt, RouteComponentProps } from "react-router";
 import ErrorPage from "../components/ErrorPage";
 import RepExercise from "../components/play-exercice/RepExercise";
 import Rest from "../components/play-exercice/Rest";
@@ -22,7 +22,8 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
     state = {
         workout: Workout.Empty, // not sure if it a good idea
-        showComponentIndex: 0
+        showComponentIndex: 0,
+        isLeaving: false
     }
     componentsStack: JSX.Element[] = [];
 
@@ -45,6 +46,10 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
         WorkoutsSave.Instance.dettachOnWorkoutsModified(this.onWorkoutsModified);
 
         AdsPlayer.hideBanner();
+
+        this.setState({
+            isLeaving: true
+        });
     }
 
     private onWorkoutsModified() {
@@ -97,6 +102,33 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
         console.log("Next component shown. Current index = " + this.state.showComponentIndex)
     }
 
+    isOnRecapScreen() {
+        return this.state.showComponentIndex + 1 == this.componentsStack.length;
+    }
+
+    getPromptMessage(): string {
+
+        var progression = this.getProgressionPercent();
+
+        const PREFIX = "Are you sure you want to stop this workout?";
+
+
+        if (progression <= .30) {
+            return PREFIX;
+        }
+        else if (progression <= .60) {
+            return PREFIX + "\nYou are almost halfway! Slow progress is better than no progress."
+        }
+        else {
+            return PREFIX + "\nYou're so close, don't you dare give up now.";
+        }
+
+    }
+
+    getProgressionPercent(): number {
+        return (this.state.showComponentIndex + 1) / this.componentsStack.length;
+    }
+
     render() {
         try {
             return (
@@ -113,6 +145,11 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
 
                     <IonContent>
                         {this.componentsStack[this.state.showComponentIndex]}
+
+                        <Prompt
+                            when={!this.isOnRecapScreen()}
+                            message={this.getPromptMessage()}
+                        />
                     </IonContent>
                 </IonPage>
             );
