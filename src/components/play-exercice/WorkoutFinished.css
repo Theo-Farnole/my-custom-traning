@@ -10,6 +10,8 @@ ion-content .informations *:not(:last-child) {
   margin-bottom: 30px;
 }
 
+/* https://codepen.io/istiaktridip/pen/BZqaOd */ 
+
 .success-animation {
   position: fixed;
   left: 50%;
