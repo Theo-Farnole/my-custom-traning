@@ -5,6 +5,7 @@
 .setContainer .native-input:not([disabled]).sc-ion-input-md {
     border: 1px solid grey;
     border-radius: 3px;
+    background-color: #f4f2f4;
 }
 
 .setContainer .native-input[disabled].sc-ion-input-md {
@@ -41,4 +42,10 @@
 
 .setContainer ion-label {
     width: 37px;
+    --color: grey !important;
+    /* font-style: italic; */
+}
+
+.setContainer .input {
+    /* font-weight: 500; */
 }
