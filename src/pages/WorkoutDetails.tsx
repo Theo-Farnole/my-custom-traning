@@ -11,7 +11,7 @@ import SetItem from '../components/edit-workout/SetItem';
 import SetsList from '../components/edit-workout/SetsList';
 import WorkoutOptionsButton from '../components/edit-workout/WorkoutOptionsButton';
 import { timeStamp } from 'console';
-
+import { FirebaseAnalytics } from "@capacitor-community/firebase-analytics";
 
 interface WorkoutDetailsProps extends RouteComponentProps<{
     id: string;
@@ -80,6 +80,13 @@ class WorkoutDetails extends React.Component<WorkoutDetailsProps>{
             this.openCannotPlayWorkout(true);
         }
         else {
+
+            FirebaseAnalytics.logEvent({
+                name: "start_workout",
+                params: {}
+            });
+
+            console.log("event start_workout");
 
             var url = "/workout/play/" + this.id;
             this.props.history.push(url);

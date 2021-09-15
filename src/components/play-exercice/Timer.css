@@ -34,7 +34,8 @@
     align-items: center;
     justify-content: center;
     /* Sort of an arbitrary number; adjust to your liking */
-    font-size: min(25.5vw, 18.5vh);
+    /* font-size: min(25.5vw, 18.5vh); */
+    font-size: 10vw;
     color: var(--ion-color-primary);
 }
 

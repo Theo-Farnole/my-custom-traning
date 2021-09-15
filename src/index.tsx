@@ -7,6 +7,7 @@ import { WorkoutsSave } from './services/WorkoutsSave';
 import './utilities/array.extensions'
 import { AdsPlayer } from './services/AdsPlayer';
 import { AudioPlayer } from './services/AudioPlayer';
+import { FirebaseAnalytics } from '@capacitor-community/firebase-analytics';
 
 ReactDOM.render(
   <React.StrictMode>

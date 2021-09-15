@@ -1,3 +1,4 @@
+import { FirebaseAnalytics } from "@capacitor-community/firebase-analytics";
 import { IonButton, IonCol, IonContent, IonFooter, IonGrid, IonHeader, IonPage, IonRow, IonToolbar } from "@ionic/react"
 import React from "react";
 import { AdsPlayer } from "../../services/AdsPlayer";
@@ -32,7 +33,13 @@ class Rest extends React.Component {
                                 You have completed your workout.<br />
                                 Keep it up!
                             </p>
-                            <IonButton routerLink="/home/" onClick={() => AdsPlayer.interstitial()} className="action continue" expand="block">Continue</IonButton>
+                            <IonButton routerLink="/home/" onClick={() => {
+                                FirebaseAnalytics.logEvent({
+                                    name: "workout_completed",
+                                    params: {}
+                                });
+                                AdsPlayer.interstitial()
+                            }} className="action continue" expand="block">Continue</IonButton>
                         </div>
                     </div>
 
