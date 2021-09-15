@@ -3,7 +3,7 @@ import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
-import { add, checkmark, saveOutline, pencilOutline, play, arrowForwardCircle, arrowForward } from 'ionicons/icons';
+import { add, checkmark, saveOutline, pencilOutline, play, arrowForwardCircle, arrowForward, arrowBack } from 'ionicons/icons';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import HomeButton from '../components/HomeButton';
@@ -101,7 +101,9 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     <IonHeader>
                         <IonToolbar>
                             <IonButtons slot="start">
-                                <HomeButton />
+                                <IonButton routerLink={"/workout/detail/" + this.props.match.params.id} fill="clear" color="light">
+                                    <IonIcon icon={arrowBack} />
+                                </IonButton>
                             </IonButtons>
                             <IonTitle>Editing {workout.name}</IonTitle>
 
