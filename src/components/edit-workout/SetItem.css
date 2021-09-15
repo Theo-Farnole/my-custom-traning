@@ -1,24 +1,44 @@
-.setContainer ion-input.input {
-    text-align: center;
-    margin: 0 10px;
+.setContainer .input.number {    
+    padding: 8px;
+}
+
+.setContainer .native-input:not([disabled]).sc-ion-input-md {
+    border: 1px solid grey;
     border-radius: 3px;
-    width: 100%;
 }
 
-.setContainer ion-input.input.number>span {
-    width: auto;
-}
-
-.setContainer .input.number, .input.number>input {
-    max-width: 40px !important;
-}
-
-.setContainer .input.text>input {
-    text-align: left;
-    padding: 10px;
-}
-
-.native-input[disabled].sc-ion-input-md {
+.setContainer .native-input[disabled].sc-ion-input-md {
     opacity: 1;
-    --background: var(--ion-background-color);
+}
+
+.setContainer ion-row, .setContainer ion-col {
+    padding: auto 0;
+}
+
+.setContainer ion-label {
+    line-height: 39px;
+}
+
+.setContainer ion-label {
+    margin-right: 20px;
+}
+
+.setContainer .input.number {
+    /* margin-left: auto;
+    margin-right: auto; */
+    min-width: 60px !important;
+    max-width: 60px !important;
+    width: 60px !important;
+}
+
+.setContainer .input.number.rep {
+    /* margin-left: auto;
+    margin-right: auto; */
+    min-width: 60px !important;
+    max-width: 60px !important;
+    width: 60px !important;
+}
+
+.setContainer ion-label {
+    width: 37px;
 }
