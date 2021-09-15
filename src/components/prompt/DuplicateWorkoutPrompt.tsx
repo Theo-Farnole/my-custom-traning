@@ -49,7 +49,7 @@ const DuplicateWorkoutPrompt: React.FC<DuplicateWorkoutPromptProps> = ({ isOpen,
 
                         const workoutIndex = saveInstance.workouts.indexOf(workout);
                         
-                        var url = "/edit-workout/" + workoutIndex;
+                        var url = "/workout/edit/" + workoutIndex;
                         history.replace(url);                        
                     }
                 }
