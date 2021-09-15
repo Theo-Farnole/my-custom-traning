@@ -27,25 +27,14 @@
 .setContainer .input.number {
     /* margin-left: auto;
     margin-right: auto; */
-    min-width: 60px !important;
-    max-width: 60px !important;
-    width: 60px !important;
+    min-width: 30px;
+    /* max-width: 60px; */
+    width: auto;
 }
 
-.setContainer .input.number.rep {
-    /* margin-left: auto;
-    margin-right: auto; */
-    min-width: 60px !important;
-    max-width: 60px !important;
-    width: 60px !important;
-}
 
-.setContainer ion-label {
-    width: 37px;
+.setContainer .inputLabel  {
+    width: 60px;
     --color: grey !important;
     /* font-style: italic; */
-}
-
-.setContainer .input {
-    /* font-weight: 500; */
 }
