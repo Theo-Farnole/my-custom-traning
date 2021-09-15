@@ -1,0 +1,40 @@
+.setContainer .input.number {    
+    padding: 8px;
+}
+
+.setContainer .native-input:not([disabled]).sc-ion-input-md {
+    border: 1px solid grey;
+    border-radius: 3px;
+    background-color: #f4f2f4;
+}
+
+.setContainer .native-input[disabled].sc-ion-input-md {
+    opacity: 1;
+}
+
+.setContainer ion-row, .setContainer ion-col {
+    padding: auto 0;
+}
+
+.setContainer ion-label {
+    line-height: 39px;
+}
+
+.setContainer ion-label {
+    margin-right: 20px;
+}
+
+.setContainer .input.number {
+    /* margin-left: auto;
+    margin-right: auto; */
+    min-width: 30px;
+    /* max-width: 60px; */
+    width: auto;
+}
+
+
+.setContainer .inputLabel  {
+    width: 60px;
+    --color: grey !important;
+    /* font-style: italic; */
+}

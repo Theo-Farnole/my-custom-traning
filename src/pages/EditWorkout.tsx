@@ -7,8 +7,8 @@ import { add, checkmark, saveOutline, pencilOutline, play, arrowForwardCircle, a
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import HomeButton from '../components/HomeButton';
-import SetItem from '../components/edit-workout/SetItem';
-import SetsList from '../components/edit-workout/SetsList';
+import EditSetItem from '../components/edit-workout/EditSetItem';
+import EditSetsList from '../components/edit-workout/EditSetsList';
 import WorkoutOptionsButton from '../components/edit-workout/WorkoutOptionsButton';
 
 
@@ -115,7 +115,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     </IonHeader>
 
                     <IonContent fullscreen>
-                        <SetsList isEditing={true} workout={workout} />
+                        <EditSetsList workout={workout} />
 
                         <IonFab vertical="bottom" horizontal="center" slot="fixed">
                             <IonFabButton onClick={() => { this.onAddSetClick(); this.forceUpdate(); }}>

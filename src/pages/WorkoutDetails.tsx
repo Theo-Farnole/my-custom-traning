@@ -1,17 +1,15 @@
-import { IonAlert, IonBackButton, IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
+import { IonAlert, IonButton, IonButtons, IonContent, IonFab, IonFabButton, IonHeader, IonIcon, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import './EditWorkout.css';
-import { add, checkmark, saveOutline, pencilOutline, play, arrowForwardCircle, arrowForward } from 'ionicons/icons';
+import { play } from 'ionicons/icons';
 import ErrorPage from '../components/ErrorPage';
 import React from 'react';
 import HomeButton from '../components/HomeButton';
-import SetItem from '../components/edit-workout/SetItem';
-import SetsList from '../components/edit-workout/SetsList';
 import WorkoutOptionsButton from '../components/edit-workout/WorkoutOptionsButton';
-import { timeStamp } from 'console';
 import { FirebaseAnalytics } from "@capacitor-community/firebase-analytics";
+import SetsList from '../components/details/SetsList';
 
 interface WorkoutDetailsProps extends RouteComponentProps<{
     id: string;
@@ -144,7 +142,7 @@ class WorkoutDetails extends React.Component<WorkoutDetailsProps>{
                             </IonLabel>
                         </div>
 
-                        <SetsList isEditing={false} workout={workout} />
+                        <SetsList workout={workout} />
 
                         <IonFab vertical="bottom" horizontal="center" slot="fixed">
                             <IonFabButton onClick={() => this.tryStartWorkout()}>

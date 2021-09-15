@@ -1,4 +1,4 @@
-import { IonReorderGroup, IonListHeader, IonLabel } from "@ionic/react";
+import { IonReorderGroup, IonListHeader, IonLabel, IonCol, IonGrid, IonInput, IonRow } from "@ionic/react";
 import React from "react";
 import { Workout } from "../../services/Workout";
 import { WorkoutsSave } from "../../services/WorkoutsSave";
@@ -7,8 +7,7 @@ import { ItemReorderEventDetail } from '@ionic/core';
 import "./SetsList.css"
 
 interface SetsListProps {
-    workout: Workout,
-    isEditing: boolean
+    workout: Workout
 }
 
 class SetsList extends React.Component<SetsListProps> {
@@ -19,7 +18,7 @@ class SetsList extends React.Component<SetsListProps> {
 
         workout?.sets.forEach((set) => {
             components.push(
-                <SetItem isEditing={this.props.isEditing} key={set.uid} set={set} workout={workout} />
+                <SetItem key={set.uid} set={set} workout={workout} />
             );
         });
 
@@ -39,17 +38,34 @@ class SetsList extends React.Component<SetsListProps> {
 
         return (
             <IonReorderGroup
-                className={"sets-list" + (this.props.isEditing ? " editing" : "")}
+                className={"sets-list"}
                 onIonItemReorder={(e) => this.onReorder(e, workout)}
                 disabled={false}>
 
-                {/* <IonListHeader hidden={workout.sets.length == 0} lines="none" className="headerContainer">
+                {/* <IonListHeader hidden={workout.sets.length == 0 || this.props.isEditing} lines="none" className="headerContainer">
                     <IonLabel className="exerciceHeader"><b>Exercice</b></IonLabel>
-                    <IonLabel className="repHeader"><b>Rep</b></IonLabel>
-                    <IonLabel className="setHeader"><b>Set</b></IonLabel>
+                    <IonLabel><b>Rep</b></IonLabel>
+                    <IonLabel><b>Set</b></IonLabel>
                 </IonListHeader> */}
 
+                <IonGrid class="gridHeader" hidden={workout.sets.length == 0}>
+                    <IonRow>
+                        <IonCol>
+                            <IonLabel><b>Exercise</b></IonLabel>
+                        </IonCol>
+
+                        <IonCol>
+                            <IonLabel><b>Set</b></IonLabel>
+                        </IonCol>
+
+                        <IonCol>
+                            <IonLabel><b>Rep</b></IonLabel>
+                        </IonCol>
+                    </IonRow>
+                </IonGrid>
+
                 {sets_list}
+
             </IonReorderGroup>);
     }
 }
