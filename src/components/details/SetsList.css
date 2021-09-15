@@ -1,4 +1,4 @@
-.sets-list .exerciceHeader {    
+.sets-list .exerciceHeader {
     width: calc(100%-20px);
     width: auto;
     margin-left: 20px;
@@ -22,27 +22,27 @@
 
 .sets-list.editing .headerContainer {
     padding-right: 78px;
-}
+}   
 
-.list-header-lines-inset {
-    --inner-border-width: 0;
-}
-
-.sets-list ion-item:nth-child(even) {
+.sets-list ion-row:nth-child(even) {
     --background: rgba(var(--ion-color-primary-rgb), 0.1);
+    background: rgba(var(--ion-color-primary-rgb), 0.1);
+}
+
+.sets-list>ion-grid {
+    padding: 0;
+    margin: 0;
 }
 
 .gridHeader {
-    padding-left: 21px;
-    padding-right: 21px;
-
     height: 60px;
     line-height: 45px;
-
-    background-color: rgba(var(--ion-color-primary-rgb), .8);
+    background-color: var(--ion-color-primary-80perc);
     color: #fff;
+    text-align: center;
 }
 
-.sets-list ion-col {
-    border-left: 2px solid #1C6EA4;
+
+.sets-list ion-col:not(:last-child) {
+    border-right: 2px solid var(--ion-color-primary-80perc);
 }

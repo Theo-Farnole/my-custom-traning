@@ -48,8 +48,8 @@ class SetsList extends React.Component<SetsListProps> {
                     <IonLabel><b>Set</b></IonLabel>
                 </IonListHeader> */}
 
-                <IonGrid class="gridHeader" hidden={workout.sets.length == 0}>
-                    <IonRow>
+                <IonGrid hidden={workout.sets.length == 0}>
+                    <IonRow class="gridHeader" >
                         <IonCol>
                             <IonLabel><b>Exercise</b></IonLabel>
                         </IonCol>
@@ -62,9 +62,9 @@ class SetsList extends React.Component<SetsListProps> {
                             <IonLabel><b>Rep</b></IonLabel>
                         </IonCol>
                     </IonRow>
-                </IonGrid>
 
-                {sets_list}
+                    {sets_list}
+                </IonGrid>
 
             </IonReorderGroup>);
     }

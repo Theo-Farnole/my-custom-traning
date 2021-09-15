@@ -1,4 +1,4 @@
-.setContainer .input.number {    
+.setContainer .input.number {
     padding: 8px;
 }
 
@@ -25,15 +25,11 @@
 }
 
 .setContainer .input.number {
-    /* margin-left: auto;
-    margin-right: auto; */
     min-width: 30px;
-    /* max-width: 60px; */
     width: auto;
 }
 
-
-.setContainer .inputLabel  {
+.setContainer .inputLabel {
     width: 60px;
     --color: grey !important;
     /* font-style: italic; */
