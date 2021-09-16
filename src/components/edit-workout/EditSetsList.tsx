@@ -28,7 +28,7 @@ class EditSetsList extends React.Component<SetsListProps> {
     onReorder(event: CustomEvent<ItemReorderEventDetail>, workout: Workout) {
         event.detail.complete();
 
-        workout.moveSet(event.detail.from - 1, event.detail.to - 1);
+        workout.moveSet(event.detail.from, event.detail.to);
         WorkoutsSave.Instance.saveCurrentWorkouts();
     }
 
@@ -39,22 +39,23 @@ class EditSetsList extends React.Component<SetsListProps> {
         return (
 
 
-            <IonGrid hidden={workout.sets.length == 0}>
+            <IonGrid className="sets-list-editing-grid" hidden={workout.sets.length == 0}>
                 <IonRow class="gridHeader" >
+    
                     <IonCol>
                         <IonLabel><b>Exercise</b></IonLabel>
                     </IonCol>
 
-                    <IonCol>
+                    <IonCol size="2">
                         <IonLabel><b>Set</b></IonLabel>
                     </IonCol>
 
-                    <IonCol>
+                    <IonCol size="2">
                         <IonLabel><b>Rep</b></IonLabel>
                     </IonCol>
 
-                    <IonCol>
-                        <IonLabel><b>Actions</b></IonLabel>
+                    <IonCol className="action" size="2">
+                        <IonLabel><b>Actions</b></IonLabel>                        
                     </IonCol>
                 </IonRow>
 

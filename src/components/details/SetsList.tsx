@@ -54,11 +54,11 @@ class SetsList extends React.Component<SetsListProps> {
                             <IonLabel><b>Exercise</b></IonLabel>
                         </IonCol>
 
-                        <IonCol>
+                        <IonCol size="2">
                             <IonLabel><b>Set</b></IonLabel>
                         </IonCol>
 
-                        <IonCol>
+                        <IonCol size="2">
                             <IonLabel><b>Rep</b></IonLabel>
                         </IonCol>
                     </IonRow>

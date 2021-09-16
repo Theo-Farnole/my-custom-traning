@@ -34,3 +34,10 @@
     --color: grey !important;
     /* font-style: italic; */
 }
+
+.setContainer ion-col.action>ion-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 100%;
+}

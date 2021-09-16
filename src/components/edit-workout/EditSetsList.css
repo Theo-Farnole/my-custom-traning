@@ -3,14 +3,19 @@
     background: rgba(var(--ion-color-primary-rgb), 0.1);
 }
 
-.sets-list-editing ion-col:not(:last-child) {
+/* .sets-list-editing ion-col:not(:last-child) {
     border-right: 2px solid var(--ion-color-primary-80perc);
-}
+} */
 
 .gridHeader {
     height: 60px;
     line-height: 45px;
-    background-color: var(--ion-color-primary-80perc);    
+    background-color: var(--ion-color-primary-80perc);
     color: #fff;
     text-align: center;
+}
+
+ion-grid.sets-list-editing-grid {
+    padding: 0;
+    margin: 0;
 }
