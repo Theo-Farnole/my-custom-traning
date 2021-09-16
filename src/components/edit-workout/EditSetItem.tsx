@@ -1,55 +1,57 @@
-import { IonItem, IonButton, IonInput, IonReorder, IonIcon, IonLabel, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding } from "@ionic/react";
+import { IonItem, IonButton, IonInput, IonReorder, IonIcon, IonLabel, IonCol, IonGrid, IonRow, IonItemOption, IonItemOptions, IonItemSliding, useIonAlert } from "@ionic/react";
 import { Workout } from "../../services/Workout";
 import { WorkoutsSave } from "../../services/WorkoutsSave";
 import { Set } from "../../services/Set";
 import React from 'react';
 import { trashOutline, reorderThreeOutline, trash } from "ionicons/icons"
 import "./EditSetItem.css"
+import { Utilities } from "../../utilities/utilities";
 
 interface SetItemProps {
     set: Set,
     workout: Workout
 }
 
-class EditSetItem extends React.Component<SetItemProps> {
+const EditSetItem: React.FC<SetItemProps> = ({ set, workout }) => {
 
-    onDeleteClick() {
-        this.props.workout.removeSet(this.props.set);
-        WorkoutsSave.Instance.saveCurrentWorkouts();
-    }
+    const [present] = useIonAlert();
 
-    render() {
-        const set = this.props.set;
+    return (
+        <IonRow className="setContainer">
+            <IonCol>
+                <IonInput className="input text" placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
+            </IonCol>
 
-        return (
-            <IonRow className="setContainer">
-                {/* <IonCol size="auto">
-                    <IonButton color="danger" onClick={() => this.onDeleteClick()} >
-                        <IonIcon slot="icon-only" icon={trash} />
-                    </IonButton>
-                </IonCol> */}
+            <IonCol size="2">
+                <IonInput className="input number rep" placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
+            </IonCol>
 
-                <IonCol>
-                    <IonInput className="input text" placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
-                </IonCol>
+            <IonCol size="2">
+                <IonInput className="input number set" placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
+            </IonCol>
 
-                <IonCol size="2">
-                    <IonInput className="input number rep" placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
-                </IonCol>
-
-                <IonCol size="2">
-                    <IonInput className="input number set" placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
-                </IonCol>
-
-                <IonCol className="action" size="2">
-                    <IonRow>
-                        <IonIcon color="danger" size="large" onClick={() => this.onDeleteClick()} icon={trash} />
-                        <IonReorder />
-                    </IonRow>
-                </IonCol>
-            </IonRow>
-        );
-    }
+            <IonCol className="action" size="2">
+                <IonRow>
+                    <IonIcon color="danger" size="large" onClick={() =>
+                        present({
+                            header: 'Delete exercise ' + Utilities.truncateString(set.exercise, 30) + '?',
+                            message: 'It cannot be reverted.',
+                            buttons: [
+                                'Cancel',
+                                {
+                                    text: 'Ok', handler: (d) => {
+                                        workout.removeSet(set);
+                                        WorkoutsSave.Instance.saveCurrentWorkouts();
+                                    }
+                                },
+                            ]
+                        })
+                    } icon={trash} />
+                    <IonReorder />
+                </IonRow>
+            </IonCol>
+        </IonRow>
+    );
 }
 
 export default EditSetItem;
