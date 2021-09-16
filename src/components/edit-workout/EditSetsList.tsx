@@ -35,8 +35,6 @@ const EditSetsList: React.FC<SetsListProps> = ({ workout }) => {
     return (
         <IonGrid className="sets-list-editing-grid" hidden={workout.sets.length == 0}>
             <IonRow class="gridHeader" >
-
-
                 <IonCol>
                     <IonLabel><b>Exercise</b></IonLabel>
                 </IonCol>
@@ -49,7 +47,6 @@ const EditSetsList: React.FC<SetsListProps> = ({ workout }) => {
                     <IonLabel className="setLabel"><b>Set </b>
                         <IonIcon icon={helpCircleOutline}></IonIcon>
                     </IonLabel>
-
                 </IonCol>
 
                 <IonCol className="action" size="2">

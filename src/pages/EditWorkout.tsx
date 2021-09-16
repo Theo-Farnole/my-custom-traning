@@ -1,4 +1,4 @@
-import { IonAlert, IonBackButton, IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorderGroup, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
+import { IonAlert, IonBackButton, IonButton, IonButtons, IonContent, IonDatetime, IonFab, IonFabButton, IonFooter, IonHeader, IonIcon, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonPage, IonReorderGroup, IonText, IonTitle, IonToolbar, useIonAlert } from '@ionic/react';
 import { RouteComponentProps } from 'react-router';
 import { Workout } from '../services/Workout';
 import { WorkoutsSave } from '../services/WorkoutsSave';
@@ -119,6 +119,13 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     <IonContent fullscreen>
                         <EditSetsList workout={workout} />
 
+                        <div className="ion-text-center ion-padding-top" >
+                            <IonLabel onClick={() => this.onAddSetClick()} hidden={this.state.workout.sets.length != 0}>
+                                No exercise added yet.<br />
+                                Click on this text to <IonText color="primary">add one.</IonText>
+                            </IonLabel>
+                        </div>
+
                         <IonFab vertical="bottom" horizontal="center" slot="fixed">
                             <IonFabButton onClick={() => { this.onAddSetClick(); this.forceUpdate(); }}>
                                 <IonIcon icon={add} />
@@ -129,6 +136,8 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             <IonListHeader>
                                 <IonLabel>Settings</IonLabel>
                             </IonListHeader>
+
+
 
                             <IonItem class="input-pause-seconds" lines="none">
                                 <IonLabel>

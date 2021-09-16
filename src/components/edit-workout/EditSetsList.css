@@ -1,4 +1,4 @@
-.sets-list-editing ion-row:nth-child(even) {
+.sets-list-editing>ion-row:nth-child(odd) {
     --background: rgba(var(--ion-color-primary-rgb), 0.1);
     background: rgba(var(--ion-color-primary-rgb), 0.1);
 }
