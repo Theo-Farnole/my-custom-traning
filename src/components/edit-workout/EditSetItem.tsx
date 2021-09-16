@@ -30,7 +30,7 @@ const EditSetItem: React.FC<SetItemProps> = ({ set, workout }) => {
                 <IonInput className="input number set" placeholder="1" type="number" onIonChange={e => { set.setCount = parseInt(e.detail.value as string); WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.setCount}></IonInput>
             </IonCol>
 
-            <IonCol className="action" size="2">
+            <IonCol className="action">
                 <IonRow>
                     <IonIcon color="danger" size="large" onClick={() =>
                         present({

@@ -49,7 +49,7 @@ const EditSetsList: React.FC<SetsListProps> = ({ workout }) => {
                     </IonLabel>
                 </IonCol>
 
-                <IonCol className="action" size="2">
+                <IonCol>
                     <IonLabel><b>Actions</b></IonLabel>
                 </IonCol>
             </IonRow>

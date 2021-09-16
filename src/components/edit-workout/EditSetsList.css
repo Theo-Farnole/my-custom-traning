@@ -9,11 +9,17 @@
 
 .gridHeader {
     height: 60px;
-    line-height: 45px;
+    line-height: 60px;
     background-color: var(--ion-color-primary-80perc);
     color: #fff;
     text-align: center;
+    text-overflow: ellipsis;
 }
+
+.gridHeader ion-label {
+    text-overflow: ellipsis;
+}
+
 
 ion-grid.sets-list-editing-grid {
     padding: 0;
