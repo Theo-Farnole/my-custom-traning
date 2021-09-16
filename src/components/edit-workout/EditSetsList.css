@@ -1,3 +1,16 @@
-.sets-list-editing ion-item:nth-child(even) {
+.sets-list-editing ion-row:nth-child(even) {
     --background: rgba(var(--ion-color-primary-rgb), 0.1);
+    background: rgba(var(--ion-color-primary-rgb), 0.1);
+}
+
+.sets-list-editing ion-col:not(:last-child) {
+    border-right: 2px solid var(--ion-color-primary-80perc);
+}
+
+.gridHeader {
+    height: 60px;
+    line-height: 45px;
+    background-color: var(--ion-color-primary-80perc);    
+    color: #fff;
+    text-align: center;
 }

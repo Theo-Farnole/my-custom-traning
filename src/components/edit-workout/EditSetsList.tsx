@@ -1,4 +1,4 @@
-import { IonReorderGroup, IonListHeader, IonLabel, IonCol, IonGrid, IonInput, IonRow } from "@ionic/react";
+import { IonReorderGroup, IonListHeader, IonLabel, IonCol, IonGrid, IonInput, IonRow, IonReorder } from "@ionic/react";
 import React from "react";
 import { Workout } from "../../services/Workout";
 import { WorkoutsSave } from "../../services/WorkoutsSave";
@@ -37,14 +37,37 @@ class EditSetsList extends React.Component<SetsListProps> {
         const workout = this.props.workout;
 
         return (
-            <IonReorderGroup
-                className="sets-list-editing"
-                onIonItemReorder={(e) => this.onReorder(e, workout)}
-                disabled={false} >
 
-                {sets_list}
 
-            </IonReorderGroup >);
+            <IonGrid hidden={workout.sets.length == 0}>
+                <IonRow class="gridHeader" >
+                    <IonCol>
+                        <IonLabel><b>Exercise</b></IonLabel>
+                    </IonCol>
+
+                    <IonCol>
+                        <IonLabel><b>Set</b></IonLabel>
+                    </IonCol>
+
+                    <IonCol>
+                        <IonLabel><b>Rep</b></IonLabel>
+                    </IonCol>
+
+                    <IonCol>
+                        <IonLabel><b>Actions</b></IonLabel>
+                    </IonCol>
+                </IonRow>
+
+
+                <IonReorderGroup
+                    className="sets-list-editing"
+                    onIonItemReorder={(e) => this.onReorder(e, workout)}
+                    disabled={false} >
+                    {sets_list}
+                </IonReorderGroup >
+            </IonGrid>
+
+        );
     }
 }
 
