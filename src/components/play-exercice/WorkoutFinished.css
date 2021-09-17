@@ -24,9 +24,19 @@ ion-content .informations *:not(:last-child) {
 :root {
   --main-color: var(--ion-color-primary);
   --main-color-half: rgba(var(--ion-color-primary-rgb), 0.1);
-  --width: min(50vw, 30vh);
+  --width: 40vw; 
+  /* min(50vw, 30vh); */
   --height: var(--width);
   /* calc(var(--width) * 1.4375); */
+}
+
+@media (max-height: 485px) {
+  .success-animation {
+    visibility: hidden;
+    height: 0;
+    width: 0;
+    background-color: red;
+  }
 }
 
 .flex-container {
