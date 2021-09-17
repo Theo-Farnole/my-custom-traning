@@ -117,7 +117,38 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     </IonHeader>
 
                     <IonContent fullscreen>
-                        <EditSetsList workout={workout} />
+                        <div className="main-content">
+                            <EditSetsList workout={workout} />
+                            <IonList class="settings-list" lines="none" >
+                                <IonListHeader>
+                                    <IonLabel><b>Settings</b></IonLabel>
+                                </IonListHeader>
+
+                                <IonItem class="input-pause-seconds" lines="none">
+                                    <IonLabel>
+                                        Pause between sets
+                                    </IonLabel>
+
+                                    <IonDatetime
+                                        display-format="mm:ss"
+                                        picker-format="mm:ss"
+                                        value={"2000-01-01T00:" + workout.secondsBetweenSetsTimeFormat + ".789"}
+                                        onIonChange={(e) => {
+                                            if (e.detail.value != null) {
+
+                                                var mm = e.detail.value.split(":")[1];
+                                                var ss = e.detail.value.split(":")[2].split(".")[0];
+
+                                                workout.secondsBetweenSetsTimeFormat = mm + ":" + ss;
+                                                WorkoutsSave.Instance.saveCurrentWorkouts();
+                                            }
+                                        }}
+                                        onChange={(e) => {
+                                        }}>
+                                    </IonDatetime>
+                                </IonItem>
+                            </IonList>
+                        </div>
 
                         <div className="ion-text-center ion-padding-top" >
                             <IonLabel onClick={() => this.onAddSetClick()} hidden={this.state.workout.sets.length != 0}>
@@ -131,38 +162,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                                 <IonIcon icon={add} />
                             </IonFabButton>
                         </IonFab>
-
-                        <IonList class="settings-list" lines="none" >
-                            <IonListHeader>
-                                <IonLabel>Settings</IonLabel>
-                            </IonListHeader>
-
-
-
-                            <IonItem class="input-pause-seconds" lines="none">
-                                <IonLabel>
-                                    Pause between sets
-                                </IonLabel>
-
-                                <IonDatetime
-                                    display-format="mm:ss"
-                                    picker-format="mm:ss"
-                                    value={"2000-01-01T00:" + workout.secondsBetweenSetsTimeFormat + ".789"}
-                                    onIonChange={(e) => {
-                                        if (e.detail.value != null) {
-
-                                            var mm = e.detail.value.split(":")[1];
-                                            var ss = e.detail.value.split(":")[2].split(".")[0];
-
-                                            workout.secondsBetweenSetsTimeFormat = mm + ":" + ss;
-                                            WorkoutsSave.Instance.saveCurrentWorkouts();
-                                        }
-                                    }}
-                                    onChange={(e) => {
-                                    }}>
-                                </IonDatetime>
-                            </IonItem>
-                        </IonList>
                     </IonContent>
                 </IonPage >
 
