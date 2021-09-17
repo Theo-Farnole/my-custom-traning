@@ -8,7 +8,7 @@
     background-color: #f4f2f4;
 }
 
-.setContainer .native-input[disabled].sc-ion-input-md {
+.input .native-input[disabled].sc-ion-input-md {
     opacity: 1;
 }
 
