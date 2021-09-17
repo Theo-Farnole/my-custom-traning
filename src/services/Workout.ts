@@ -4,7 +4,21 @@ import { Set } from "./Set";
 export class Workout {
     sets: Set[] = [];
     secondsBetweenSets: number = 0;
-    name: string = "";
+    private _name: string = "";
+
+    public get name(): string {
+        console.log("getting name \"" + this._name + "\"");
+
+        if (Utilities.isBlank(this._name)) {
+            return "XDDDD";
+        }
+        else {
+            return this._name;
+        }
+    }
+    public set name(value: string) {
+        this._name = value;
+    }
 
     private _uid: string;
 

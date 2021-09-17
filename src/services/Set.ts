@@ -2,8 +2,32 @@ import { Utilities } from "../utilities/utilities";
 
 
 export class Set {
-    repetitionsPerSet: string;
-    exercise: string;
+    private _repetitionsPerSet: string = "";
+
+    public get repetitionsPerSet(): string {
+        if (Utilities.isBlank(this._repetitionsPerSet)) {
+            return "1"
+        }
+        else {
+            return this._repetitionsPerSet;
+        }
+    }
+    public set repetitionsPerSet(value: string) {
+        this._repetitionsPerSet = value;
+    }
+    private _exercise: string = "";
+
+    public get exercise(): string {
+        if (Utilities.isBlank(this._exercise)) {
+            return "unnamed"
+        }
+        else {
+            return this._exercise;
+        }
+    }
+    public set exercise(value: string) {
+        this._exercise = value;
+    }
     uid: string;
     private _setCount: number = 1;
 
