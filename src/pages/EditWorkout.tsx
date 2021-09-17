@@ -119,10 +119,22 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                     <IonContent fullscreen>
                         <div className="main-content">
                             <EditSetsList workout={workout} />
+
+                            <div className="ion-text-center center ion-padding-top " >
+                                <IonLabel onClick={() => this.onAddSetClick()} hidden={this.state.workout.sets.length != 0}>
+                                    No exercise added yet.<br />
+                                    Click on this text to <IonText color="primary">add one.</IonText>
+                                </IonLabel>
+                            </div>
+
+{/* the above grid is needed to set the settings at the footer whiel edit sets list is empty */}
+                            <div className="flex-grow-one"> </div>
+
                             <IonList class="settings-list" lines="none" >
                                 <IonListHeader>
                                     <IonLabel><b>Settings</b></IonLabel>
                                 </IonListHeader>
+
 
                                 <IonItem class="input-pause-seconds" lines="none">
                                     <IonLabel>
@@ -150,12 +162,6 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                             </IonList>
                         </div>
 
-                        <div className="ion-text-center ion-padding-top" >
-                            <IonLabel onClick={() => this.onAddSetClick()} hidden={this.state.workout.sets.length != 0}>
-                                No exercise added yet.<br />
-                                Click on this text to <IonText color="primary">add one.</IonText>
-                            </IonLabel>
-                        </div>
 
                         <IonFab vertical="bottom" horizontal="center" slot="fixed">
                             <IonFabButton onClick={() => { this.onAddSetClick(); this.forceUpdate(); }}>

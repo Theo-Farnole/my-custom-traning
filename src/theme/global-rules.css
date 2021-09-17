@@ -70,3 +70,7 @@ ion-toolbar {
     border-left: 2px dotted #ff0000;
     transform: translate(-50%);
   }
+
+  .flex-grow-one {
+      flex-grow: 1;
+  }
