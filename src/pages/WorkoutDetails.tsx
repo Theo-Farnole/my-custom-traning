@@ -10,6 +10,7 @@ import HomeButton from '../components/HomeButton';
 import WorkoutOptionsButton from '../components/edit-workout/WorkoutOptionsButton';
 import { FirebaseAnalytics } from "@capacitor-community/firebase-analytics";
 import SetsList from '../components/details/SetsList';
+import './WorkoutDetails.css'
 
 interface WorkoutDetailsProps extends RouteComponentProps<{
     id: string;

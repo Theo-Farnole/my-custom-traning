@@ -1,0 +1,6 @@
+.sets-list>ion-grid {
+    display: flex;
+    flex-direction: column;
+    /* height: calc(100% + 800px); */
+    margin-bottom: 80px;
+}
