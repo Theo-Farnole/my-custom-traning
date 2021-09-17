@@ -66,9 +66,6 @@ class Timer extends React.Component<TimerProps> {
         this.timePassed += VISUAL_INTERVAL_MS / 1000;
         this.updateVisual();
 
-
-        console.log(this.state.timeLeft);
-
         if (this.state.timeLeft == 1 || this.state.timeLeft == 2 || this.state.timeLeft == 3) {
             AudioPlayer.PlayTimerDecount();
         }

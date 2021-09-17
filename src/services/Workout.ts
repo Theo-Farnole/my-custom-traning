@@ -4,11 +4,9 @@ import { Set } from "./Set";
 export class Workout {
     sets: Set[] = [];
     secondsBetweenSets: number = 0;
-    private _name: string = "";
+    private _name: string = "";    
 
     public get name(): string {
-        console.log("getting name \"" + this._name + "\"");
-
         if (Utilities.isBlank(this._name)) {
             return "XDDDD";
         }
@@ -16,6 +14,12 @@ export class Workout {
             return this._name;
         }
     }
+
+    // return name without fallback
+    public get rawName(): string {
+        return this._name;
+    }
+
     public set name(value: string) {
         this._name = value;
     }

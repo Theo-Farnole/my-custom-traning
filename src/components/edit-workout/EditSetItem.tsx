@@ -19,11 +19,11 @@ const EditSetItem: React.FC<SetItemProps> = ({ set, workout }) => {
     return (
         <IonRow className="setContainer">
             <IonCol>
-                <IonInput className="input text" placeholder="exercise" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.exercise}></IonInput>
+                <IonInput className="input text" placeholder="unnamed" onIonChange={e => { set.exercise = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.rawExerciseName}></IonInput>
             </IonCol>
 
             <IonCol size="2">
-                <IonInput className="input number rep" placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.repetitionsPerSet}></IonInput>
+                <IonInput className="input number rep" placeholder="1" onIonChange={e => { set.repetitionsPerSet = e.detail.value as string; WorkoutsSave.Instance.saveCurrentWorkouts(); }} value={set.rawRep}></IonInput>
             </IonCol>
 
             <IonCol size="2">

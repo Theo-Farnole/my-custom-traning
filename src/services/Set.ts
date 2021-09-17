@@ -28,6 +28,15 @@ export class Set {
     public set exercise(value: string) {
         this._exercise = value;
     }
+
+    public get rawExerciseName() : string {
+        return this._exercise;
+    }
+
+    public get rawRep() : string {
+        return this._repetitionsPerSet;
+    }
+
     uid: string;
     private _setCount: number = 1;
 
