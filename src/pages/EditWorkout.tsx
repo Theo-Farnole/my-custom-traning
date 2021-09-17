@@ -127,7 +127,7 @@ class EditWorkout extends React.Component<EditWorkoutProps>{
                                 </IonLabel>
                             </div>
 
-{/* the above grid is needed to set the settings at the footer whiel edit sets list is empty */}
+                            {/* the above grid is needed to set the settings at the footer whiel edit sets list is empty */}
                             <div className="flex-grow-one"> </div>
 
                             <IonList class="settings-list" lines="none" >
