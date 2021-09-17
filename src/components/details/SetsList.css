@@ -29,6 +29,10 @@
     background: rgba(var(--ion-color-primary-rgb), 0.1);
 }
 
+.sets-list ion-row:last-child {
+    border-bottom: 2px solid var(--ion-color-primary-80perc);
+}
+
 .sets-list>ion-grid {
     padding: 0;
     margin: 0;

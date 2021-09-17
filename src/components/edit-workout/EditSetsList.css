@@ -2,6 +2,9 @@
     --background: rgba(var(--ion-color-primary-rgb), 0.1);
     background: rgba(var(--ion-color-primary-rgb), 0.1);
 }
+.sets-list-editing>ion-row:last-child {
+    border-bottom: 2px solid var(--ion-color-primary-80perc);
+}
 
 /* .sets-list-editing ion-col:not(:last-child) {
     border-right: 2px solid var(--ion-color-primary-80perc);
