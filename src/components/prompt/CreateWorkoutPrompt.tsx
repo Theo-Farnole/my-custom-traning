@@ -23,7 +23,7 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
                     name: 'name',
                     label: 'name',
                     type: 'text',
-                    placeholder: WorkoutsSave.Instance.getNextWorkoutGenericName()
+                    placeholder: 'workout name'
                 }
             ]}
             buttons={[
