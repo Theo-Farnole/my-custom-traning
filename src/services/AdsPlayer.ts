@@ -10,9 +10,8 @@ const ID_TEST_INTERSTITIAL_VIDEO = "ca-app-pub-3940256099942544/8691691433";
 // IDs
 const ID_INTER_WORKOUT_ENDED = "ca-app-pub-9484689619220641/2382817960";
 const ID_BANNER_WORKOUT_PLAYING = "ca-app-pub-9484689619220641/8795155406";
-const ID_pub = "ca-app-pub-9484689619220641~7865217112";
 
-const IS_TESTING = true;
+const IS_TESTING = false;
 
 export class AdsPlayer {
 
