@@ -1,12 +1,10 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButtons, IonMenuButton, IonButton, IonIcon, IonFab, IonFabButton, IonLabel, IonInput } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButton, IonLabel } from '@ionic/react';
 import './Home.css';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import WorkoutsList from '../components/home/WorkoutsList';
-import { AdsPlayer } from '../services/AdsPlayer';
 import CreateWorkoutButton from '../components/home/CreateWorkoutButton';
-import { settingsOutline, settingsSharp, barbellOutline, barbellSharp, add } from 'ionicons/icons';
-import { AudioPlayer } from '../services/AudioPlayer';
+import { Insomnia } from '@ionic-native/insomnia';
 
 class Home extends React.Component {
 
@@ -83,8 +81,11 @@ class Home extends React.Component {
             <WorkoutsList />
           </div>
 
-          <IonLabel hidden={(WorkoutsSave.Instance.areWorkoutsLoaded && WorkoutsSave.Instance.workouts.length > 0)} className="center">
-            There is no workout routines 😥<br />
+
+          {/* <IonButton onclick="window.plugins.insomnia.allowSleepAgain()">allow sleep again</IonButton> */}
+
+          <IonLabel hidden={(WorkoutsSave.Instance.areWorkoutsLoaded && WorkoutsSave.Instance.workouts.length > 0)} className="center ion-text-center">
+            There is no workout routines 😢<br />
           </IonLabel>
 
           <CreateWorkoutButton />

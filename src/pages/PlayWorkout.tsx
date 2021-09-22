@@ -9,6 +9,7 @@ import HomeButton from "../components/HomeButton";
 import { Workout } from "../services/Workout";
 import { WorkoutsSave } from "../services/WorkoutsSave";
 import { AdsPlayer } from "../services/AdsPlayer";
+import { Insomnia } from "@ionic-native/insomnia";
 
 interface PlayWorkoutProps extends RouteComponentProps<{
     id: string;
@@ -40,6 +41,8 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
         WorkoutsSave.Instance.attachOnWorkoutsModified(this.onWorkoutsModified);
 
         AdsPlayer.showBanner_WorkoutPlaying();
+
+        Insomnia.keepAwake()
     }
 
     componentWillUnmount() {
@@ -50,6 +53,8 @@ class PlayWorkout extends React.Component<PlayWorkoutProps> {
         this.setState({
             isLeaving: true
         });
+
+        Insomnia.allowSleepAgain()
     }
 
     private onWorkoutsModified() {
