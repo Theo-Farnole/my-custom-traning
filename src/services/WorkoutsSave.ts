@@ -104,7 +104,7 @@ export class WorkoutsSave {
     }
 
     createDefaultConfiguration() {
-        this._workouts = WorkoutExamples.getAllExamples();
+        this._workouts = [];
         this.saveCurrentWorkouts();
 
         console.log("Default file created.")
