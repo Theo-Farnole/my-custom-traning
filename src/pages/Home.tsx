@@ -1,16 +1,18 @@
 import React from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButton, IonLabel } from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonSelectOption, IonButton, IonLabel, IonText } from '@ionic/react';
 import './Home.css';
 import { WorkoutsSave } from '../services/WorkoutsSave';
 import WorkoutsList from '../components/home/WorkoutsList';
 import CreateWorkoutButton from '../components/home/CreateWorkoutButton';
 import { Insomnia } from '@ionic-native/insomnia';
+import CreateWorkoutPrompt from '../components/prompt/CreateWorkoutPrompt';
 
 class Home extends React.Component {
 
   state = {
     selectOptions: [],
-    selectedWorkoutID: -1
+    selectedWorkoutID: -1,
+    isCreatePromptOpen: false
   }
 
   constructor(props: {} | Readonly<{}>) {
@@ -84,9 +86,15 @@ class Home extends React.Component {
 
           {/* <IonButton onclick="window.plugins.insomnia.allowSleepAgain()">allow sleep again</IonButton> */}
 
-          <IonLabel hidden={(WorkoutsSave.Instance.areWorkoutsLoaded && WorkoutsSave.Instance.workouts.length > 0)} className="center ion-text-center">
-            There is no workout routines 😢<br />
+          <IonLabel
+            hidden={(WorkoutsSave.Instance.areWorkoutsLoaded && WorkoutsSave.Instance.workouts.length > 0)}
+            className="center ion-text-center"
+            onClick={() => this.setState({ isCreatePromptOpen: true })}>
+            No workout routines created yet 😢<br />
+            Tap here to <IonText color="primary">create one</IonText>
           </IonLabel>
+
+          <CreateWorkoutPrompt isOpen={this.state.isCreatePromptOpen} onDismiss={() => this.setState({ isCreatePromptOpen: false })} />
 
           <CreateWorkoutButton />
         </IonContent>
