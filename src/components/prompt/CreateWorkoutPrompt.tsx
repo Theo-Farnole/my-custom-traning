@@ -23,7 +23,7 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
                     name: 'name',
                     label: 'name',
                     type: 'text',
-                    placeholder: 'legz day'
+                    placeholder: WorkoutsSave.Instance.getNextWorkoutGenericName()
                 }
             ]}
             buttons={[
@@ -40,7 +40,7 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
                     handler: (data) => {
                         const saveInstance = WorkoutsSave.Instance;
 
-                        const workoutName = Utilities.isBlank(data.name) ? "workout #" + (saveInstance.workouts.length + 1) : data.name;
+                        const workoutName = Utilities.isBlank(data.name) ? WorkoutsSave.Instance.getNextWorkoutGenericName() : data.name;
                         const workout = new Workout(workoutName, [], 90);
                         saveInstance.addWorkout(workout);
 
@@ -49,7 +49,7 @@ const CreateWorkoutPrompt: React.FC<CreateWorkoutPromptProps> = ({ isOpen, onDis
                         // we must call onDismiss before changing URL
                         // so we call it, then disable it
                         onDismiss();
-                        onDismiss = () => {};
+                        onDismiss = () => { };
 
                         var url = "/workout/edit/" + workoutIndex;
                         history.push(url);

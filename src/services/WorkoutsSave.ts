@@ -42,6 +42,12 @@ export class WorkoutsSave {
         this._workoutsModifiedDispatcher.unregister(handler);
     }
 
+    public getNextWorkoutGenericName() {
+        if (this._areWorkoutsLoaded == false) return "workout";
+
+        return "workout #" + (this.workouts.length + 1)
+    }
+
     private fireWorkoutsModifiedEvent(event: WorkoutsModifiedEvent) {
         this._workoutsModifiedDispatcher.fire(event);
     }
