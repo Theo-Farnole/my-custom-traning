@@ -5,4 +5,6 @@
     <string name="package_name">com.tfarnole.workoutbuilder</string>
     <string name="custom_url_scheme">com.tfarnole.workoutbuilder</string>
     <string name="admob_app_id">ca-app-pub-9484689619220641~7865217112</string>
+    <string name="fb_app_id">394604365692222</string>
+    <string name="fb_app_name">Workout Builder</string>    
 </resources>
